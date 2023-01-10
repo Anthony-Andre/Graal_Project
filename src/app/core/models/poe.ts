@@ -7,7 +7,7 @@ export class Poe {
     private beginDate!: Date;
     private endDate!: Date;
     private type!: PoeType;
-    private trainees: Array<Stagiaire> = [];
+    private trainees!: Array<Stagiaire>;
 
 
     public getId(): number {

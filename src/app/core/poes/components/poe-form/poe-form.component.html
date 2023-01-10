@@ -22,10 +22,10 @@
 
 
 
-        <div id="beginDate">
+        <!--  <div id="beginDate">
             <mat-form-field appearance="fill">
                 <mat-label>Begindate</mat-label>
-                <input matInput [matDatepicker]="dp">
+                <input matInput [matDatepicker]="dp" formControlName="beginDate">
                 <mat-hint>Format : JJ-MM-YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
                 <mat-datepicker #dp></mat-datepicker>
@@ -35,12 +35,26 @@
         <div id="endDate">
             <mat-form-field appearance="fill">
                 <mat-label>EndDate</mat-label>
-                <input matInput [matDatepicker]="bp">
+                <input matInput [matDatepicker]="bp" formControlName="endDate">
                 <mat-hint>Format : JJ-MM-YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="bp"></mat-datepicker-toggle>
                 <mat-datepicker #bp></mat-datepicker>
             </mat-form-field>
+        </div> -->
+
+        <div class="form-field">
+            <mat-form-field appearance="fill">
+                <mat-label>Begin and End dates</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate formControlName="beginDate" placeholder="Start date">
+                    <input matEndDate formControlName="endDate" placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>JJ/MM/AAAA – JJ/MM/AAAA</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
         </div>
+
 
 
         <button [disabled]="!poeForm.valid">{{addMode ? 'Ajouter' : 'Modifier'}}</button>

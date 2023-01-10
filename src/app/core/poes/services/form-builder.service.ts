@@ -22,11 +22,11 @@ export class FormBuilderService {
     this.adapter.setLocale(this.locale);
   }
 
-    public getForm(): FormGroup {
+  public getForm(): FormGroup {
     return this.form;
   }
 
-    public build(poe: Poe): FormBuilderService {
+  public build(poe: Poe): FormBuilderService {
     this.poe = poe
     if (poe.getId() !== 0) {
       this.updateMode = true;
@@ -39,13 +39,13 @@ export class FormBuilderService {
           Validators.required
         ]
       ],
-      begindate: [
+      beginDate: [
         this.poe.getBeginDate() !== null ? this.poe.getBeginDate() : '',
         [
           Validators.required
         ]
       ],
-      enddate: [
+      endDate: [
         this.poe.getEndDate() !== null ? this.poe.getEndDate() : '',
         [
           Validators.required

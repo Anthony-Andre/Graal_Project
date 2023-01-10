@@ -12,7 +12,7 @@ import { PoeDto } from '../poes/dto/poe-dto';
 export class PoeService {
 
   private poes: Array<Poe> = [];
-  private controllerBaseUrl: string = `${environment.apiBaseUrl}/poe/fullDetails`;
+  private controllerBaseUrl: string = `${environment.apiBaseUrl}/poe`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -30,7 +30,7 @@ export class PoeService {
             poe.setBeginDate(inputPoe.beginDate);
             poe.setEndDate(inputPoe.endDate);
             poe.setPoeType(inputPoe.type);
-            poe.setTrainees(inputPoe.trainees);
+            // poe.setTrainees(inputPoe.trainees);
             return poe;
           })
         })
@@ -57,7 +57,7 @@ export class PoeService {
 
   public addPoe(poe: PoeDto): Observable<Poe> {
     console.log('add poe : ', poe)
-    return this.httpClient.post<PoeDto>(
+    return this.httpClient.patch<PoeDto>(
       this.controllerBaseUrl,
       poe
     )
@@ -85,7 +85,7 @@ export class PoeService {
   }
 
   public update(poe: Poe): Observable<Poe> {
-    return this.httpClient.put<Poe>(
+    return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}`,
       poe
     )

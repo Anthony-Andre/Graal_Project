@@ -22,10 +22,12 @@ export class PoeTableComponent implements OnInit {
   greeting: any[] = [];
 
   public poes: Array<Poe> = [];
+  public stagiaires: Array<Stagiaire> = [];
   public tousLesStagiaires: Array<Stagiaire> = [];
   public stopDate: String | null = null;
   public dateOfTheDay: string = new Date().getFullYear() + "," + (new Date().getMonth() + 1) + "," + (new Date().getDate() + 1);
   public hasUser: boolean = this.authService.isUserSignedin();
+  public moyenneStagiaires!: number;
 
   constructor(
     private poeService: PoeService,
@@ -39,13 +41,15 @@ export class PoeTableComponent implements OnInit {
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
-      for (let poe of poes) {
-        for (let stagiaire of poe.getTrainees()) {
-          console.log(stagiaire);
-          this.tousLesStagiaires.push(stagiaire);
-        }
-      }
+      // for (let poe of poes) {
+      //   for (let stagiaire of poe.getTrainees()) {
+      //     console.log(stagiaire);
+      //     this.tousLesStagiaires.push(stagiaire);
+      //   }
+      // }
+      this.moyenneStagiaires = this.tousLesStagiaires.length / this.poes.length;
     })
+
 
     this.isSignedin = this.authService.isUserSignedin();
     this.signedinUser = this.authService.getSignedinUser();
@@ -60,7 +64,6 @@ export class PoeTableComponent implements OnInit {
       this.greetingService.getByUserOrAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
       this.greetingService.getByAnonymousRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/anonymous - You are not authorized'));
     }
-
 
   }
 
@@ -84,6 +87,7 @@ export class PoeTableComponent implements OnInit {
 
   public onUpDate(poe: Poe): void {
     console.log(`L'utilisateur souhaite modifier ${poe.getTitle()}`);
+    console.log(poe);
     this.router.navigate(['/', 'poe', 'update', poe.getId()]);
   }
 

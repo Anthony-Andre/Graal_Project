@@ -86,10 +86,8 @@ export class StagiaireTableComponent implements OnInit {
     if (this.stopDate === null) {
       return true;
     }
-
     if (this.stopDate.getDate() === 31) {
       return stagiaire.getBirthDate() > this.stopDate;
-
     }
     return stagiaire.getBirthDate() < this.stopDate;
   }
