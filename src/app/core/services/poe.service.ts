@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
+import { Stagiaire } from '../models/stagiaire';
 import { PoeDto } from '../poes/dto/poe-dto';
 
 
@@ -30,7 +31,7 @@ export class PoeService {
             poe.setBeginDate(inputPoe.beginDate);
             poe.setEndDate(inputPoe.endDate);
             poe.setPoeType(inputPoe.type);
-            // poe.setTrainees(inputPoe.trainees);
+            poe.setTrainees(inputPoe.trainees);
             return poe;
           })
         })
@@ -49,7 +50,7 @@ export class PoeService {
         poe.setBeginDate(new Date(inputPoe.beginDate));
         poe.setEndDate(new Date(inputPoe.endDate));
         poe.setPoeType(inputPoe.type);
-        console.log(poe);
+        poe.setTrainees(inputPoe.trainees);
         return poe;
       })
     )

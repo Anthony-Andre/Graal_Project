@@ -71,6 +71,10 @@ export class PoeTableComponent implements OnInit {
     this.authService.signout();
   }
 
+  public onClick(poe: Poe): void {
+    this.router.navigate(['/', 'poe', poe.getId()])
+  }
+
   public onRemove(poe: Poe): void {
     console.log(`L'utilisateur souhaite supprimer ${poe.getTitle()}`);
     this.poeService.delete(poe).subscribe({

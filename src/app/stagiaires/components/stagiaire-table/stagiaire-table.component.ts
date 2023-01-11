@@ -43,6 +43,7 @@ export class StagiaireTableComponent implements OnInit {
   ngOnInit(): void {
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
       this.stagiaires = stagiaires;
+      console.log(this.stagiaires[0] instanceof Stagiaire);
     })
 
     this.isDetailHidden$ = this.handleDetailService.isDetailHidden;

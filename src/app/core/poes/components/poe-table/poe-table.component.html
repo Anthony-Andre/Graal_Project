@@ -29,7 +29,7 @@
     <tbody>
         <ng-container *ngFor="let poe of poes">
             <tr class="stagiaireLine" *ngIf="changeView(poe)">
-                <td> {{ poe.getId() }} </td>
+                <td (click)="onClick(poe)"><button type="button" class="buttonDelete">{{ poe.getId() }} </button></td>
                 <td> {{ poe.getTitle() }} </td>
                 <td> {{ poe.getBeginDate() | date: 'dd-MM-YYYY' }} </td>
                 <td> {{ poe.getEndDate() | date: 'dd-MM-YYYY' }} </td>

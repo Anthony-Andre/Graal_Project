@@ -12,6 +12,7 @@ import { LoginFormComponent } from './user/login/login-form/login-form.component
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { UserFormComponent } from './user/components/user-form/user-form.component';
+import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 
 const routes: Routes = [];
 
@@ -45,6 +46,13 @@ export class AppRoutingModule {
     {
       path: 'poe',
       component: PoeTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/:id',
+      component: PoeDetailsComponent,
       canActivate: [
         HasUserGuard
       ]
