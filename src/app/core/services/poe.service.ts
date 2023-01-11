@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
+import { Stagiaire } from '../models/stagiaire';
 import { PoeDto } from '../poes/dto/poe-dto';
 
 
@@ -30,7 +31,7 @@ export class PoeService {
             poe.setBeginDate(inputPoe.beginDate);
             poe.setEndDate(inputPoe.endDate);
             poe.setPoeType(inputPoe.type);
-            // poe.setTrainees(inputPoe.trainees);
+            poe.setTrainees(inputPoe.trainees);
             return poe;
           })
         })
@@ -49,6 +50,7 @@ export class PoeService {
         poe.setBeginDate(new Date(inputPoe.beginDate));
         poe.setEndDate(new Date(inputPoe.endDate));
         poe.setPoeType(inputPoe.type);
+        poe.setTrainees(inputPoe.trainees);
         console.log(poe);
         return poe;
       })
@@ -102,4 +104,28 @@ export class PoeService {
         })
       )
   }
+
+  public addTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
+    return this.httpClient.post<Poe>(
+      `${this.controllerBaseUrl}/${poe.getId()}/addTrainee/${stagiaire.getId()}`, poe)
+      .pipe(
+        take(1),
+        map((inputPoe: any) => {
+          const poe: Poe = new Poe();
+          poe.setId(inputPoe.id!);
+          poe.setTitle(inputPoe.title);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
+          poe.setPoeType(inputPoe.type);
+          poe.setTrainees(inputPoe.trainees);
+          return poe;
+        })
+      )
+  }
+
+  
+
+
+    
+  
 }
