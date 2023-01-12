@@ -94,6 +94,7 @@ export class PoeDetailsComponent implements OnInit {
 
   public addNewTrainee() {
     console.log("L'utilisateur veut ajouter un nouveau stagiaire");
+
   }
 
 

@@ -6,17 +6,19 @@ import { take, map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { StagiaireDetailComponent } from 'src/app/stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
+import { Poe } from '../models/poe';
+import { PoeService } from './poe.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StagiaireService {
+
   private stagiaires: Array<Stagiaire> = [];
   private controllerBaseUrl: string = `${environment.apiBaseUrl}/trainee`;
 
   constructor(
-    private httpClient: HttpClient
-  ) {
+    private httpClient: HttpClient, private poeService: PoeService) {
   }
 
   // Récupérer tous les stagiaire : 
@@ -36,6 +38,7 @@ export class StagiaireService {
             stagiaire.setEmail(inputStagiaire.email);
             stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
             stagiaire.setBirthDate(new Date(inputStagiaire.birthdate));
+            stagiaire.setPoe(inputStagiaire.poe_id);
             console.log(stagiaire);
             return stagiaire;
           })
@@ -58,6 +61,14 @@ export class StagiaireService {
         stagiaire.setEmail(inputStagiaire.email);
         stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
         stagiaire.setBirthDate(new Date(inputStagiaire.birthdate));
+        // const poe: Poe = this.poeService.findOne(inputStagiaire.poe_id);
+        this.poeService.findOne(inputStagiaire.poe_id)
+          .subscribe((poe: Poe) => {
+            const thispoe: Poe = poe;
+            console.log("POE :", thispoe);
+            stagiaire.setPoe(thispoe);
+          });
+
         console.log(stagiaire);
         return stagiaire;
       })
@@ -85,6 +96,7 @@ export class StagiaireService {
           stagiaire.setEmail(stagiaireDto.email);
           stagiaire.setPhoneNumber(stagiaireDto.phoneNumber);
           stagiaire.setBirthDate(stagiaireDto.birthdate);
+          stagiaire.setPoe(stagiaireDto.poe);
           return stagiaire;
         })
       );
@@ -140,5 +152,7 @@ export class StagiaireService {
       this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() > date).length :
       this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() < date).length;
   }
+
+
 
 }

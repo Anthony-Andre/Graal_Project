@@ -66,7 +66,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'poe/add',
+      path: 'add/poe',
       component: PoeFormComponent,
       resolve: { form: PoeResolver },
       canActivate: [
