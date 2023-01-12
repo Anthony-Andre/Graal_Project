@@ -16,7 +16,7 @@ export class PoeService {
   private poes: Array<Poe> = [];
   private controllerBaseUrl: string = `${environment.apiBaseUrl}/poe`;
 
-  constructor(private httpClient: HttpClient, private stagiaireService: StagiaireService) { }
+  constructor(private httpClient: HttpClient) { }
 
   public findAll(): Observable<any> {
     return this.httpClient.get<any>(

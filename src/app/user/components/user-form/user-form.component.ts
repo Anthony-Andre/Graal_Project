@@ -15,6 +15,7 @@
 // }
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { Request } from '../../models/request';
 import { AuthService } from '../../services/auth-service.service';
@@ -26,7 +27,10 @@ import { AuthService } from '../../services/auth-service.service';
 })
 export class UserFormComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   username: string = '';
   password: string = '';
@@ -57,6 +61,7 @@ export class UserFormComponent implements OnInit {
         //console.log(result);
         //this.success = 'Signup successful';
         this.success = result;
+        this.router.navigate(['/', 'signin'])
       }, (err) => {
         //console.log(err);
         this.error = 'Something went wrong during signup';

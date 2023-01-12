@@ -8,6 +8,8 @@ import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
 import { FormBuilderService } from '../../services/form-builder.service';
 import { Location } from '@angular/common';
+import { PoeService } from 'src/app/core/services/poe.service';
+import { Poe } from 'src/app/core/models/poe';
 @Component({
   selector: 'app-stagiaire-form',
   templateUrl: './stagiaire-form.component.html',
@@ -18,6 +20,7 @@ export class StagiaireFormComponent implements OnInit {
 
   stagiaire: Stagiaire = new Stagiaire();
   stagiaireToUpdate: Stagiaire = new Stagiaire();
+  public poes: Array<Poe> = [];
 
   stagiaireForm!: FormGroup;
 
@@ -30,7 +33,8 @@ export class StagiaireFormComponent implements OnInit {
     private formBuilderService: FormBuilderService,
     private router: Router,
     private route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private poeService: PoeService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +51,10 @@ export class StagiaireFormComponent implements OnInit {
       console.log('id =', this.stagiaireForm.value.id);
     }
 
-    console.log("addMode:", this.addMode);
+    this.poeService.findAll().subscribe((poes: Poe[]) => {
+      this.poes = poes;
+
+    })
 
 
 
