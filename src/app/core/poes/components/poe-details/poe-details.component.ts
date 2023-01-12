@@ -43,7 +43,7 @@ export class PoeDetailsComponent implements OnInit {
         this.poeService.findOne(poeId)
           .subscribe((poe: Poe) => {
             this.poe = poe;
-            poe.getTrainees().map((anyTrainee: any) => {
+            this.poe.getTrainees().map((anyTrainee: any) => {
               const stagiaire: Stagiaire = new Stagiaire();
               stagiaire.setId(anyTrainee.id);
               stagiaire.setBirthDate(new Date(anyTrainee.birthdate));
