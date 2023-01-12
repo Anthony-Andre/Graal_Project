@@ -125,9 +125,11 @@ export class PoeService {
   }
 
   public addTrainees(poe: Poe, stagiaires: Array<Stagiaire>): Observable<Poe> {
+    const stagiaireIds: any[] = [];
+    for (let stagiaire of stagiaires) {stagiaireIds.push(stagiaire.getId);}
     return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}/${poe.getId()}/addTrainees`,
-      stagiaires
+      stagiaireIds
     ).pipe(
       take(1),
       map((inputPoe: any) => {
@@ -146,7 +148,7 @@ export class PoeService {
   public deleteTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
     return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}/${poe.getId()}/deleteTrainee/${stagiaire.getId()}`,
-      poe
+      ''
     ).pipe(
       take(1),
       map((inputPoe: any) => {
@@ -164,7 +166,7 @@ export class PoeService {
 
 
   public clearTrainees(poe: Poe): Observable<Poe> {
-    return this.httpClient.post<Poe>(`${this.controllerBaseUrl}/clearTrainees`, poe)
+    return this.httpClient.post<Poe>(`${this.controllerBaseUrl}/clearTrainees`, '')
       .pipe(
         take(1),
         map((inputPoe: any) => {
