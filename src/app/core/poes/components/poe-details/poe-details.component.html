@@ -12,13 +12,32 @@
 
         <p>Nom de la promotion : {{poe.getTitle()}}</p>
         <p>Type : {{ poe.getType() }}</p>
-        <p>Date de début : {{poe.getBeginDate()}}</p>
-        <p>Date de fin : {{poe.getEndDate()}}</p>
+        <p>Date de début : {{poe.getBeginDate().toLocaleDateString()}}</p>
+        <p>Date de fin : {{poe.getEndDate().toLocaleDateString()}}</p>
         <p>Nombre de stagiaires dans la poe : {{trainees.length}}</p>
-        <label for="traineeList">Liste des stagiaires :</label>
-        <ng-container name="traineeList" *ngFor="let michel of trainees">
-          <p>{{michel.getLastName()}} {{michel.getFirstName()}}</p>
-        </ng-container>
+        <label for="traineeList">
+          <h1>Liste des stagiaires :</h1>
+        </label>
+
+        <table class="listeStagiaires">
+          <td>Nom</td>
+          <td>Prénom</td>
+          <td>Adresse mail</td>
+          <td>Numéro de téléphone</td>
+          <td>Supprimer le stagiaire</td>
+
+          <tr class="stagiaireLine" *ngFor="let trainee of trainees">
+            <th>{{trainee.getLastName()}}</th>
+            <th>{{trainee.getFirstName()}}</th>
+            <th>{{trainee.getEmail()}}</th>
+            <th>{{trainee.getPhoneNumber()}}</th>
+            <th><button class="link-button buttonDelete" (click)="deleteTraineeFromPoe(poe, trainee)">X</button></th>
+          </tr>
+        </table>
+
+        <button type="button" class="buttonAdd" (click)="addNewTrainee()">Ajouter un stagaire</button>
+
+
         <!--
         <p>Lastname : {{poe.getLastName()}}</p>
         <p>Firstname : {{poe.getFirstName()}}</p>
