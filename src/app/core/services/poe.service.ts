@@ -122,6 +122,27 @@ export class PoeService {
       )
   }
 
+  public deleteTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
+    return this.httpClient.patch<Poe>(
+      `${this.controllerBaseUrl}/${poe.getId()}/deleteTrainee/${stagiaire.getId()}`,
+       poe
+    ).pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id!);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(new Date(inputPoe.beginDate));
+        poe.setEndDate(new Date(inputPoe.endDate));
+        poe.setPoeType(inputPoe.type);
+        poe.setTrainees(inputPoe.trainees);
+        return poe;
+      })
+    )
+  }
+
+
+
   
 
 
