@@ -87,8 +87,8 @@ export class PoeService {
   }
 
   public update(poe: Poe): Observable<Poe> {
-    return this.httpClient.patch<Poe>(
-      `${this.controllerBaseUrl}`,
+    return this.httpClient.put<Poe>(
+      this.controllerBaseUrl,
       poe
     )
       .pipe(
@@ -146,7 +146,7 @@ export class PoeService {
   public deleteTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
     return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}/${poe.getId()}/deleteTrainee/${stagiaire.getId()}`,
-       poe
+       ''
     ).pipe(
       take(1),
       map((inputPoe: any) => {
@@ -177,19 +177,5 @@ export class PoeService {
           return poe;
         })
       )
-  }
-
-  
-
-  
-
-
-
-
-
-  
-
-
-    
-  
+  }  
 }
