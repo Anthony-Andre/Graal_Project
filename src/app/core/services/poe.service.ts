@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
 import { Stagiaire } from '../models/stagiaire';
 import { PoeDto } from '../poes/dto/poe-dto';
+import { StagiaireService } from './stagiaire.service';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class PoeService {
   private poes: Array<Poe> = [];
   private controllerBaseUrl: string = `${environment.apiBaseUrl}/poe`;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private stagiaireService: StagiaireService) { }
 
   public findAll(): Observable<any> {
     return this.httpClient.get<any>(
@@ -103,4 +104,92 @@ export class PoeService {
         })
       )
   }
+
+  public addTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
+    return this.httpClient.post<Poe>(
+      `${this.controllerBaseUrl}/${poe.getId()}/addTrainee/${stagiaire.getId()}`, poe)
+      .pipe(
+        take(1),
+        map((inputPoe: any) => {
+          const poe: Poe = new Poe();
+          poe.setId(inputPoe.id!);
+          poe.setTitle(inputPoe.title);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
+          poe.setPoeType(inputPoe.type);
+          const trainees: Array<Stagiaire> = [];
+          poe.setTrainees(inputPoe.trainees);            
+          return poe;
+        })
+      )
+  }
+
+  public addTrainees(poe: Poe, stagiaires: Array<Stagiaire>): Observable<Poe> {
+    return this.httpClient.patch<Poe>(
+      `${this.controllerBaseUrl}/${poe.getId()}/addTrainees`,
+       stagiaires
+    ).pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id!);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(new Date(inputPoe.beginDate));
+        poe.setEndDate(new Date(inputPoe.endDate));
+        poe.setPoeType(inputPoe.type);
+        poe.setTrainees(inputPoe.trainees);
+        return poe;
+      })
+    )
+  }
+
+  public deleteTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
+    return this.httpClient.patch<Poe>(
+      `${this.controllerBaseUrl}/${poe.getId()}/deleteTrainee/${stagiaire.getId()}`,
+       poe
+    ).pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id!);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(new Date(inputPoe.beginDate));
+        poe.setEndDate(new Date(inputPoe.endDate));
+        poe.setPoeType(inputPoe.type);
+        poe.setTrainees(inputPoe.trainees);
+        return poe;
+      })
+    )
+  }
+
+  public clearTrainees(poe: Poe): Observable<Poe> {
+    return this.httpClient.post<Poe>(`${this.controllerBaseUrl}/clearTrainees`, poe)
+      .pipe(
+        take(1),
+        map((inputPoe: any) => {
+          const poe : Poe = new Poe();
+          poe.setId(inputPoe.id!);
+          poe.setTitle(inputPoe.title);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
+          poe.setPoeType(inputPoe.type);
+          poe.setTrainees(inputPoe.trainees);
+          return poe;
+        })
+      )
+  }
+
+  
+
+  
+
+
+
+
+
+  
+
+
+    
+  
 }
