@@ -12,13 +12,18 @@
 
         <p>Nom de la promotion : {{poe.getTitle()}}</p>
         <p>Type : {{ poe.getType() }}</p>
-        <p>Date de début : {{poe.getBeginDate()}}</p>
-        <p>Date de fin : {{poe.getEndDate()}}</p>
+        <p>Date de début : {{poe.getBeginDate().toLocaleDateString()}}</p>
+        <p>Date de fin : {{poe.getEndDate().toLocaleDateString()}}</p>
         <p>Nombre de stagiaires dans la poe : {{trainees.length}}</p>
         <label for="traineeList">Liste des stagiaires :</label>
-        <ng-container name="traineeList" *ngFor="let michel of trainees">
-          <p>{{michel.getLastName()}} {{michel.getFirstName()}}</p>
-        </ng-container>
+        <ul name="traineeList" *ngFor="let trainee of trainees">
+          <li class="stagiaireListe">
+            <p>{{trainee.getLastName()}} {{trainee.getFirstName()}}</p>
+            <button (click)="deleteTraineeFromPoe()">X</button>
+          </li>
+        </ul>
+
+        <button type="button" class="buttonDelete">Ajouter un stagaire</button>
         <!--
         <p>Lastname : {{poe.getLastName()}}</p>
         <p>Firstname : {{poe.getFirstName()}}</p>
