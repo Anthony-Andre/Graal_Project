@@ -23,6 +23,7 @@ import { UserService } from './user/services/user.service';
 import { FormsModule } from '@angular/forms';
 import { UserFormComponent } from './user/components/user-form/user-form.component';
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
+import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 
 export function initializeApp1(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -41,7 +42,8 @@ export function initializeApp1(appInitService: AppInitService) {
     StagiaireFormComponent,
     PoeFormComponent,
     PoeTableComponent,
-    PoeFilterComponent
+    PoeFilterComponent,
+    PoeDetailsComponent
   ],
   imports: [
     BrowserModule,

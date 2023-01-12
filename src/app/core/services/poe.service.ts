@@ -51,7 +51,6 @@ export class PoeService {
         poe.setEndDate(new Date(inputPoe.endDate));
         poe.setPoeType(inputPoe.type);
         poe.setTrainees(inputPoe.trainees);
-        console.log(poe);
         return poe;
       })
     )

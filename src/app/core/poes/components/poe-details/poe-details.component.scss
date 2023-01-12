@@ -1,0 +1,63 @@
+.stagiaireCard {
+  margin: auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  padding: 2em;
+  width: 30em;
+  border: solid;
+}
+
+.infosCard {
+  margin: 2em;
+}
+
+// .initials {
+//   display: flex;
+//   justify-content: center;
+//   background-color: rgba(189, 58, 58, 0.651);
+//   width: 1.5em;
+//   height: 1.5em;
+//   border-radius: 2.5em;
+//   padding: .5em;
+//   line-height: 1.5;
+// }
+
+div {
+  &.outer-dialog {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(128, 128, 128, .6);
+    top: 0;
+    left: 0;
+
+    .inner-dialog {
+      padding: 1.5em;
+      position: relative;
+      top: 50%;
+      width: 25em;
+      height: 30em;
+      margin: 0 auto;
+      transform: translateY(-50%);
+      background-color: #FBAB7E;
+      background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 50%, #ffffff 100%);
+      line-height: 1.75;
+      text-align: center;
+      border: solid;
+
+    }
+  }
+}
+
+.topCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topCard button {
+  margin: 2em 0;
+  width: 2em;
+  height: 2em;
+  line-height: 1.5;
+}
