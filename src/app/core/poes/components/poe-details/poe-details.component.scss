@@ -1,3 +1,10 @@
+// Variables: 
+$main-color : rgb(212, 145, 62);
+$std-color : rgb(255, 255, 255); // Front color 
+$main-font: 'Acme', sans-serif;
+$head-and-foot-color : rgb(212, 145, 62);
+$head-and-foot-text-color : rgb(0, 0, 0);
+
 .stagiaireCard {
   margin: auto;
   margin-top: 3em;
@@ -53,9 +60,14 @@ div {
 
 // Liste des stagiaires : 
 
+.listeStagiaires {
+  margin: 4em auto;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: #ffffff57;
+}
 
-
-.stagiaireListe {
+.stagiaire {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,6 +75,52 @@ div {
   margin: 0.5em 0;
 }
 
-.stagiaireListe p {
+td,
+th {
+  border: solid;
+  height: 2em;
+  padding: .5em 1em
+}
+
+thead {
+  th {
+    width: 10em;
+    height: 3em;
+  }
+}
+
+// Mise en valeur du Thead et tu Tfoot : 
+thead,
+tfoot {
+  tr {
+    background-color: $head-and-foot-color;
+    color: $head-and-foot-text-color;
+  }
+}
+
+.stagiaireLine:hover {
+  background-color: #FBAB7E;
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 50%, #ffffff 100%);
+}
+
+.stagiaire p {
   margin: 0 1em 0 0;
+}
+
+.buttonDelete {
+  width: 2em;
+  margin: auto;
+}
+
+.buttonAdd {
+  width: 12em;
+  height: 3em;
+  text-decoration: none;
+  background-color: $main-color;
+  color: #fff;
+  border: solid black;
+  border-radius: 25px;
+  margin: 2em auto;
+  text-align: center;
+  cursor: pointer;
 }

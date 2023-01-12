@@ -118,7 +118,7 @@ export class PoeService {
           poe.setEndDate(new Date(inputPoe.endDate));
           poe.setPoeType(inputPoe.type);
           const trainees: Array<Stagiaire> = [];
-          poe.setTrainees(inputPoe.trainees);            
+          poe.setTrainees(inputPoe.trainees);
           return poe;
         })
       )
@@ -127,7 +127,7 @@ export class PoeService {
   public addTrainees(poe: Poe, stagiaires: Array<Stagiaire>): Observable<Poe> {
     return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}/${poe.getId()}/addTrainees`,
-       stagiaires
+      stagiaires
     ).pipe(
       take(1),
       map((inputPoe: any) => {
@@ -146,7 +146,7 @@ export class PoeService {
   public deleteTrainee(poe: Poe, stagiaire: Stagiaire): Observable<Poe> {
     return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}/${poe.getId()}/deleteTrainee/${stagiaire.getId()}`,
-       poe
+      poe
     ).pipe(
       take(1),
       map((inputPoe: any) => {
@@ -162,12 +162,13 @@ export class PoeService {
     )
   }
 
+
   public clearTrainees(poe: Poe): Observable<Poe> {
     return this.httpClient.post<Poe>(`${this.controllerBaseUrl}/clearTrainees`, poe)
       .pipe(
         take(1),
         map((inputPoe: any) => {
-          const poe : Poe = new Poe();
+          const poe: Poe = new Poe();
           poe.setId(inputPoe.id!);
           poe.setTitle(inputPoe.title);
           poe.setBeginDate(new Date(inputPoe.beginDate));
@@ -179,17 +180,17 @@ export class PoeService {
       )
   }
 
-  
-
-  
 
 
 
 
 
-  
 
 
-    
-  
+
+
+
+
+
+
 }

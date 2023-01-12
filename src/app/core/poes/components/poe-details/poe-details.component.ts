@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Poe } from 'src/app/core/models/poe';
@@ -56,7 +57,6 @@ export class PoeDetailsComponent implements OnInit {
               console.log("trainees2", this.trainees);
               return stagiaire;
             }
-
             )
           });
       })
@@ -72,8 +72,32 @@ export class PoeDetailsComponent implements OnInit {
     this.handleDetailService.setIsDetailHidden(true);
   }
 
-  public deleteTraineeFromPoe() {
-
+  public deleteTraineeFromPo(poe: Poe, stagiaire: Stagiaire) {
+    this.poeService.findAll();
+    this.poeService.deleteTrainee(poe, stagiaire);
   }
+
+
+  public deleteTraineeFromPoe(poe: Poe, stagiaire: Stagiaire): void {
+    console.log("delete trainee:", stagiaire.getLastName(), "from poe:", poe.getTitle());
+    this.poeService.deleteTrainee(poe, stagiaire).subscribe(
+      {
+        complete: () => {
+          this.trainees.splice(
+            this.trainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+            1
+          )
+        }
+      }
+    );
+  }
+
+  public addNewTrainee() {
+    console.log("L'utilisateur veut ajouter un nouveau stagiaire");
+  }
+
+
+
+
 
 }
