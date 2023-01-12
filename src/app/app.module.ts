@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { UserFormComponent } from './user/components/user-form/user-form.component';
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
+import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 
 export function initializeApp1(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -43,7 +44,8 @@ export function initializeApp1(appInitService: AppInitService) {
     PoeFormComponent,
     PoeTableComponent,
     PoeFilterComponent,
-    PoeDetailsComponent
+    PoeDetailsComponent,
+    SurveyFormComponent
   ],
   imports: [
     BrowserModule,
