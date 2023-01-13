@@ -13,6 +13,7 @@
       <th>Birthdate</th>
       <th>Modify</th>
       <th>Delete</th>
+      <th>Poe</th>
     </tr>
   </thead>
 
@@ -45,6 +46,10 @@
         <td>
           <button class="buttonDelete" type="button" (click)="onRemove(stagiaire)">X</button>
         </td>
+        <td *ngIf="stagiaire.getPoe()">
+          {{stagiaire.getPoe().getTitle()}}
+        </td>
+        <td *ngIf="!stagiaire.getPoe()">Libre</td>
 
 
 

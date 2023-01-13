@@ -9,7 +9,7 @@ export class StagiaireDto {
   public email: string = '';
   public phoneNumber: string = '';
   public birthdate!: Date;
-  public poe!: Poe;
+  public poe_id!: number;
 
   public constructor(formValues: any) {
     Object.assign(this, formValues);
