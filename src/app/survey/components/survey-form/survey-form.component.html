@@ -9,7 +9,10 @@
         <input id="title" type="text" placeholder="title" formControlName="title">
 
         <button type="button" (click)="InsertQuestion()">Add New Question</button>
+            <input id="addNewQuestion" type="text" placeholder="Add New Question" formControlName="addNewQuestion" *ngIf="InsertQuestion()">
         <button type="button" (click)="SelectQuestion()">Add Current Question</button>
+            <select id="addCurrentQuestion" placeholder="add Current Question" formControlName="addCurrentQuestion" *ngIf="SelectQuestion()"></select>
+
 
         <select name="poeType" id="type" placeholder="type" formControlName="type">
             <option value="POEI">POEI</option>
@@ -17,7 +20,7 @@
         </select>
 
         <button type="button" >Go Questionnaire</button>
-        <button type="button" >Retour</button>
+        <button type="button" (click)="goHome()">Retour</button>
 
     </form>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-survey-form',
@@ -37,10 +38,27 @@ export class SurveyFormComponent implements OnInit {
   }
 
   SelectQuestion(){
-
+         
   }
 
 
-  onSubmit() {}
+  onSubmit() {
+    console.log('Delegate add survey: ', this.surveyForm.value);
+
+    //const surv: SurveyDto = new SurveyDto(this.surveyForm.value);
+
+    let subscription: Observable<any>;
+    //subscription = this.surveyService.addSurvey(surv);
+    //subscription.subscribe(() => this.nextStape())
+
+  }
+
+  public nextStape(): void {
+    //this.router.navigate(['/', 'home'])
+  }
+
+  public goHome(): void {
+    this.router.navigate(['/', 'home'])
+  }
 
 }
