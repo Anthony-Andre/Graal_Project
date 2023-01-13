@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
@@ -30,6 +31,7 @@ export class PoeDetailsComponent implements OnInit {
   }
   public selectHidden: boolean = false;
   public selectBarMode: boolean = false;
+  public stagiaireForm!: FormGroup;
 
   constructor(
     private handleDetailService: HandleDetailService,
@@ -101,18 +103,13 @@ export class PoeDetailsComponent implements OnInit {
   }
 
   public addNewTrainee() {
-    console.log("L'utilisateur veut ajouter un nouveau stagiaire");
-
     this.selectHidden = true;
     this.selectBarMode = true;
-
-
   }
 
   public closeSelectBar() {
     this.selectHidden = false;
     this.selectBarMode = false;
-
   }
 
   public clearTrainees(poe: Poe): void {
