@@ -18,6 +18,7 @@ export class PoeDetailsComponent implements OnInit {
   // @Input() stagiaire: Stagiaire | null = new Stagiaire();
   @Input() poe: Poe | null = new Poe();
   trainees: Array<Stagiaire> = [];
+  allTrainees: Array<Stagiaire> = [];
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
@@ -62,6 +63,11 @@ export class PoeDetailsComponent implements OnInit {
             )
           });
       })
+
+    this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
+      this.allTrainees = stagiaires;
+    })
+
   }
 
   public changePoe(poe: Poe) {
@@ -99,7 +105,7 @@ export class PoeDetailsComponent implements OnInit {
 
     this.selectHidden = true;
     this.selectBarMode = true;
-    
+
 
   }
 
