@@ -43,8 +43,8 @@ export class StagiaireService {
                 .subscribe((poe: Poe) => {
                   const thispoe: Poe = poe;
                   stagiaire.setPoe(thispoe);
-                  stagiaire.setPoe_Id(thispoe.getId());
                 });
+              stagiaire.setPoe_Id(inputStagiaire.poe_id);
             }
             return stagiaire;
           })

@@ -9,7 +9,7 @@ export class Stagiaire {
     private phoneNumber: string = "";
     private birthdate!: Date;
     private poe!: Poe;
-    public poe_id: number = 0;
+    private poe_id: number = 0;
 
     public getId(): number {
         return this.id;
@@ -75,13 +75,10 @@ export class Stagiaire {
     }
 
     public setPoe_Id(poe_id: number): void {
-        console.log("poeDuParamSet", poe_id);
         this.poe_id = poe_id;
-        console.log("poeDuSet: ", this.poe_id);
     }
 
     public getPoe_Id(): number {
-        console.log("poeDuGet", this.poe_id)
         return this.poe_id;
     }
 
