@@ -18,7 +18,7 @@ import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 export class PoeDetailsComponent implements OnInit {
 
   // @Input() stagiaire: Stagiaire | null = new Stagiaire();
-  @Input() poe: Poe | null = new Poe();
+  @Input() poe: Poe = new Poe();
   public stagiaireToPoe: Stagiaire = new Stagiaire();
   public stagiaireDto!: StagiaireDto;
 
@@ -130,22 +130,14 @@ export class PoeDetailsComponent implements OnInit {
   }
 
   sendSelectedTrainee() {
-    // var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
-    // var inputToInt = parseInt(input);
-    // this.stagiaireService.findOne(inputToInt)
-    //   .subscribe((stagiaire: Stagiaire) => {
-    //     this.stagiaireToPoe = stagiaire;
-    //     console.log(this.stagiaireToPoe)
-    //   }
-
-    //   )
-    // this.stagiaireToPoe.setPoe_Id(1);
-    // this.stagiaireDto = new StagiaireDto(this.stagiaireToPoe);
-
-    // console.log(this.stagiaireToPoe);
-    
-
-    // this.stagiaireService.addStagiaire(this.stagiaireDto);
+    var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
+    var inputToInt = parseInt(input);
+    this.stagiaireService.findOne(inputToInt)
+      .subscribe((stagiaire: Stagiaire) => {
+        this.stagiaireToPoe = stagiaire;
+        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe();
+      }
+    )
   }
 
 
