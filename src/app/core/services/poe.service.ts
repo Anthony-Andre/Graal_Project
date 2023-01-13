@@ -166,7 +166,7 @@ export class PoeService {
 
 
   public clearTrainees(poe: Poe): Observable<Poe> {
-    return this.httpClient.post<Poe>(`${this.controllerBaseUrl}/clearTrainees`, '')
+    return this.httpClient.patch<Poe>(`${this.controllerBaseUrl}/${poe.getId()}/clearTrainees`, '')
       .pipe(
         take(1),
         map((inputPoe: any) => {
