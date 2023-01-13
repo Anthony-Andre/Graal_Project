@@ -27,12 +27,15 @@ export class FormBuilderService {
   }
 
   public build(stagiaire: Stagiaire): FormBuilderService {
-    this.stagiaire = stagiaire
+    console.log("stagiaire envoyé au formulaire: ", stagiaire);
+    console.log("poeID envoyé au formulaire: ", stagiaire.getPoe_Id());
+    console.log("poeID envoyé au formulaire: ", stagiaire.getLastName());
+
+
+    this.stagiaire = stagiaire;
     if (stagiaire.getId() !== 0) {
       this.updateMode = true;
     }
-
-    console.log("formulaire", this.stagiaire);
 
     this.form = this.formBuilder.group({
       lastname: [
@@ -81,6 +84,8 @@ export class FormBuilderService {
     if (this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId());
       console.log("stagiaireFromFormBuilder: ", this.stagiaire)
+      this.stagiaire.setPoe_Id(35)
+      console.log("poeFromFormBuilder: ", this.stagiaire.poe_id);
       this.form.addControl('id', idControl);
     }
 

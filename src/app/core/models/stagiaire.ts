@@ -9,7 +9,7 @@ export class Stagiaire {
     private phoneNumber: string = "";
     private birthdate!: Date;
     private poe!: Poe;
-    private poe_id!: number;
+    public poe_id: number = 0;
 
     public getId(): number {
         return this.id;

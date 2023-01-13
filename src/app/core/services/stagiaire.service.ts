@@ -67,13 +67,12 @@ export class StagiaireService {
         stagiaire.setEmail(inputStagiaire.email);
         stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
         stagiaire.setBirthDate(new Date(inputStagiaire.birthdate));
-        // const poe: Poe = this.poeService.findOne(inputStagiaire.poe_id);
+        stagiaire.setPoe_Id(inputStagiaire.poe_id);
         if (inputStagiaire.poe_id) {
           this.poeService.findOne(inputStagiaire.poe_id)
             .subscribe((poe: Poe) => {
               const thispoe: Poe = poe;
               stagiaire.setPoe(thispoe);
-              stagiaire.setPoe_Id(thispoe.getId());
             });
         }
         console.log("findOne: ", stagiaire);

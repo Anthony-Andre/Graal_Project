@@ -45,8 +45,6 @@ export class StagiaireFormComponent implements OnInit {
 
     if (this.stagiaireForm.value.id !== 0 && this.stagiaireForm.value.id !== undefined) {
       this.addMode = false;
-      console.log('id =', this.stagiaireForm.value.id);
-      console.log("poeIdFromForm", this.stagiaireForm.value.poe_id);
     } else {
       this.addMode = true;
       console.log('id =', this.stagiaireForm.value.id);
