@@ -109,6 +109,10 @@ export class PoeDetailsComponent implements OnInit {
   }
 
   public addNewTrainee() {
+
+    const choixTrainee = console.log(document.getElementById('choixTrainee'));
+    console.log("L'utilisateur veut ajouter un nouveau stagiaire");
+
     this.selectHidden = true;
     this.selectBarMode = true;
   }
