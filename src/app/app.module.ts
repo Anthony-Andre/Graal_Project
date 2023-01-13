@@ -26,6 +26,7 @@ import { HttpInterceptorService } from './user/services/http-interceptor.service
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 
+
 export function initializeApp1(appInitService: AppInitService) {
   return (): Promise<any> => {
     return appInitService.init();
@@ -52,7 +53,8 @@ export function initializeApp1(appInitService: AppInitService) {
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    UserModule
+    UserModule,
+    FormsModule
   ],
   providers: [
     AppInitService,
