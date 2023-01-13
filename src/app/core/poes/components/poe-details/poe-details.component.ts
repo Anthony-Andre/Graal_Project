@@ -7,6 +7,7 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
+import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 
 @Component({
   selector: 'app-poe-details',
@@ -18,8 +19,11 @@ export class PoeDetailsComponent implements OnInit {
 
   // @Input() stagiaire: Stagiaire | null = new Stagiaire();
   @Input() poe: Poe | null = new Poe();
-  trainees: Array<Stagiaire> = [];
-  allTrainees: Array<Stagiaire> = [];
+  public stagiaireToPoe: Stagiaire = new Stagiaire();
+  public stagiaireDto!: StagiaireDto;
+
+  public trainees: Array<Stagiaire> = [];
+  public allTrainees: Array<Stagiaire> = [];
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
@@ -123,6 +127,25 @@ export class PoeDetailsComponent implements OnInit {
         }
       }
     )
+  }
+
+  sendSelectedTrainee() {
+    // var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
+    // var inputToInt = parseInt(input);
+    // this.stagiaireService.findOne(inputToInt)
+    //   .subscribe((stagiaire: Stagiaire) => {
+    //     this.stagiaireToPoe = stagiaire;
+    //     console.log(this.stagiaireToPoe)
+    //   }
+
+    //   )
+    // this.stagiaireToPoe.setPoe_Id(1);
+    // this.stagiaireDto = new StagiaireDto(this.stagiaireToPoe);
+
+    // console.log(this.stagiaireToPoe);
+    
+
+    // this.stagiaireService.addStagiaire(this.stagiaireDto);
   }
 
 

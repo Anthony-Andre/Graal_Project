@@ -51,7 +51,7 @@
               <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
 
               <div id="botButtons">
-                <button class="buttonAdd">Valider</button>
+                <button class="buttonAdd" (click)="sendSelectedTrainee()">Valider</button>
                 <button type="button" class="buttonAdd" (click)="closeSelectBar()">Annuler</button>
               </div>
 
