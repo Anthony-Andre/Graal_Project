@@ -46,6 +46,7 @@ export class StagiaireFormComponent implements OnInit {
     if (this.stagiaireForm.value.id !== 0 && this.stagiaireForm.value.id !== undefined) {
       this.addMode = false;
       console.log('id =', this.stagiaireForm.value.id);
+      console.log("poeIdFromForm", this.stagiaireForm.value.poe_id);
     } else {
       this.addMode = true;
       console.log('id =', this.stagiaireForm.value.id);
@@ -55,23 +56,6 @@ export class StagiaireFormComponent implements OnInit {
       this.poes = poes;
 
     })
-
-
-
-    //   if (this.router.url.includes("update")) {
-    //     this.addMode = false;
-    //     this.route.params
-    //       .subscribe((routeParams: Params) => {
-    //         const stagiaireId: number = routeParams['id'];
-    //         this.stagiaireService.findOne(stagiaireId)
-    //           .subscribe((stagiaire: Stagiaire) =>
-    //             // this.stagiaireToUpdate = stagiaire
-    //             this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm()
-    //           );
-    //       })
-    //   } else {
-    //     this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();
-    //   }
   }
 
 
@@ -97,6 +81,7 @@ export class StagiaireFormComponent implements OnInit {
       subscription = this.stagiaireService.update(this.stagiaireForm.value);
     }
 
+    console.log("dto du stagiaireFormComponent", dto.poe_id);
     subscription.subscribe(() => this.goHome())
   }
 

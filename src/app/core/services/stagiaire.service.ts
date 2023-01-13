@@ -38,8 +38,14 @@ export class StagiaireService {
             stagiaire.setEmail(inputStagiaire.email);
             stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
             stagiaire.setBirthDate(new Date(inputStagiaire.birthdate));
-            stagiaire.setPoe(inputStagiaire.poe_id);
-            console.log(stagiaire);
+            if (inputStagiaire.poe_id) {
+              this.poeService.findOne(inputStagiaire.poe_id)
+                .subscribe((poe: Poe) => {
+                  const thispoe: Poe = poe;
+                  stagiaire.setPoe(thispoe);
+                  stagiaire.setPoe_Id(thispoe.getId());
+                });
+            }
             return stagiaire;
           })
         })
@@ -62,14 +68,15 @@ export class StagiaireService {
         stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
         stagiaire.setBirthDate(new Date(inputStagiaire.birthdate));
         // const poe: Poe = this.poeService.findOne(inputStagiaire.poe_id);
-        this.poeService.findOne(inputStagiaire.poe_id)
-          .subscribe((poe: Poe) => {
-            const thispoe: Poe = poe;
-            console.log("POE :", thispoe);
-            stagiaire.setPoe(thispoe);
-          });
-
-        console.log(stagiaire);
+        if (inputStagiaire.poe_id) {
+          this.poeService.findOne(inputStagiaire.poe_id)
+            .subscribe((poe: Poe) => {
+              const thispoe: Poe = poe;
+              stagiaire.setPoe(thispoe);
+              stagiaire.setPoe_Id(thispoe.getId());
+            });
+        }
+        console.log("findOne: ", stagiaire);
         return stagiaire;
       })
     )
@@ -80,7 +87,8 @@ export class StagiaireService {
   }
 
   public addStagiaire(stagiaire: StagiaireDto): Observable<Stagiaire> {
-    console.log('add stagiaire asked: ', stagiaire)
+    console.log('add stagiaire asked: ', stagiaire);
+    console.log('addStagiaireToPoe :', stagiaire.poe_id);
     // Transform any to Stagiaire
     return this.httpClient.post<StagiaireDto>(
       this.controllerBaseUrl,
@@ -96,7 +104,10 @@ export class StagiaireService {
           stagiaire.setEmail(stagiaireDto.email);
           stagiaire.setPhoneNumber(stagiaireDto.phoneNumber);
           stagiaire.setBirthDate(stagiaireDto.birthdate);
-          stagiaire.setPoe(stagiaireDto.poe);
+          // stagiaire.setPoe(stagiaireDto.poe);
+          stagiaire.setPoe_Id(stagiaireDto.poe_id);
+          console.log("stagiaireDtoDuAdd: ", stagiaireDto);
+          console.log("poe addStagiaire: ", stagiaire);
           return stagiaire;
         })
       );
@@ -117,6 +128,7 @@ export class StagiaireService {
           stagiaire.setBirthDate(new Date(anyStagiaire.birthdate));
           stagiaire.setPhoneNumber(anyStagiaire.phoneNumber);
           stagiaire.setEmail(anyStagiaire.email);
+          stagiaire.setPoe_Id(anyStagiaire.poe_id);
           return stagiaire;
         })
       )
