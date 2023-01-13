@@ -109,8 +109,16 @@ export class PoeDetailsComponent implements OnInit {
 
   }
 
-
-
+  public clearTrainees(poe: Poe): void {
+    console.log("L'utilisateur souhaite supprimer la liste des stagiaires de la poe", poe.getTitle());
+    this.poeService.clearTrainees(poe).subscribe(
+      {
+        complete: () => {
+          this.trainees.splice(0);
+        }
+      }
+    )
+  }
 
 
 }

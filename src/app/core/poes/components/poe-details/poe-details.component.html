@@ -35,15 +35,25 @@
           </tr>
         </table>
 
-        <!-- <ng-container *ngIf="selectHidden"> -->
-          <div id="closeSelectBar" *ngIf="selectHidden">
-            Select du new stagiaire here
-            <button class="linkButton" (click)="closeSelectBar()">x</button>
-            <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
-          </div>
-        <!-- </ng-container> -->
-
+<<<<<<< HEAD
         <button type="button" class="buttonAdd" (click)="addNewTrainee()">{{selectBarMode ? 'Valider' : 'Ajouter un stagaire'}}</button>
+=======
+>>>>>>> 0702941 (clear method in poe)
+        <div>
+          <button type="button" class="buttonAdd" (click)="addNewTrainee()">Ajouter un stagiaire</button>
+          <div class="space"></div>
+          <button type="button" class="buttonClear" (click)="clearTrainees(poe)">Supprimer les stagiaires</button>
+        </div>
+<<<<<<< HEAD
+
+        <div id="closeSelectBar" *ngIf="selectHidden">
+          Select du new stagiaire here
+          <button class="linkButton" (click)="closeSelectBar()">x</button>
+          <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
+        </div>
+=======
+>>>>>>> 0702941 (clear method in poe)
+        
 
 
         <!--
