@@ -85,7 +85,6 @@ export class FormBuilderService {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId());
       console.log("stagiaireFromFormBuilder: ", this.stagiaire)
       this.stagiaire.setPoe_Id(35)
-      console.log("poeFromFormBuilder: ", this.stagiaire.poe_id);
       this.form.addControl('id', idControl);
     }
 

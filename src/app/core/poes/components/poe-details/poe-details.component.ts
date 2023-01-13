@@ -43,9 +43,7 @@ export class PoeDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .subscribe((routeParams: Params) => {
-        console.log('Routes params ', JSON.stringify(routeParams));
         const poeId: number = routeParams['id'];
-        console.log('Id from route = ', poeId);
         this.poeService.findOne(poeId)
           .subscribe((poe: Poe) => {
             this.poe = poe;
@@ -57,9 +55,7 @@ export class PoeDetailsComponent implements OnInit {
               stagiaire.setPhoneNumber(anyTrainee.phoneNumber);
               stagiaire.setLastName(anyTrainee.lastname);
               stagiaire.setFirstName(anyTrainee.firstname);
-              console.log("map stagiaire : ", stagiaire instanceof Stagiaire);
               this.trainees.push(stagiaire);
-              console.log("trainees2", this.trainees);
               return stagiaire;
             }
             )
@@ -67,7 +63,13 @@ export class PoeDetailsComponent implements OnInit {
       })
 
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
-      this.allTrainees = stagiaires;
+      // this.allTrainees = stagiaires;
+      for (const trainee of stagiaires) {
+        console.log(trainee.getPoe_Id())
+        if (!trainee.getPoe_Id()) {
+          this.allTrainees.push(trainee);
+        }
+      }
     })
 
   }
