@@ -35,7 +35,15 @@
           </tr>
         </table>
 
-        <button type="button" class="buttonAdd" (click)="addNewTrainee()">Ajouter un stagaire</button>
+        <!-- <ng-container *ngIf="selectHidden"> -->
+          <div id="closeSelectBar" *ngIf="selectHidden">
+            Select du new stagiaire here
+            <button class="linkButton" (click)="closeSelectBar()">x</button>
+            <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
+          </div>
+        <!-- </ng-container> -->
+
+        <button type="button" class="buttonAdd" (click)="addNewTrainee()">{{selectBarMode ? 'Valider' : 'Ajouter un stagaire'}}</button>
 
 
         <!--

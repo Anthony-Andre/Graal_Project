@@ -27,6 +27,8 @@ export class PoeDetailsComponent implements OnInit {
     color: '#fff',
     border: 'solid 2px rgb(2, 222, 45)'
   }
+  public selectHidden: boolean = false;
+  public selectBarMode: boolean = false;
 
   constructor(
     private handleDetailService: HandleDetailService,
@@ -94,6 +96,16 @@ export class PoeDetailsComponent implements OnInit {
 
   public addNewTrainee() {
     console.log("L'utilisateur veut ajouter un nouveau stagiaire");
+
+    this.selectHidden = true;
+    this.selectBarMode = true;
+    
+
+  }
+
+  public closeSelectBar() {
+    this.selectHidden = false;
+    this.selectBarMode = false;
 
   }
 
