@@ -35,19 +35,20 @@
           </tr>
         </table>
 
-        <div>
-          <div class="space"></div>
-          <button type="button" class="buttonClear" (click)="clearTrainees(poe)">Supprimer les stagiaires</button>
-        </div>
-
-
-        <button type="button" class="buttonAdd" (click)="addNewTrainee()">{{selectBarMode ? 'Valider' : 'Ajouter un stagaire'}}</button>
-
         <div id="closeSelectBar" *ngIf="selectHidden">
           Select du new stagiaire here
           <button class="linkButton" (click)="closeSelectBar()">x</button>
           <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
         </div>
+
+        <div id="botButtons">
+          <button type="button" class="buttonAdd" (click)="addNewTrainee()">{{selectBarMode ? 'Valider' : 'Ajouter un stagaire'}}</button>
+          <!-- <div> -->
+            <!-- <div class="space"></div> -->
+            <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTrainees(poe)">Supprimer les stagiaires</button>
+          <!-- </div> -->
+        </div>
+
 
 
         <!--

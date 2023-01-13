@@ -15,12 +15,12 @@
       <tr>
         <td>Roles:</td>
         <td>
-          <div *ngFor="let role of user_roles">
+          <div class="roles" *ngFor="let role of user_roles">
             <input [(ngModel)]="role.selected" name="{{ role.name }}" type="checkbox" id="{{role.name}}"
               (change)="onChangeCategory($event, role)">
-            <label class="form-check-label" for="{{role.name}}">
-              {{role.name}}
-            </label>
+              <label class="form-check-label" for="{{role.name}}">
+                {{role.name}}
+              </label>
           </div>
         </td>
       </tr>
