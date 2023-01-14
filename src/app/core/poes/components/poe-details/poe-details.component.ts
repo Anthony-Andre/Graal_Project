@@ -112,7 +112,6 @@ export class PoeDetailsComponent implements OnInit {
 
     const choixTrainee = console.log(document.getElementById('choixTrainee'));
     console.log("L'utilisateur veut ajouter un nouveau stagiaire");
-
     this.selectHidden = true;
     this.selectBarMode = true;
   }
@@ -134,6 +133,8 @@ export class PoeDetailsComponent implements OnInit {
   }
 
   sendSelectedTrainee() {
+
+
     var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
     var inputToInt = parseInt(input);
     this.stagiaireService.findOne(inputToInt)
@@ -141,7 +142,7 @@ export class PoeDetailsComponent implements OnInit {
         this.stagiaireToPoe = stagiaire;
         this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe();
       }
-    )
+      )
   }
 
 
