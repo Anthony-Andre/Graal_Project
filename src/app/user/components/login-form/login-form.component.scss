@@ -22,7 +22,14 @@
 
 .lineForm p,
 .lineForm input,
-.lineForm label {
+.lineForm label,
+.lineForm div {
+    width: 50%;
     margin: auto;
     text-align: center;
+}
+
+.link-button {
+    margin: auto;
+    width: 50%;
 }
