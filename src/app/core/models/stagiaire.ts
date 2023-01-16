@@ -1,3 +1,6 @@
+import { PoeService } from "../services/poe.service";
+import { Poe } from "./poe";
+
 export class Stagiaire {
     private id: number = 0;
     private firstname: string = "";
@@ -5,6 +8,8 @@ export class Stagiaire {
     private email: string = "";
     private phoneNumber: string = "";
     private birthdate!: Date;
+    private poe!: Poe;
+    private poe_id: number = 0;
 
     public getId(): number {
         return this.id;
@@ -54,8 +59,29 @@ export class Stagiaire {
         this.email = email;
     }
 
-    // public getInitials(): string {
-    //     return this.firstName.charAt(0).toUpperCase() + this.lastName.charAt(0).toUpperCase();
+    public getPoe(): Poe {
+        return this.poe;
+    }
+
+    // public setPoe(poeid: number): void {
+    //     this.poeService.findOne(poeid)
+    //         .subscribe((poe: Poe) => {
+    //             this.poe = poe;
+    //         })
     // }
 
+    public setPoe(poe: Poe): void {
+        this.poe = poe;
+    }
+
+    public setPoe_Id(poe_id: number): void {
+        this.poe_id = poe_id;
+    }
+
+    public getPoe_Id(): number {
+        return this.poe_id;
+    }
+
+
 }
+

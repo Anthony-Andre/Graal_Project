@@ -61,7 +61,9 @@ div {
 // Liste des stagiaires : 
 
 .listeStagiaires {
-  margin: 4em auto;
+  margin: auto;
+  margin-top: 2em;
+  margin-bottom: 1em;
   border-collapse: collapse;
   text-align: center;
   background-color: #ffffff57;
@@ -123,4 +125,28 @@ tfoot {
   margin: 2em auto;
   text-align: center;
   cursor: pointer;
+}
+
+.buttonClear {
+  width: 14em;
+  height: 3em;
+  text-decoration: none;
+  background-color: $main-color;
+  color: #fff;
+  border: solid black;
+  border-radius: 25px;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+#botButtons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+form {
+  width: 450px;
 }

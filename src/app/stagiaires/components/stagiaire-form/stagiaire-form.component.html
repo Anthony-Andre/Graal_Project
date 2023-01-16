@@ -10,6 +10,15 @@
         <label for="firstName">Veuillez saisir le prénom du stagiaire:</label>
         <input id="firstName" type="text" placeholder="Prénom" formControlName="firstname">
 
+        <select name="poeType" id="type" placeholder="type" formControlName="poe_id">
+            <option selected="{{poe.getId()}} == formControlValue ? true : null" *ngFor="let poe of poes"
+                value="{{poe.getId()}}">
+                {{poe.getTitle()}}
+            </option>
+        </select>
+
+
+
         <!-- 
         <label for="birthdate">Veuillez saisir la date de naissance du stagiaire:</label>
         <input type="date" name="birthdate" id="" birthdate formControlName="birthdate">

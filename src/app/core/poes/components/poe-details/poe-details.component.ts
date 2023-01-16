@@ -1,11 +1,13 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
+import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 
 @Component({
   selector: 'app-poe-details',
@@ -16,8 +18,12 @@ import { HandleDetailService } from 'src/app/shared/directives/handle-detail.ser
 export class PoeDetailsComponent implements OnInit {
 
   // @Input() stagiaire: Stagiaire | null = new Stagiaire();
-  @Input() poe: Poe | null = new Poe();
-  trainees: Array<Stagiaire> = [];
+  @Input() poe: Poe = new Poe();
+  public stagiaireToPoe: Stagiaire = new Stagiaire();
+  public stagiaireDto!: StagiaireDto;
+
+  public trainees: Array<Stagiaire> = [];
+  public allTrainees: Array<Stagiaire> = [];
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
@@ -27,6 +33,9 @@ export class PoeDetailsComponent implements OnInit {
     color: '#fff',
     border: 'solid 2px rgb(2, 222, 45)'
   }
+  public selectHidden: boolean = false;
+  public selectBarMode: boolean = false;
+  public stagiaireForm!: FormGroup;
 
   constructor(
     private handleDetailService: HandleDetailService,
@@ -38,9 +47,7 @@ export class PoeDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .subscribe((routeParams: Params) => {
-        console.log('Routes params ', JSON.stringify(routeParams));
         const poeId: number = routeParams['id'];
-        console.log('Id from route = ', poeId);
         this.poeService.findOne(poeId)
           .subscribe((poe: Poe) => {
             this.poe = poe;
@@ -52,14 +59,23 @@ export class PoeDetailsComponent implements OnInit {
               stagiaire.setPhoneNumber(anyTrainee.phoneNumber);
               stagiaire.setLastName(anyTrainee.lastname);
               stagiaire.setFirstName(anyTrainee.firstname);
-              console.log("map stagiaire : ", stagiaire instanceof Stagiaire);
               this.trainees.push(stagiaire);
-              console.log("trainees2", this.trainees);
               return stagiaire;
             }
             )
           });
       })
+
+    this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
+      // this.allTrainees = stagiaires;
+      for (const trainee of stagiaires) {
+        console.log(trainee.getPoe_Id())
+        if (!trainee.getPoe_Id()) {
+          this.allTrainees.push(trainee);
+        }
+      }
+    })
+
   }
 
   public changePoe(poe: Poe) {
@@ -93,11 +109,40 @@ export class PoeDetailsComponent implements OnInit {
   }
 
   public addNewTrainee() {
+
+    const choixTrainee = console.log(document.getElementById('choixTrainee'));
     console.log("L'utilisateur veut ajouter un nouveau stagiaire");
+
+    this.selectHidden = true;
+    this.selectBarMode = true;
   }
 
+  public closeSelectBar() {
+    this.selectHidden = false;
+    this.selectBarMode = false;
+  }
 
+  public clearTrainees(poe: Poe): void {
+    console.log("L'utilisateur souhaite supprimer la liste des stagiaires de la poe", poe.getTitle());
+    this.poeService.clearTrainees(poe).subscribe(
+      {
+        complete: () => {
+          this.trainees.splice(0);
+        }
+      }
+    )
+  }
 
+  sendSelectedTrainee() {
+    var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
+    var inputToInt = parseInt(input);
+    this.stagiaireService.findOne(inputToInt)
+      .subscribe((stagiaire: Stagiaire) => {
+        this.stagiaireToPoe = stagiaire;
+        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe();
+      }
+    )
+  }
 
 
 }

@@ -36,9 +36,10 @@
                 <td> {{ poe.getType() }} </td>
                 <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">M</button></td>
                 <td><button type="button" class="buttonDelete" (click)="onRemove(poe)">X</button></td>
+                <td> {{ poe.getTrainees().length }}</td>
 
                 <!--
-                <td>{{poe.getTrainees().length}}</td>
+                
                 <td>
                     <li *ngFor="let stagiaire of poe.getTrainees()">
                         <ul>{{stagiaire}}</ul>
@@ -51,6 +52,7 @@
 </table>
 
 <a class="link-button" [routerLink]="['/','poe','add']">Ajouter une poe</a>
+<a class="link-button" [routerLink]="['/','add','poe']">Ajouter une poe</a>
 <a class="link-button" [routerLink]="['/','survey']">Créer Questionnaire</a>
 
 <table class="stats">
@@ -62,9 +64,9 @@
 
     <tr>Nombre total de Poe : {{poes.length}}</tr>
 
-    <tr>Nombre total de stagiaires : {{tousLesStagiaires.length}}</tr>
+    <tr>Nombre total de stagiaires : {{tousLesStagiaires()}}</tr>
 
-    <tr>Moyenne de stagiaire par POE : {{moyenneStagiaires}}</tr>
+    <tr>Moyenne de stagiaires par POE : {{moyenneStagiaires()}}</tr>
 
     <p></p>
 

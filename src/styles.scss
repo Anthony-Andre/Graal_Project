@@ -228,7 +228,8 @@ form div {
 }
 
 .mat-form-field-flex,
-.mat-button-wrapper {
+.mat-button-wrapper,
+#choixTrainee {
   text-align: center;
   font-family: $main-font;
 }
@@ -273,4 +274,10 @@ body {
 body {
   margin: 0;
   //  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#choixTrainee {
+  height: 2em;
+  margin: auto 1em;
+  border-radius: 5px;
 }

@@ -6,6 +6,7 @@ export class Survey {
     private title: string = "";
     private type!: PoeType;
     private level!: Level;
+    //private trainees!: Array<Question>;
     
 
 
@@ -40,6 +41,14 @@ export class Survey {
     public setLevel(type: PoeType): void {
         this.type = type;
     }
+
+    //public getQuestions(): Array<Question> {
+        //return this.questions;
+    //}
+
+    //public setQuestions(questions: Array<Question>): void {
+     //   this.questions = questions;
+    //}
 
 
    

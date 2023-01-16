@@ -27,11 +27,15 @@ export class FormBuilderService {
   }
 
   public build(stagiaire: Stagiaire): FormBuilderService {
-    this.stagiaire = stagiaire
+    console.log("stagiaire envoyé au formulaire: ", stagiaire);
+    console.log("poeID envoyé au formulaire: ", stagiaire.getPoe_Id());
+    console.log("poeID envoyé au formulaire: ", stagiaire.getLastName());
+
+
+    this.stagiaire = stagiaire;
     if (stagiaire.getId() !== 0) {
       this.updateMode = true;
     }
-
 
     this.form = this.formBuilder.group({
       lastname: [
@@ -60,10 +64,18 @@ export class FormBuilderService {
           Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")
         ]
       ],
+      poe_id: [
+        this.stagiaire.getPoe_Id()
+      ],
       birthdate: [
         this.stagiaire.getBirthDate() !== null ? this.stagiaire.getBirthDate() : ''
       ]
     });
+
+    console.log("après formulaire", this.stagiaire);
+    console.log("après formulaire POE", this.stagiaire.getPoe_Id());
+    console.log("après formulaire Nom", this.stagiaire.getLastName());
+
 
 
     // Ajoute un contrôle avec la valeur de l'id du Stagiaire 
@@ -71,6 +83,8 @@ export class FormBuilderService {
 
     if (this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId());
+      console.log("stagiaireFromFormBuilder: ", this.stagiaire)
+      this.stagiaire.setPoe_Id(35)
       this.form.addControl('id', idControl);
     }
 

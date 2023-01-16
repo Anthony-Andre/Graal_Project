@@ -15,18 +15,18 @@
       <tr>
         <td>Roles:</td>
         <td>
-          <div *ngFor="let role of user_roles">
+          <div class="roles" *ngFor="let role of user_roles">
             <input [(ngModel)]="role.selected" name="{{ role.name }}" type="checkbox" id="{{role.name}}"
               (change)="onChangeCategory($event, role)">
-            <label class="form-check-label" for="{{role.name}}">
-              {{role.name}}
-            </label>
+              <label class="form-check-label" for="{{role.name}}">
+                {{role.name}}
+              </label>
           </div>
         </td>
       </tr>
       <tr>
         <td><input class="link-button" name="submit" type="submit" value="Signup" /></td>
-        <td>Have account? <a href="/signin" routerLink="/signin">Signin</a></td>
+        <td>Have account? <a routerLink="/signin">Signin</a></td>
       </tr>
     </table>
   </form>

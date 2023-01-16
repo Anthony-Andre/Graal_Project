@@ -1,3 +1,4 @@
+import { Poe } from "src/app/core/models/poe";
 import { Stagiaire } from "src/app/core/models/stagiaire";
 
 export class StagiaireDto {
@@ -8,6 +9,7 @@ export class StagiaireDto {
   public email: string = '';
   public phoneNumber: string = '';
   public birthdate!: Date;
+  public poe_id!: number;
 
   public constructor(formValues: any) {
     Object.assign(this, formValues);

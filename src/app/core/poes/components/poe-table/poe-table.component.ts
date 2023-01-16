@@ -23,11 +23,10 @@ export class PoeTableComponent implements OnInit {
 
   public poes: Array<Poe> = [];
   public stagiaires: Array<Stagiaire> = [];
-  public tousLesStagiaires: Array<Stagiaire> = [];
   public stopDate: String | null = null;
   public dateOfTheDay: string = new Date().getFullYear() + "," + (new Date().getMonth() + 1) + "," + (new Date().getDate() + 1);
   public hasUser: boolean = this.authService.isUserSignedin();
-  public moyenneStagiaires!: number;
+  public nbStagiaires!: number;
 
   constructor(
     private poeService: PoeService,
@@ -40,14 +39,7 @@ export class PoeTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
-      this.poes = poes;
-      // for (let poe of poes) {
-      //   for (let stagiaire of poe.getTrainees()) {
-      //     console.log(stagiaire);
-      //     this.tousLesStagiaires.push(stagiaire);
-      //   }
-      // }
-      this.moyenneStagiaires = this.tousLesStagiaires.length / this.poes.length;
+      this.poes = poes;     
     })
 
 
@@ -123,6 +115,18 @@ export class PoeTableComponent implements OnInit {
   public getDayDiff(startDate: Date, endDate: Date): number {
     const msInDay = 24 * 60 * 60 * 1000;
     return Math.round(Math.abs(Number(endDate) - Number(startDate)) / msInDay);
+  }
+
+  public tousLesStagiaires(): number {
+    this.nbStagiaires = 0;
+    for (let poe of this.poes) {
+      this.nbStagiaires += poe.getTrainees().length;
+    }
+    return this.nbStagiaires;
+  }
+
+  public moyenneStagiaires(): number {
+    return this.tousLesStagiaires()/this.poes.length;
   }
 
 }
