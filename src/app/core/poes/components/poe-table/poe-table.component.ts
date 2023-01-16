@@ -1,6 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
@@ -27,6 +29,7 @@ export class PoeTableComponent implements OnInit {
   public dateOfTheDay: string = new Date().getFullYear() + "," + (new Date().getMonth() + 1) + "," + (new Date().getDate() + 1);
   public hasUser: boolean = this.authService.isUserSignedin();
   public nbStagiaires!: number;
+  public confirmation: string = "false";
 
   constructor(
     private poeService: PoeService,
@@ -35,7 +38,8 @@ export class PoeTableComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private authService: AuthService,
-    private greetingService: GreetingService) { }
+    private greetingService: GreetingService,
+    private dialog : MatDialog) { }
 
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
@@ -68,16 +72,26 @@ export class PoeTableComponent implements OnInit {
 
   public onRemove(poe: Poe): void {
     console.log(`L'utilisateur souhaite supprimer ${poe.getTitle()}`);
-    this.poeService.delete(poe).subscribe({
-      next: (response: HttpResponse<any>) => { },
-      error: (error: any) => { },
-      complete: () => {
-        this.poes.splice(
-          this.poes.findIndex((p: Poe) => p.getId() === poe.getId()),
-          1
-        )
-      }
-    });
+    if (this.confirmation === "true") {
+      this.poeService.delete(poe).subscribe({
+        next: (response: HttpResponse<any>) => { },
+        error: (error: any) => { },
+        complete: () => {
+          this.poes.splice(
+            this.poes.findIndex((p: Poe) => p.getId() === poe.getId()),
+            1
+          )
+        }
+      });
+    }    
+  }
+
+  public onRemovePoeDialog(poe: Poe): void {
+    const dialogRef = this.dialog.open(DeletePoeDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.onRemove(poe);
+    })
   }
 
   public onUpDate(poe: Poe): void {

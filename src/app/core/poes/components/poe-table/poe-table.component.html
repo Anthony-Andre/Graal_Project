@@ -37,7 +37,7 @@
                 <td> {{ poe.getEndDate() | date: 'dd-MM-YYYY' }} </td>
                 <td> {{ poe.getType() }} </td>
                 <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">M</button></td>
-                <td><button type="button" class="buttonDelete" (click)="onRemove(poe)">X</button></td>
+                <td><button type="button" class="buttonDelete" (click)="onRemovePoeDialog(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
                 <td>La réponse est oui</td>
 

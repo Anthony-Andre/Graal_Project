@@ -6,6 +6,8 @@ import { HandleDetailService } from 'src/app/shared/directives/handle-detail.ser
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteTraineeDialogComponent } from 'src/app/core/dialogs/delete-trainee-dialog/delete-trainee-dialog.component';
 
 @Component({
   selector: 'app-stagiaire-table',
@@ -33,11 +35,13 @@ export class StagiaireTableComponent implements OnInit {
   }
   public isDetailHidden$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public selectedStagiaire: Stagiaire | null = null;
+  public confirmation: string = "false";
 
   constructor(
     private stagiaireService: StagiaireService,
     private handleDetailService: HandleDetailService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +55,8 @@ export class StagiaireTableComponent implements OnInit {
 
   public onRemove(stagiaire: Stagiaire): void {
     console.log(`L'utilisateur souhaite supprimer ${stagiaire.getLastName()}`);
-    this.stagiaireService.delete(stagiaire)
+    if (this.confirmation === "true") {
+      this.stagiaireService.delete(stagiaire)
       .subscribe({
         next: (response: HttpResponse<any>) => {
 
@@ -67,6 +72,16 @@ export class StagiaireTableComponent implements OnInit {
           )
         }
       })
+    }
+    
+  }
+
+  public onRemoveTraineeDialog(stagiaire: Stagiaire): void {
+    const dialogRef = this.dialog.open(DeleteTraineeDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.onRemove(stagiaire);
+    })
   }
 
   public onClick(stagiaire: Stagiaire): void {
