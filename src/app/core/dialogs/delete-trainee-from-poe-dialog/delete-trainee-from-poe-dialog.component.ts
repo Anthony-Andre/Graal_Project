@@ -9,7 +9,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DeleteTraineeFromPoeDialogComponent {
 
-  constructor(
-    private dialogRef: MatDialogRef<DeleteTraineeFromPoeDialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<DeleteTraineeFromPoeDialogComponent>) { }
 
 }

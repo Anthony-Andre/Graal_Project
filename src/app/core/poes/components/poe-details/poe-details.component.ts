@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import { of } from 'rxjs';
+import { ClearTraineesFromPoeDialogComponent } from 'src/app/core/dialogs/clear-trainees-from-poe-dialog/clear-trainees-from-poe-dialog.component';
 import { DeleteTraineeFromPoeDialogComponent } from 'src/app/core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
@@ -126,13 +127,15 @@ export class PoeDetailsComponent implements OnInit {
 
   public clearTrainees(poe: Poe): void {
     console.log("L'utilisateur souhaite supprimer la liste des stagiaires de la poe", poe.getTitle());
-    this.poeService.clearTrainees(poe).subscribe(
-      {
-        complete: () => {
-          this.trainees.splice(0);
+    if (this.confirmation === "true") {
+      this.poeService.clearTrainees(poe).subscribe(
+        {
+          complete: () => {
+            this.trainees.splice(0);
+          }
         }
-      }
-    )
+      )
+    }    
   }
 
   public deleteTraineeDialog(poe: Poe, trainee: Stagiaire): void {
@@ -140,6 +143,14 @@ export class PoeDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.confirmation = result;
       this.deleteTraineeFromPoe(poe, trainee);        
+    });
+  }
+
+  public clearTraineesDialog(poe: Poe): void {
+    const dialogRef = this.dialog.open(ClearTraineesFromPoeDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.clearTrainees(poe);
     });
   }
 
