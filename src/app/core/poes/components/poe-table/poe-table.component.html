@@ -1,8 +1,10 @@
+<h1 id="welcome">Gestion des POE Aelion - {{ signedinUser }}</h1>
+
 <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
 
 <div *ngIf="isSignedin">
 
-    <h1>Welcome back, {{ signedinUser }}!</h1>
+
 
     <!--   <div *ngFor="let greet of greeting">
         {{greet}}
@@ -22,7 +24,7 @@
             <th>Modify</th>
             <th>Delete</th>
             <th>Nombre de stagiaires</th>
-            <th>Stagiaires</th>
+            <th>Mail envoyé</th>
         </tr>
     </thead>
 
@@ -37,15 +39,8 @@
                 <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">M</button></td>
                 <td><button type="button" class="buttonDelete" (click)="onRemove(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
+                <td>La réponse est oui</td>
 
-                <!--
-                
-                <td>
-                    <li *ngFor="let stagiaire of poe.getTrainees()">
-                        <ul>{{stagiaire}}</ul>
-                    </li>
-                </td>
-                -->
             </tr>
         </ng-container>
     </tbody>

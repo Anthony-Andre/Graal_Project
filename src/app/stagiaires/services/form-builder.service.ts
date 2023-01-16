@@ -27,9 +27,6 @@ export class FormBuilderService {
   }
 
   public build(stagiaire: Stagiaire): FormBuilderService {
-    console.log("stagiaire envoyé au formulaire: ", stagiaire);
-    console.log("poeID envoyé au formulaire: ", stagiaire.getPoe_Id());
-    console.log("poeID envoyé au formulaire: ", stagiaire.getLastName());
 
 
     this.stagiaire = stagiaire;
@@ -72,10 +69,6 @@ export class FormBuilderService {
       ]
     });
 
-    console.log("après formulaire", this.stagiaire);
-    console.log("après formulaire POE", this.stagiaire.getPoe_Id());
-    console.log("après formulaire Nom", this.stagiaire.getLastName());
-
 
 
     // Ajoute un contrôle avec la valeur de l'id du Stagiaire 
@@ -83,7 +76,6 @@ export class FormBuilderService {
 
     if (this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId());
-      console.log("stagiaireFromFormBuilder: ", this.stagiaire)
       this.stagiaire.setPoe_Id(35)
       this.form.addControl('id', idControl);
     }

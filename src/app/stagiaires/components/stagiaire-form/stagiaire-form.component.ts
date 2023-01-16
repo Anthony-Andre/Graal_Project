@@ -40,14 +40,12 @@ export class StagiaireFormComponent implements OnInit {
   ngOnInit(): void {
 
     const data: any = this.route.snapshot.data;
-    console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
     this.stagiaireForm = data.form;
 
     if (this.stagiaireForm.value.id !== 0 && this.stagiaireForm.value.id !== undefined) {
       this.addMode = false;
     } else {
       this.addMode = true;
-      console.log('id =', this.stagiaireForm.value.id);
     }
 
     this.poeService.findAll().subscribe((poes: Poe[]) => {
@@ -68,7 +66,6 @@ export class StagiaireFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Delegate add stagiaire: ', this.stagiaireForm.value);
     const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
 
     let subscription: Observable<any>;
@@ -79,7 +76,6 @@ export class StagiaireFormComponent implements OnInit {
       subscription = this.stagiaireService.update(this.stagiaireForm.value);
     }
 
-    console.log("dto du stagiaireFormComponent", dto.poe_id);
     subscription.subscribe(() => this.goHome())
   }
 

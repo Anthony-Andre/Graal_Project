@@ -12,6 +12,7 @@
 
         <label for="poeType">Affecter une POE (Facultatif) :</label>
         <select name="poeType" id="type" placeholder="type" formControlName="poe_id">
+            <option value=""></option>
             <option *ngFor="let poe of poes" value="{{poe.getId()}}">
                 {{poe.getTitle()}}
             </option>

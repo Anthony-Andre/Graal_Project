@@ -31,14 +31,19 @@ export class StagiaireResolver implements Resolve<FormGroup> {
     let stagiaire: Stagiaire;
     let form: FormGroup;
 
+
+
+    if (idPoe !== 0) {
+      stagiaire = new Stagiaire();
+      stagiaire.setPoe_Id(idPoe);
+      form = this.formBuilderService.build(stagiaire).getForm();
+      return of(form);
+    }
     if (id === 0) {
       stagiaire = new Stagiaire();
       form = this.formBuilderService.build(stagiaire).getForm();
-      return of(form);
-    } else if (idPoe !== 0) {
-      console.log("Salut on veut modifier la poe ", idPoe);
-      stagiaire = new Stagiaire();
-      form = this.formBuilderService.build(stagiaire).getForm();
+      console.log("idPoe:", idPoe);
+      console.log("id", id);
       return of(form);
     } else {
       return this.stagiaireService.findOne(id)

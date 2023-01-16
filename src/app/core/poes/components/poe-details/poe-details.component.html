@@ -48,7 +48,7 @@
             </option>
           </datalist>
 
-          <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
+          <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add/{{poe.getId()}}">Créer</a></div>
 
           <div id="botButtons">
             <button class="buttonAdd" (click)="sendSelectedTrainee()">Valider</button>
