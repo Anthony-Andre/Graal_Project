@@ -1,6 +1,9 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
+import { of } from 'rxjs';
+import { DeleteTraineeFromPoeDialogComponent } from 'src/app/core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
@@ -19,6 +22,7 @@ export class PoeDetailsComponent implements OnInit {
   @Input() poe: Poe | null = new Poe();
   trainees: Array<Stagiaire> = [];
   allTrainees: Array<Stagiaire> = [];
+  confirmation: string = "false";
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
@@ -35,7 +39,8 @@ export class PoeDetailsComponent implements OnInit {
     private handleDetailService: HandleDetailService,
     private route: ActivatedRoute,
     private stagiaireService: StagiaireService,
-    private poeService: PoeService
+    private poeService: PoeService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -90,16 +95,18 @@ export class PoeDetailsComponent implements OnInit {
 
   public deleteTraineeFromPoe(poe: Poe, stagiaire: Stagiaire): void {
     console.log("delete trainee:", stagiaire.getLastName(), "from poe:", poe.getTitle());
-    this.poeService.deleteTrainee(poe, stagiaire).subscribe(
-      {
-        complete: () => {
-          this.trainees.splice(
-            this.trainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
-            1
-          )
+    if (this.confirmation === "true") {
+      this.poeService.deleteTrainee(poe, stagiaire).subscribe(
+        {
+          complete: () => {
+            this.trainees.splice(
+              this.trainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+              1
+            )
+          }
         }
-      }
-    );
+      ); 
+    }       
   }
 
   public addNewTrainee() {
@@ -126,6 +133,14 @@ export class PoeDetailsComponent implements OnInit {
         }
       }
     )
+  }
+
+  public deleteTraineeDialog(poe: Poe, trainee: Stagiaire): void {
+    const dialogRef = this.dialog.open(DeleteTraineeFromPoeDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.deleteTraineeFromPoe(poe, trainee);        
+    });
   }
 
 
