@@ -44,7 +44,7 @@
           <button class="buttonDelete" type="button" (click)="onUpdate(stagiaire)">🖊️</button>
         </td>
         <td>
-          <button class="buttonDelete" type="button" (click)="onRemove(stagiaire)">X</button>
+          <button class="buttonDelete" type="button" (click)="onRemoveTraineeDialog(stagiaire)">X</button>
         </td>
         <td *ngIf="stagiaire.getPoe()">
           {{stagiaire.getPoe().getTitle()}}

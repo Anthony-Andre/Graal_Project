@@ -28,6 +28,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteTraineeFromPoeDialogComponent } from './core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
 import { ClearTraineesFromPoeDialogComponent } from './core/dialogs/clear-trainees-from-poe-dialog/clear-trainees-from-poe-dialog.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { DeletePoeDialogComponent } from './core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
+import { DeleteTraineeDialogComponent } from './core/dialogs/delete-trainee-dialog/delete-trainee-dialog.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -51,7 +53,9 @@ export function initializeApp1(appInitService: AppInitService) {
     PoeDetailsComponent,
     DeleteTraineeFromPoeDialogComponent,
     ClearTraineesFromPoeDialogComponent,
-    SurveyFormComponent
+    SurveyFormComponent,
+    DeletePoeDialogComponent,
+    DeleteTraineeDialogComponent
   ],
   imports: [
     BrowserModule,
