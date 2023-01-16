@@ -140,7 +140,9 @@ export class PoeDetailsComponent implements OnInit {
     this.stagiaireService.findOne(inputToInt)
       .subscribe((stagiaire: Stagiaire) => {
         this.stagiaireToPoe = stagiaire;
-        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe();
+        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe((poe: Poe) => {
+          this.poe = poe;
+        });
       }
       )
   }

@@ -10,9 +10,9 @@
         <label for="firstName">Veuillez saisir le prénom du stagiaire:</label>
         <input id="firstName" type="text" placeholder="Prénom" formControlName="firstname">
 
+        <label for="poeType">Affecter une POE (Facultatif) :</label>
         <select name="poeType" id="type" placeholder="type" formControlName="poe_id">
-            <option selected="{{poe.getId()}} == formControlValue ? true : null" *ngFor="let poe of poes"
-                value="{{poe.getId()}}">
+            <option *ngFor="let poe of poes" value="{{poe.getId()}}">
                 {{poe.getTitle()}}
             </option>
         </select>

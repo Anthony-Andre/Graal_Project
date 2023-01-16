@@ -105,6 +105,14 @@ export class AppRoutingModule {
       ]
     },
     {
+      path: 'stagiaire/add/:idPoe',
+      component: StagiaireFormComponent,
+      resolve: { form: StagiaireResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
       path: 'survey',
       component: SurveyFormComponent,
       canActivate: [
@@ -116,6 +124,6 @@ export class AppRoutingModule {
       redirectTo: 'home',
       pathMatch: 'full'
     },
-    
+
   ];
 }

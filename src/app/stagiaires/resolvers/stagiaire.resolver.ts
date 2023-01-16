@@ -27,10 +27,16 @@ export class StagiaireResolver implements Resolve<FormGroup> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {
 
     const id: number = +route.paramMap.get('id')!;
+    const idPoe: number = +route.paramMap.get('idPoe')!;
     let stagiaire: Stagiaire;
     let form: FormGroup;
 
     if (id === 0) {
+      stagiaire = new Stagiaire();
+      form = this.formBuilderService.build(stagiaire).getForm();
+      return of(form);
+    } else if (idPoe !== 0) {
+      console.log("Salut on veut modifier la poe ", idPoe);
       stagiaire = new Stagiaire();
       form = this.formBuilderService.build(stagiaire).getForm();
       return of(form);
@@ -43,8 +49,6 @@ export class StagiaireResolver implements Resolve<FormGroup> {
           })
         )
     }
-
-    console.log("log lancé par le front end via le stagiaire resolver");
 
   }
 }
