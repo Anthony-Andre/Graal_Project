@@ -39,7 +39,7 @@ export class PoeTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
-      this.poes = poes;     
+      this.poes = poes;
     })
 
 
@@ -54,7 +54,6 @@ export class PoeTableComponent implements OnInit {
       this.greetingService.getByUserRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/user - You are not authorize'));
       this.greetingService.getByAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/admin - You are not authorized'));
       this.greetingService.getByUserOrAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
-      this.greetingService.getByAnonymousRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/anonymous - You are not authorized'));
     }
 
   }
@@ -126,7 +125,7 @@ export class PoeTableComponent implements OnInit {
   }
 
   public moyenneStagiaires(): number {
-    return this.tousLesStagiaires()/this.poes.length;
+    return this.tousLesStagiaires() / this.poes.length;
   }
 
 }
