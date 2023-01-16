@@ -1,0 +1,28 @@
+.errorsDiv {
+    padding-bottom: 15px;
+}
+
+.contour {
+    border: solid rgb(0, 0, 0);
+    margin: 2em auto;
+    padding: 2em;
+    width: 25%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.lineForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.lineForm p,
+.lineForm input,
+.lineForm label {
+    margin: auto;
+    text-align: center;
+}

@@ -1,8 +1,6 @@
 <div id="signup-box">
   <h2>Signup Here</h2>
-  <div style="color : red" *ngIf='error'>{{error}}</div>
-  <div style="color : green" *ngIf='success'>{{success}}</div>
-  <form name='signupForm' (submit)="doSignup()">
+  <form class="basicForm" name='signupForm' (submit)="doSignup()">
     <table>
       <tr>
         <td>Username:</td>
@@ -12,6 +10,8 @@
         <td>Password:</td>
         <td><input type='password' name='password' [(ngModel)]="password" /></td>
       </tr>
+        <div class="errorsDiv" style="color : red" *ngIf='error'>{{error}}</div>
+        <div class="errorsDiv" style="color : green" *ngIf='success'>{{success}}</div>
       <tr>
         <td>Roles:</td>
         <td>
