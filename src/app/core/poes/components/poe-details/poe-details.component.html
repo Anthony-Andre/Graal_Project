@@ -40,7 +40,7 @@
 
 
           <label for="choixTrainee">Choisir le stagiaire à enregistrer :</label>
-          <input list="allTrainees" id="choixTrainee" type="text">
+          <input list="allTrainees" id="choixTrainee" type="search">
 
           <datalist id="allTrainees">
             <option *ngFor="let trainee of allTrainees" value="{{trainee.getId()}}">

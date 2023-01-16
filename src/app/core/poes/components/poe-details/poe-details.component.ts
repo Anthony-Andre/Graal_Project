@@ -25,11 +25,12 @@ export class PoeDetailsComponent implements OnInit {
   @Input() poe: Poe = new Poe();
   trainees: Array<Stagiaire> = [];
   allTrainees: Array<Stagiaire> = [];
-  confirmation: string = "false";  
+  confirmation: string = "false";
   public stagiaireToPoe: Stagiaire = new Stagiaire();
   public stagiaireDto!: StagiaireDto;
+  public traineeId!: number;
 
-  
+
 
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
@@ -108,14 +109,15 @@ export class PoeDetailsComponent implements OnInit {
       this.poeService.deleteTrainee(poe, stagiaire).subscribe(
         {
           complete: () => {
+            this.allTrainees.push(stagiaire);
             this.trainees.splice(
               this.trainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
               1
             )
           }
         }
-      ); 
-    }       
+      );
+    }
   }
 
   public addNewTrainee() {
@@ -141,14 +143,14 @@ export class PoeDetailsComponent implements OnInit {
           }
         }
       )
-    }    
+    }
   }
 
   public deleteTraineeDialog(poe: Poe, trainee: Stagiaire): void {
     const dialogRef = this.dialog.open(DeleteTraineeFromPoeDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       this.confirmation = result;
-      this.deleteTraineeFromPoe(poe, trainee);        
+      this.deleteTraineeFromPoe(poe, trainee);
     });
   }
 
@@ -160,16 +162,23 @@ export class PoeDetailsComponent implements OnInit {
     });
   }
 
+
   sendSelectedTrainee() {
-
-
+    console.log("traineeId", this.traineeId);
     var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
+    console.log("input: ", input);
     var inputToInt = parseInt(input);
     this.stagiaireService.findOne(inputToInt)
       .subscribe((stagiaire: Stagiaire) => {
         this.stagiaireToPoe = stagiaire;
-        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe((poe: Poe) => {
-          this.poe = poe;
+        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe({
+          complete: () => {
+            this.allTrainees.splice(
+              this.allTrainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+              1);
+            (<HTMLInputElement>document.getElementById("choixTrainee")).value = "";
+            return this.trainees.push(stagiaire);
+          }
         });
       }
       )
