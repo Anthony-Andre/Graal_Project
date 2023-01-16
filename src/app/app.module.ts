@@ -24,6 +24,9 @@ import { FormsModule } from '@angular/forms';
 import { UserFormComponent } from './user/components/user-form/user-form.component';
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteTraineeFromPoeDialogComponent } from './core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
+import { ClearTraineesFromPoeDialogComponent } from './core/dialogs/clear-trainees-from-poe-dialog/clear-trainees-from-poe-dialog.component';
 
 export function initializeApp1(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -43,14 +46,17 @@ export function initializeApp1(appInitService: AppInitService) {
     PoeFormComponent,
     PoeTableComponent,
     PoeFilterComponent,
-    PoeDetailsComponent
+    PoeDetailsComponent,
+    DeleteTraineeFromPoeDialogComponent,
+    ClearTraineesFromPoeDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    UserModule
+    UserModule,
+    MatDialogModule
   ],
   providers: [
     AppInitService,
