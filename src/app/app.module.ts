@@ -15,15 +15,18 @@ import { SharedModule } from './shared/shared.module';
 import { PoeFormComponent } from './core/poes/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './core/poes/components/poe-table/poe-table.component';
 import { PoeFilterComponent } from './core/poes/components/poe-filter/poe-filter.component';
-import { LoginFormComponent } from './user/login/login-form/login-form.component';
+import { LoginFormComponent } from './user/components/login-form/login-form.component';
 import { UserModule } from './user/user.module';
 import { AppInitService } from './app-init.service';
 import { LocalStrategy } from './core/strategies/storage/local-strategy';
 import { UserService } from './user/services/user.service';
 import { FormsModule } from '@angular/forms';
-import { UserFormComponent } from './user/components/user-form/user-form.component';
+import { SignupFormComponent } from './user/components/signup-form/signup-form.component';
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteTraineeFromPoeDialogComponent } from './core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
+import { ClearTraineesFromPoeDialogComponent } from './core/dialogs/clear-trainees-from-poe-dialog/clear-trainees-from-poe-dialog.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 
@@ -56,7 +59,9 @@ export function initializeApp1(appInitService: AppInitService) {
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
+    MatDialogModule,
     FormsModule
+
   ],
   providers: [
     AppInitService,

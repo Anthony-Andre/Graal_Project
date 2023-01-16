@@ -1,7 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ClearTraineesFromPoeDialogComponent } from 'src/app/core/dialogs/clear-trainees-from-poe-dialog/clear-trainees-from-poe-dialog.component';
+import { DeleteTraineeFromPoeDialogComponent } from 'src/app/core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
@@ -18,12 +21,17 @@ import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 export class PoeDetailsComponent implements OnInit {
 
   // @Input() stagiaire: Stagiaire | null = new Stagiaire();
+
   @Input() poe: Poe = new Poe();
+  trainees: Array<Stagiaire> = [];
+  allTrainees: Array<Stagiaire> = [];
+  confirmation: string = "false";
   public stagiaireToPoe: Stagiaire = new Stagiaire();
   public stagiaireDto!: StagiaireDto;
+  public traineeId!: number;
 
-  public trainees: Array<Stagiaire> = [];
-  public allTrainees: Array<Stagiaire> = [];
+
+
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
@@ -41,7 +49,8 @@ export class PoeDetailsComponent implements OnInit {
     private handleDetailService: HandleDetailService,
     private route: ActivatedRoute,
     private stagiaireService: StagiaireService,
-    private poeService: PoeService
+    private poeService: PoeService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -96,23 +105,25 @@ export class PoeDetailsComponent implements OnInit {
 
   public deleteTraineeFromPoe(poe: Poe, stagiaire: Stagiaire): void {
     console.log("delete trainee:", stagiaire.getLastName(), "from poe:", poe.getTitle());
-    this.poeService.deleteTrainee(poe, stagiaire).subscribe(
-      {
-        complete: () => {
-          this.trainees.splice(
-            this.trainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
-            1
-          )
+    if (this.confirmation === "true") {
+      this.poeService.deleteTrainee(poe, stagiaire).subscribe(
+        {
+          complete: () => {
+            this.allTrainees.push(stagiaire);
+            this.trainees.splice(
+              this.trainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+              1
+            )
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   public addNewTrainee() {
 
     const choixTrainee = console.log(document.getElementById('choixTrainee'));
     console.log("L'utilisateur veut ajouter un nouveau stagiaire");
-
     this.selectHidden = true;
     this.selectBarMode = true;
   }
@@ -124,24 +135,53 @@ export class PoeDetailsComponent implements OnInit {
 
   public clearTrainees(poe: Poe): void {
     console.log("L'utilisateur souhaite supprimer la liste des stagiaires de la poe", poe.getTitle());
-    this.poeService.clearTrainees(poe).subscribe(
-      {
-        complete: () => {
-          this.trainees.splice(0);
+    if (this.confirmation === "true") {
+      this.poeService.clearTrainees(poe).subscribe(
+        {
+          complete: () => {
+            this.trainees.splice(0);
+          }
         }
-      }
-    )
+      )
+    }
   }
 
+  public deleteTraineeDialog(poe: Poe, trainee: Stagiaire): void {
+    const dialogRef = this.dialog.open(DeleteTraineeFromPoeDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.deleteTraineeFromPoe(poe, trainee);
+    });
+  }
+
+  public clearTraineesDialog(poe: Poe): void {
+    const dialogRef = this.dialog.open(ClearTraineesFromPoeDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.clearTrainees(poe);
+    });
+  }
+
+
   sendSelectedTrainee() {
+    console.log("traineeId", this.traineeId);
     var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
+    console.log("input: ", input);
     var inputToInt = parseInt(input);
     this.stagiaireService.findOne(inputToInt)
       .subscribe((stagiaire: Stagiaire) => {
         this.stagiaireToPoe = stagiaire;
-        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe();
+        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe({
+          complete: () => {
+            this.allTrainees.splice(
+              this.allTrainees.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+              1);
+            (<HTMLInputElement>document.getElementById("choixTrainee")).value = "";
+            return this.trainees.push(stagiaire);
+          }
+        });
       }
-    )
+      )
   }
 
 

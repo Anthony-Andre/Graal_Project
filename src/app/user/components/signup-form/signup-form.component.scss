@@ -1,0 +1,22 @@
+.roles {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-check-label {
+    margin: auto  ;
+}
+
+.errorsDiv {
+    width: 100%;
+    margin-left: 50%;
+    padding: 15px 0 5px 0;
+}
+
+
+.link-button {
+    border: solid rgb(0, 0, 0);
+    &:hover {
+        border: solid rgb(255, 255, 255);
+      }
+}

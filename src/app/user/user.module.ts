@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginFormComponent } from './login/login-form/login-form.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { UserFormComponent } from './components/user-form/user-form.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from '../app-routing.module';
@@ -13,7 +13,7 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 @NgModule({
   declarations: [
     LoginFormComponent,
-    UserFormComponent
+    SignupFormComponent
   ],
   imports: [
     CommonModule,

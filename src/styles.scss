@@ -176,7 +176,7 @@ header h1 {
 
 // Style d'un formulaire (Carte) avec Material : // 
 
-form {
+.basicForm {
   margin: 2em auto;
   padding: 2em;
   width: 25%;
@@ -187,33 +187,33 @@ form {
   text-align: center;
 }
 
-form label,
-form button,
-form select,
+.basicForm label,
+.basicForm button,
+.basicForm select,
 #beginDate {
   margin-top: .75em;
   font-weight: bold;
 }
 
-form input,
-form button,
-form select {
+.basicForm input,
+.basicForm button,
+.basicForm select {
   height: 2.5em;
   text-align: center;
   font-family: $main-font;
 }
 
-form input {
+.basicForm input {
   border-top: none;
   border-left: none;
   border-right: none;
 }
 
-form input::placeholder {
+.basicForm input::placeholder {
   color: $main-color !important;
 }
 
-form div {
+.basicForm div {
   display: flex;
   flex-direction: column;
 }
