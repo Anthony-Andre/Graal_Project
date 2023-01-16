@@ -61,6 +61,13 @@
 
         </div>
 
+        <div id="botButtons">
+          <button type="button" class="buttonAdd" *ngIf="!selectBarMode" (click)="addNewTrainee()">Ajouter un
+            stagaire</button>
+          <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTrainees(poe)">Supprimer les
+            stagiaires</button>
+        </div>
+
 
 
 
