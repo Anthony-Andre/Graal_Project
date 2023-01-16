@@ -1,8 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { of } from 'rxjs';
 import { ClearTraineesFromPoeDialogComponent } from 'src/app/core/dialogs/clear-trainees-from-poe-dialog/clear-trainees-from-poe-dialog.component';
 import { DeleteTraineeFromPoeDialogComponent } from 'src/app/core/dialogs/delete-trainee-from-poe-dialog/delete-trainee-from-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
@@ -10,6 +10,7 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
+import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 
 @Component({
   selector: 'app-poe-details',
@@ -20,10 +21,16 @@ import { HandleDetailService } from 'src/app/shared/directives/handle-detail.ser
 export class PoeDetailsComponent implements OnInit {
 
   // @Input() stagiaire: Stagiaire | null = new Stagiaire();
-  @Input() poe: Poe | null = new Poe();
+
+  @Input() poe: Poe = new Poe();
   trainees: Array<Stagiaire> = [];
   allTrainees: Array<Stagiaire> = [];
-  confirmation: string = "false";
+  confirmation: string = "false";  
+  public stagiaireToPoe: Stagiaire = new Stagiaire();
+  public stagiaireDto!: StagiaireDto;
+
+  
+
 
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
@@ -35,6 +42,7 @@ export class PoeDetailsComponent implements OnInit {
   }
   public selectHidden: boolean = false;
   public selectBarMode: boolean = false;
+  public stagiaireForm!: FormGroup;
 
   constructor(
     private handleDetailService: HandleDetailService,
@@ -111,18 +119,16 @@ export class PoeDetailsComponent implements OnInit {
   }
 
   public addNewTrainee() {
-    console.log("L'utilisateur veut ajouter un nouveau stagiaire");
 
+    const choixTrainee = console.log(document.getElementById('choixTrainee'));
+    console.log("L'utilisateur veut ajouter un nouveau stagiaire");
     this.selectHidden = true;
     this.selectBarMode = true;
-
-
   }
 
   public closeSelectBar() {
     this.selectHidden = false;
     this.selectBarMode = false;
-
   }
 
   public clearTrainees(poe: Poe): void {
@@ -152,6 +158,19 @@ export class PoeDetailsComponent implements OnInit {
       this.confirmation = result;
       this.clearTrainees(poe);
     });
+  }
+
+  sendSelectedTrainee() {
+
+
+    var input = (<HTMLInputElement>document.getElementById("choixTrainee")).value;
+    var inputToInt = parseInt(input);
+    this.stagiaireService.findOne(inputToInt)
+      .subscribe((stagiaire: Stagiaire) => {
+        this.stagiaireToPoe = stagiaire;
+        this.poeService.addTrainee(this.poe, this.stagiaireToPoe).subscribe();
+      }
+      )
   }
 
 

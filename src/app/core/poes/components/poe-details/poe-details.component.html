@@ -35,31 +35,36 @@
           </tr>
         </table>
 
-        <div id="closeSelectBar" *ngIf="selectHidden">
 
-          <label for="choixTrainee">Choisir le stagiaire à enregistrer :</label>
-          <input list="allTrainees" id="choixTrainee" type="text">
-
-          <datalist id="allTrainees">
-            <option *ngFor="let trainee of allTrainees" value="{{trainee.getId()}}">
-              {{trainee.getPoe_Id()}} {{trainee.getLastName()}}
-            </option>
-          </datalist>
+          <div id="closeSelectBar" *ngIf="selectHidden">
 
 
-          <button class="linkButton" (click)="closeSelectBar()">x</button>
-          <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
-        </div>
+              <label for="choixTrainee">Choisir le stagiaire à enregistrer :</label>
+              <input list="allTrainees" id="choixTrainee" type="text">
 
-        <div id="botButtons">
-          <button type="button" class="buttonAdd" (click)="addNewTrainee()">{{selectBarMode ? 'Valider' : 'Ajouter un
-            stagaire'}}</button>
-          <!-- <div> -->
-          <!-- <div class="space"></div> -->
-          <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTraineesDialog(poe)">Supprimer les
-            stagiaires</button>
-          <!-- </div> -->
-        </div>
+              <datalist id="allTrainees">
+                <option *ngFor="let trainee of allTrainees" value="{{trainee.getId()}}">
+                  {{trainee.getPoe_Id()}} {{trainee.getLastName()}}
+                </option>
+              </datalist>
+
+              <div>Le stagiaire n'est pas dans la liste? <a routerLink="/stagiaire/add">Créer</a></div>
+
+              <div id="botButtons">
+                <button class="buttonAdd" (click)="sendSelectedTrainee()">Valider</button>
+                <button type="button" class="buttonAdd" (click)="closeSelectBar()">Annuler</button>
+              </div>
+
+          </div>
+
+          <div id="botButtons">
+            <button type="button" class="buttonAdd" *ngIf="!selectBarMode"
+                (click)="addNewTrainee()">Ajouter un stagaire</button>
+            <button type="button" class="buttonClear" *ngIf="!selectBarMode"
+                (click)="clearTraineesDialog(poe)">Supprimer les stagiaires</button>
+          </div>
+
+
 
 
 

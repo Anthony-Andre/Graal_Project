@@ -1,0 +1,40 @@
+<ng-container *ngIf="surveyForm">
+
+    <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" >
+        <!-- Onsubmit  -->
+
+        <h1>Creer Questionnaire</h1>
+
+        <label for="title">Veuillez Saisir le titre du Questionnaire</label>
+        <input id="title" type="text" placeholder="title" formControlName="title">
+
+        <button type="button" (click)="InsertQuestion()">Add New Question</button>
+            <input id="addNewQuestion" type="text" placeholder="Add New Question" formControlName="addNewQuestion" *ngIf="showInput">
+        <button type="button" (click)="InsertSelect()">Add Current Question</button>
+            <select id="addCurrentQuestion" placeholder="add Current Question" formControlName="addCurrentQuestion" *ngIf="showSelect">
+                <option *ngFor="let item of itemResearch">{{item}}</option>
+            </select>
+        
+
+
+        <select name="levelType" id="level" placeholder="level" formControlName="level" >
+            <option *ngFor="let item of options">{{getOptionLabelLevel(item)}}</option>
+        </select>
+
+
+
+        <select name="poeType" id="type" placeholder="type" formControlName="type" >
+            <option *ngFor="let item of options2">{{getOptionLabelPoeType(item)}}</option>
+        </select>
+
+        <li *ngFor="let item of itemResearch" >
+            <input type="checkbox"  formControlName="check">{{item}}
+          </li>
+
+
+        <button type="button" [disabled]="!surveyForm.valid">Go Questionnaire</button>
+        <button type="button" (click)="goHome()">Retour</button>
+
+    </form>
+
+</ng-container>

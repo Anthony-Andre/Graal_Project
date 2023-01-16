@@ -140,31 +140,13 @@ tfoot {
   cursor: pointer;
 }
 
-// .space {
-//   margin: 0;
-//   height: auto;
-//   display: inline-block;
-// }
-
-/*-- bouton close de la select barre --*/
-
-.linkButton {
-  // display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5em;
-  height: 1.5em;
-  text-decoration: none;
-  background-color: $main-color;
-  color: #fff;
-  border: solid black;
-  border-radius: 25px;
-  margin: 2em auto;
-  text-align: center;
-  cursor: pointer;
-}
 
 #botButtons {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+}
+
+form {
+  width: 450px;
 }
