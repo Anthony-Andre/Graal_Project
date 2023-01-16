@@ -25,6 +25,7 @@ import { UserFormComponent } from './user/components/user-form/user-form.compone
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -46,7 +47,8 @@ export function initializeApp1(appInitService: AppInitService) {
     PoeTableComponent,
     PoeFilterComponent,
     PoeDetailsComponent,
-    SurveyFormComponent
+    SurveyFormComponent,
+    QuestionFormComponent
   ],
   imports: [
     BrowserModule,

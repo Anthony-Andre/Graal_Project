@@ -14,6 +14,7 @@ import { HasUserGuard } from './user/guards/has-user.guard';
 import { UserFormComponent } from './user/components/user-form/user-form.component';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 
 const routes: Routes = [];
 
@@ -107,6 +108,13 @@ export class AppRoutingModule {
     {
       path: 'survey',
       component: SurveyFormComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'question',
+      component: QuestionFormComponent,
       canActivate: [
         HasUserGuard
       ]

@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
+import { Question } from 'src/app/question/core/models/question';
 import { environment } from 'src/environments/environment';
 import { SurveyDto } from '../../dto/survey-dto';
 import { Survey } from '../models/survey';
@@ -65,7 +66,7 @@ export class SurveyService {
           survey.setId(surveyDto.id!);
           survey.setTitle(surveyDto.title)
           survey.setLevel(surveyDto.level)
-          survey.setPoeType(surveyDto.type)
+          survey.setPoeType(surveyDto.poeType)
           
           return survey;
         })
@@ -81,45 +82,45 @@ export class SurveyService {
     );
   }
 
-  //public addQuestion(survey: Survey, question: Question): Observable<Survey> {
-    //return this.httpClient.post<Survey>(
-    //  `${this.controllerBaseUrl}/${survey.getId()}/addQuestion/${question.getId()}`, survey)
-    //  .pipe(
-    //    take(1),
-    //    map((inputSurvey: any) => {
-    //      const survey: Survey = new Survey();
-    //      survey.setId(inputSurvey.id!);
-     //     survey.setTitle(inputSurvey.title);
-     //     survey.setLevel(inputSurvey.level);
-      //    survey.setPoeType(inputSurvey.type);
+  public addQuestion(survey: Survey, question: Question): Observable<Survey> {
+    return this.httpClient.post<Survey>(
+      `${this.controllerBaseUrl}/${survey.getId()}/addQuestion/${question.getId()}`, survey)
+      .pipe(
+        take(1),
+        map((inputSurvey: any) => {
+          const survey: Survey = new Survey();
+          survey.setId(inputSurvey.id!);
+          survey.setTitle(inputSurvey.title);
+          survey.setLevel(inputSurvey.level);
+          survey.setPoeType(inputSurvey.type);
           
-     //     const questions: Array<Question> = [];
-     //     survey.setQuestions(inputSurvey.questions);
-      //    return survey;
-     //   })
-    //  )
-  //}
+          const questions: Array<Question> = [];
+          //survey.setQuestions(inputSurvey.questions);
+          return survey;
+        })
+      )
+  }
 
- // public addQuestions(survey: Survey, questions: Array<Question>): Observable<Survey> {
-  //  const questionIds: any[] = [];
-  //  for (let question of questions) {questionIds.push(question.getId);}
-  //  return this.httpClient.patch<Survey>(
-  //    `${this.controllerBaseUrl}/${survey.getId()}/addQuestions`,
-  //    questionIds
-   // ).pipe(
-   //   take(1),
-   //   map((inputSurvey: any) => {
-   //     const survey: Survey = new Survey();
-    //    survey.setId(inputSurvey.id!);
-   //     survey.setTitle(inputSurvey.title);
-  //      survey.setLevel(inputSurvey.level);
-   //     survey.setPoeType(inputSurvey.type)
+  public addQuestions(survey: Survey, questions: Array<Question>): Observable<Survey> {
+    const questionIds: any[] = [];
+    for (let question of questions) {questionIds.push(question.getId);}
+    return this.httpClient.patch<Survey>(
+      `${this.controllerBaseUrl}/${survey.getId()}/addQuestions`,
+      questionIds
+    ).pipe(
+      take(1),
+      map((inputSurvey: any) => {
+        const survey: Survey = new Survey();
+        survey.setId(inputSurvey.id!);
+        survey.setTitle(inputSurvey.title);
+        survey.setLevel(inputSurvey.level);
+        survey.setPoeType(inputSurvey.type)
         
-    //    survey.setQuestions(inputSurvey.questions);
-    //    return survey;
-   //   })
-   // )
-  //}
+        //survey.setQuestions(inputSurvey.questions);
+        return survey;
+      })
+    )
+  }
 
 
 

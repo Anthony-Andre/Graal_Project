@@ -1,6 +1,6 @@
 <ng-container *ngIf="surveyForm">
 
-    <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="surveyForm"  >
         <!-- Onsubmit  -->
 
         <h1>Creer Questionnaire</h1>
@@ -27,12 +27,10 @@
             <option *ngFor="let item of options2">{{getOptionLabelPoeType(item)}}</option>
         </select>
 
-        <li *ngFor="let item of itemResearch" >
-            <input type="checkbox"  formControlName="check">{{item}}
-          </li>
+        
 
 
-        <button type="button" [disabled]="!surveyForm.valid">Go Questionnaire</button>
+        <button type="button" [disabled]="!surveyForm.valid" (click)="onSubmit()">Go Questionnaire</button>
         <button type="button" (click)="goHome()">Retour</button>
 
     </form>

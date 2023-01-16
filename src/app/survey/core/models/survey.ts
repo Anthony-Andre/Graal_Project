@@ -1,12 +1,13 @@
 import { Level } from "src/app/core/enums/level";
 import { PoeType } from "src/app/core/enums/poe-type";
+import { Question } from "src/app/question/core/models/question";
 
 export class Survey {
     private id: number = 0;
     private title: string = "";
-    private type!: PoeType;
+    private poeType!: PoeType;
     private level!: Level;
-    //private trainees!: Array<Question>;
+    private questions!: Array<Question>;
     
 
 
@@ -27,28 +28,28 @@ export class Survey {
     }
 
     public getType(): PoeType {
-        return this.type;
+        return this.poeType;
     }
 
     public setPoeType(type: PoeType): void {
-        this.type = type;
+        this.poeType = type;
     }
 
-    public getLevel(): PoeType {
-        return this.type;
+    public getLevel(): Level {
+        return this.level;
     }
 
-    public setLevel(type: PoeType): void {
-        this.type = type;
+    public setLevel(level: Level): void {
+        this.level = level;
     }
 
-    //public getQuestions(): Array<Question> {
-        //return this.questions;
-    //}
+    public getQuestions(): Array<Question> {
+        return this.questions;
+    }
 
-    //public setQuestions(questions: Array<Question>): void {
-     //   this.questions = questions;
-    //}
+    public setQuestions(questions: Array<Question>): void {
+        this.questions = questions;
+    }
 
 
    
