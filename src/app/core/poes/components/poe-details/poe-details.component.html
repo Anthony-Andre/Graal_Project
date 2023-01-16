@@ -53,10 +53,6 @@
           <div id="botButtons">
             <button class="buttonAdd" (click)="sendSelectedTrainee()">Valider</button>
             <button type="button" class="buttonAdd" (click)="closeSelectBar()">Annuler</button>
-            <button type="button" class="buttonAdd" *ngIf="!selectBarMode" (click)="addNewTrainee()">Ajouter un
-              stagaire</button>
-            <button type="button" class="buttonClear" *ngIf="!selectBarMode"
-              (click)="clearTraineesDialog(poe)">Supprimer les stagiaires</button>
           </div>
 
         </div>
@@ -64,7 +60,7 @@
         <div id="botButtons">
           <button type="button" class="buttonAdd" *ngIf="!selectBarMode" (click)="addNewTrainee()">Ajouter un
             stagaire</button>
-          <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTrainees(poe)">Supprimer les
+          <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTraineesDialog(poe)">Supprimer les
             stagiaires</button>
         </div>
 
