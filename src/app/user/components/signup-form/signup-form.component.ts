@@ -22,10 +22,10 @@ import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class SignupFormComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
@@ -38,7 +38,6 @@ export class UserFormComponent implements OnInit {
   user_roles: any = [
     { name: 'User', value: 'ROLE_USER', selected: false },
     { name: 'Admin', value: 'ROLE_ADMIN', selected: false },
-    { name: 'Anonymous', value: 'ROLE_ANONYMOUS', selected: false },
   ]
 
   selectedRoles: string[] = [];

@@ -8,10 +8,10 @@ import { PoeTableComponent } from './core/poes/components/poe-table/poe-table.co
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { PoeFormComponent } from './core/poes/components/poe-form/poe-form.component';
 import { PoeResolver } from './core/resolvers/poe.resolver';
-import { LoginFormComponent } from './user/login/login-form/login-form.component';
+import { LoginFormComponent } from './user/components/login-form/login-form.component';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { HasUserGuard } from './user/guards/has-user.guard';
-import { UserFormComponent } from './user/components/user-form/user-form.component';
+import { SignupFormComponent } from './user/components/signup-form/signup-form.component';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 
@@ -29,7 +29,7 @@ export class AppRoutingModule {
       redirectTo: 'login', // Redirection vers un autre chemin, ici 'signin' 
       pathMatch: 'full'
     },
-    { path: 'signup', component: UserFormComponent },
+    { path: 'signup', component: SignupFormComponent },
     {
       path: 'login',
       component: LoginFormComponent,

@@ -1,6 +1,6 @@
 <ng-container *ngIf="stagiaireForm">
 
-    <form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()">
+    <form class="basicForm" [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()">
 
         <h1>{{addMode ? 'Ajouter un Stagiaire' : 'Modifier le Stagiaire'}}</h1>
 
