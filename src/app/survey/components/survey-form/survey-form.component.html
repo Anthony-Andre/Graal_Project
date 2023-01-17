@@ -1,6 +1,6 @@
 <ng-container *ngIf="surveyForm">
 
-    <form class="basicForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()" >
+    <form class="basicForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
         <!-- Onsubmit  -->
 
         <h1>Creer Questionnaire</h1>
@@ -9,21 +9,28 @@
         <input id="title" type="text" placeholder="title" formControlName="title">
 
         <button type="button" (click)="InsertQuestion()">Add New Question</button>
-            <input id="addNewQuestion" type="text" placeholder="Add New Question" formControlName="addNewQuestion" *ngIf="showInput">
+        <input id="addNewQuestion" type="text" placeholder="Add New Question" formControlName="addNewQuestion"
+            *ngIf="showInput">
+        <select name="" id="">
+            <option value="boolean">boolean</option>
+            <option value="boolean">choix multiple</option>
+            <option value="">libre</option>
+        </select>
         <button type="button" (click)="InsertSelect()">Add Current Question</button>
-            <select id="addCurrentQuestion" placeholder="add Current Question" formControlName="addCurrentQuestion" *ngIf="showSelect">
-                <option *ngFor="let item of itemResearch">{{item}}</option>
-            </select>
-        
+        <select id="addCurrentQuestion" placeholder="add Current Question" formControlName="addCurrentQuestion"
+            *ngIf="showSelect">
+            <option *ngFor="let item of itemResearch">{{item}}</option>
+        </select>
 
 
-        <select name="levelType" id="level" placeholder="level" formControlName="level" >
+
+        <select name="levelType" id="level" placeholder="level" formControlName="level">
             <option *ngFor="let item of options">{{getOptionLabelLevel(item)}}</option>
         </select>
 
 
 
-        <select name="poeType" id="type" placeholder="type" formControlName="type" >
+        <select name="poeType" id="type" placeholder="type" formControlName="type">
             <option *ngFor="let item of options2">{{getOptionLabelPoeType(item)}}</option>
         </select>
 

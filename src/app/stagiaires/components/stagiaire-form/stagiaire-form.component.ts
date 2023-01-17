@@ -50,7 +50,6 @@ export class StagiaireFormComponent implements OnInit {
 
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
-
     })
   }
 
