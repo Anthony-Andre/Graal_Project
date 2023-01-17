@@ -25,7 +25,7 @@ export class Survey {
         this.title = title;
     }
 
-    public getType(): PoeType {
+    public getPoeType(): PoeType {
         return this.poeType;
     }
 
@@ -33,12 +33,12 @@ export class Survey {
         this.poeType = type;
     }
 
-    public getLevel(): PoeType {
-        return this.poeType;
+    public getLevel(): Level {
+        return this.level;
     }
 
-    public setLevel(type: PoeType): void {
-        this.poeType = type;
+    public setLevel(level: Level): void {
+        this.level = level;
     }
 
 

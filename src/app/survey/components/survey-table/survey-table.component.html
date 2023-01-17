@@ -1,1 +1,32 @@
-<p>survey-table works!</p>
+
+<!-- <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter> -->
+<!-- filtrer par type poe ? -->
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Type de POE</th>
+            <th>Level</th>
+        </tr>
+    </thead>  
+
+    <tbody>
+        <ng-container class="surveyLine" *ngFor="let survey of surveys">
+            <!-- <tr class="stagiaireLine" *ngIf="changeView(poe)"> remettre un changeView lié au filter (par type poe/titre) ? -->
+            <tr>
+                <!-- <td (click)="onClick(survey)"><button type="button" class="buttonDelete">{{ survey.getId() }} </button></td> -->
+                <td> {{ survey.getId() }} </td>
+                <td> {{ survey.getTitle() }} </td>
+                <td> {{ survey.getPoeType() }} </td>
+                <td> {{ survey.getLevel() }} </td>
+                <!-- <td><button type="button" class="buttonDelete" (click)="onUpDate(survey)">M</button></td> -->
+                <!-- <td><button type="button" class="buttonDelete" (click)="onRemoveSurveyDialog(survey)">X</button></td> -->
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<a class="link-button" [routerLink]="['/','add','survey']">Ajouter une survey</a>
