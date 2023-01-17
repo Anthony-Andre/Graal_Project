@@ -115,7 +115,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'survey',
+      path: 'survey/add',
       component: SurveyFormComponent,
       canActivate: [
         HasUserGuard
@@ -129,7 +129,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'survey-table',
+      path: 'survey',
       component: SurveyTableComponent,
       canActivate: [
         HasUserGuard
