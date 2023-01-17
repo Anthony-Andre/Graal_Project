@@ -10,6 +10,8 @@
             <th>Title</th>
             <th>Type de POE</th>
             <th>Level</th>
+            <th>Modify</th>
+            <th>Delete</th>
         </tr>
     </thead>  
 
@@ -22,8 +24,8 @@
                 <td> {{ survey.getTitle() }} </td>
                 <td> {{ survey.getPoeType() }} </td>
                 <td> {{ survey.getLevel() }} </td>
-                <!-- <td><button type="button" class="buttonDelete" (click)="onUpDate(survey)">M</button></td> -->
-                <!-- <td><button type="button" class="buttonDelete" (click)="onRemoveSurveyDialog(survey)">X</button></td> -->
+                <td><button type="button" class="buttonDelete" (click)="onUpDate(survey)">M</button></td>
+                <td><button type="button" class="buttonDelete" (click)="onRemoveSurveyDialog(survey)">X</button></td>
             </tr>
         </ng-container>
     </tbody>

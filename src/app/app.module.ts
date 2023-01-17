@@ -31,6 +31,7 @@ import { SurveyFormComponent } from './survey/components/survey-form/survey-form
 import { DeletePoeDialogComponent } from './core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { DeleteTraineeDialogComponent } from './core/dialogs/delete-trainee-dialog/delete-trainee-dialog.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
+import { DeleteSurveyDialogComponent } from './survey/components/dialogs/delete-survey-dialog/delete-survey-dialog.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -57,7 +58,8 @@ export function initializeApp1(appInitService: AppInitService) {
     SurveyFormComponent,
     DeletePoeDialogComponent,
     DeleteTraineeDialogComponent,
-    SurveyTableComponent
+    SurveyTableComponent,
+    DeleteSurveyDialogComponent
   ],
   imports: [
     BrowserModule,
