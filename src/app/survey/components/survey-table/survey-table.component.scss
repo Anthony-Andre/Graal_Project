@@ -1,5 +1,6 @@
 $head-and-foot-color : rgb(212, 145, 62);
 $head-and-foot-text-color : rgb(0, 0, 0);
+$red-delete-cross-color : rgb(197, 0, 0);
 
 table {
     margin: auto;
@@ -35,6 +36,24 @@ tfoot {
   }
 }
 
+/*-- lignes du tableau --*/
+
 .surveyLine {
     cursor: pointer;
+}
+
+.surveyLine:hover {
+  background-color: #FBAB7E;
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 50%, #ffffff 100%);
+}
+
+.buttonDelete {
+  border: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 5em;
+  cursor: pointer;
+  line-height: 1.6;
+  font-weight: bold;
+  color: $red-delete-cross-color;
 }

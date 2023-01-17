@@ -1,5 +1,6 @@
 $head-and-foot-color : rgb(212, 145, 62);
 $head-and-foot-text-color : rgb(0, 0, 0);
+$red-delete-cross-color : rgb(197, 0, 0);
 
 table {
   margin: auto;
@@ -43,6 +44,7 @@ tfoot {
   cursor: pointer;
   line-height: 1.6;
   font-weight: bold;
+  color: $red-delete-cross-color;
 }
 
 // .initials {
