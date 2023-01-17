@@ -24,7 +24,6 @@ export class SurveyFormComponent implements OnInit {
     addCurrentQuestion: new FormControl(''),
     type: new FormControl('',Validators.required),
     level:new FormControl('',Validators.required),
-    check:new FormControl(false,Validators.requiredTrue),
   });
   
   public showInput = false;
@@ -121,13 +120,13 @@ export class SurveyFormComponent implements OnInit {
     const surv: SurveyDto = new SurveyDto(this.surveyForm.value);
 
     let subscription: Observable<any>;
-    //subscription = this.surveyService.addSurvey(surv);
+    subscription = this.surveyService.addSurvey(surv);
     //subscription.subscribe(() => this.nextStape())
 
   }
 
   public nextStape(): void {
-    //this.router.navigate(['/', 'question'])
+    this.router.navigate(['/', 'question'])
   }
 
   public goHome(): void {

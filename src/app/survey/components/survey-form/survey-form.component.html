@@ -27,10 +27,6 @@
             <option *ngFor="let item of options2">{{getOptionLabelPoeType(item)}}</option>
         </select>
 
-        <li *ngFor="let item of itemResearch" >
-            <input type="checkbox"  formControlName="check">{{item}}
-          </li>
-
 
         <button type="button" [disabled]="!surveyForm.valid">Go Questionnaire</button>
         <button type="button" (click)="goHome()">Retour</button>
