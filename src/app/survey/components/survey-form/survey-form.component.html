@@ -28,7 +28,7 @@
         </select>
 
 
-        <button type="button" [disabled]="!surveyForm.valid">Go Questionnaire</button>
+        <button type="button" [disabled]="!surveyForm.valid" (click)="onSubmit()">Go Questionnaire</button>
         <button type="button" (click)="goHome()">Retour</button>
 
     </form>

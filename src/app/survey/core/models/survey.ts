@@ -4,7 +4,7 @@ import { PoeType } from "src/app/core/enums/poe-type";
 export class Survey {
     private id: number = 0;
     private title: string = "";
-    private type!: PoeType;
+    private poeType!: PoeType;
     private level!: Level;
     
 
@@ -26,19 +26,19 @@ export class Survey {
     }
 
     public getType(): PoeType {
-        return this.type;
+        return this.poeType;
     }
 
     public setPoeType(type: PoeType): void {
-        this.type = type;
+        this.poeType = type;
     }
 
     public getLevel(): PoeType {
-        return this.type;
+        return this.poeType;
     }
 
     public setLevel(type: PoeType): void {
-        this.type = type;
+        this.poeType = type;
     }
 
 

@@ -14,6 +14,7 @@ import { HasUserGuard } from './user/guards/has-user.guard';
 import { SignupFormComponent } from './user/components/signup-form/signup-form.component';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 
 const routes: Routes = [];
 
@@ -119,6 +120,14 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
+    {
+      path: 'question',
+      component: QuestionFormComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    
     {
       path: '**', // Wild card (Redirige vers le home si l'url n'existe pas) - Toujours mettre en dernier
       redirectTo: 'home',

@@ -28,7 +28,7 @@ export class SurveyService {
             survey.setId(inputSurvey.id);
             survey.setTitle(inputSurvey.title)
             survey.setLevel(inputSurvey.level)
-            survey.setPoeType(inputSurvey.type)
+            survey.setPoeType(inputSurvey.poeType)
             
             //console.log(survey);
             return survey;
@@ -47,7 +47,7 @@ export class SurveyService {
         survey.setId(inputSurvey.id);
         survey.setTitle(inputSurvey.title);
         survey.setLevel(inputSurvey.level)
-        survey.setPoeType(inputSurvey.type)
+        survey.setPoeType(inputSurvey.poeType)
         return survey;
       })
     )
@@ -92,7 +92,7 @@ export class SurveyService {
           survey.setId(inputSurvey.id!);
           survey.setTitle(inputSurvey.title);
           survey.setLevel(inputSurvey.level);
-          survey.setPoeType(inputSurvey.type);
+          survey.setPoeType(inputSurvey.poeType);
           
           const questions: Array<Question> = [];
           //survey.setQuestions(inputSurvey.questions);
@@ -114,7 +114,7 @@ export class SurveyService {
         survey.setId(inputSurvey.id!);
         survey.setTitle(inputSurvey.title);
         survey.setLevel(inputSurvey.level);
-        survey.setPoeType(inputSurvey.type)
+        survey.setPoeType(inputSurvey.poeType)
         
         //survey.setQuestions(inputSurvey.questions);
         return survey;

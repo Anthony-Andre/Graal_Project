@@ -121,7 +121,7 @@ export class SurveyFormComponent implements OnInit {
 
     let subscription: Observable<any>;
     subscription = this.surveyService.addSurvey(surv);
-    //subscription.subscribe(() => this.nextStape())
+    subscription.subscribe(() => this.nextStape())
 
   }
 
