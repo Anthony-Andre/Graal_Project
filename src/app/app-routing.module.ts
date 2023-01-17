@@ -15,6 +15,7 @@ import { SignupFormComponent } from './user/components/signup-form/signup-form.c
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
+import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 
 const routes: Routes = [];
 
@@ -127,7 +128,13 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
-    
+    {
+      path: 'survey-table',
+      component: SurveyTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
     {
       path: '**', // Wild card (Redirige vers le home si l'url n'existe pas) - Toujours mettre en dernier
       redirectTo: 'home',
