@@ -2,16 +2,6 @@
 
 <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
 
-<div *ngIf="isSignedin">
-
-
-
-    <!--   <div *ngFor="let greet of greeting">
-        {{greet}}
-    </div>
-
-    -->
-</div>
 
 <table class="table">
     <thead>
@@ -36,7 +26,7 @@
                 <td> {{ poe.getBeginDate() | date: 'dd-MM-YYYY' }} </td>
                 <td> {{ poe.getEndDate() | date: 'dd-MM-YYYY' }} </td>
                 <td> {{ poe.getType() }} </td>
-                <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">M</button></td>
+                <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">🖊️</button></td>
                 <td><button type="button" class="buttonDelete" (click)="onRemovePoeDialog(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
                 <td>La réponse est oui</td>
@@ -47,7 +37,6 @@
 </table>
 
 <a class="link-button" [routerLink]="['/','add','poe']">Ajouter une poe</a>
-<a class="link-button" [routerLink]="['/','survey']">Créer Questionnaire</a>
 
 <table class="stats">
 

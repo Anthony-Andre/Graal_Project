@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-question-form',
   templateUrl: './question-form.component.html',
@@ -10,6 +11,7 @@ export class QuestionFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
