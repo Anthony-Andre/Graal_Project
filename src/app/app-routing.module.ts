@@ -16,6 +16,7 @@ import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-deta
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
+import { SurveyResolver } from './survey/resolver/survey.resolver';
 
 const routes: Routes = [];
 
@@ -131,7 +132,7 @@ export class AppRoutingModule {
     {
       path: 'survey/update/:id',
       component: SurveyFormComponent,
-      // resolve: { form: SurveyResolver },
+      resolve: { form: SurveyResolver },
       canActivate: [
         HasUserGuard
       ]
