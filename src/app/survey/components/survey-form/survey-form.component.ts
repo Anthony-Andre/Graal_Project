@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Level } from 'src/app/core/enums/level';
@@ -10,6 +11,7 @@ import { QuestionService } from 'src/app/question/core/services/question.service
 import { Survey } from '../../core/models/survey';
 import { SurveyService } from '../../core/services/survey.service';
 import { SurveyDto } from '../../dto/survey-dto';
+import { SurveyMatDialogComponent } from '../survey-mat-dialog/survey-mat-dialog/survey-mat-dialog.component';
 
 @Component({
   selector: 'app-survey-form',
@@ -33,13 +35,11 @@ export class SurveyFormComponent implements OnInit {
     typeControl: ['',Validators.required],
     levelControl: ['', Validators.required]});
   addQuestions = this.formBuilder.group({
-    oldQuestionControl: [''],
-    newQuestionControl: ['']
+    oldQuestionControl: [new Question()],
+    newQuestionControl: [new Question()]
   });
 
-
-
-  
+  @ViewChild(SurveyMatDialogComponent) comp!:SurveyMatDialogComponent
   public showInput = false;
   public showSelect = false;
   public currentQuestion!: string;
@@ -54,11 +54,14 @@ export class SurveyFormComponent implements OnInit {
     private questionService: QuestionService,
     private formBuilder: FormBuilder,
     private surveyService: SurveyService,
-    private _location: Location
+    private _location: Location,
+    public dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
-    this.getAllQuestions();    
+    this.getAllQuestions();
+    console.log("questions :", this.questions);  
+    console.log("oldquestion : ", this.addQuestions.value.oldQuestionControl.getText());
     
 
     // /*-- Add by Raph : switch mode ADD ou UPDATE --*/
@@ -93,6 +96,15 @@ export class SurveyFormComponent implements OnInit {
      // })
     //);
 
+
+    this.dialog.open(SurveyMatDialogComponent,{
+      ///data:s,
+      height: '450px',
+      width: '600px'
+      
+     })
+    .afterClosed().subscribe((result) =>{
+      })
   }
 
   InsertSelect(){
@@ -155,10 +167,13 @@ export class SurveyFormComponent implements OnInit {
   public goHome(): void {
     this._location.back();  }
 
-  public addQuestion(): void {    
-  }
-  
-  
+  public addQuestion(): void {
+    console.log("addQuestions", this.addQuestions);
+    console.log("this.questions :", this.questions);
+    var currentQuestion = this.addQuestions.value.oldQuestionControl;
+    console.log("Question courante: ", currentQuestion);
+      
+  }  
 }
 
 

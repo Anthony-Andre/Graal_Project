@@ -33,6 +33,7 @@ import { DeleteTraineeDialogComponent } from './core/dialogs/delete-trainee-dial
 import { MatStepperModule } from '@angular/material/stepper';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { DeleteSurveyDialogComponent } from './survey/components/dialogs/delete-survey-dialog/delete-survey-dialog.component';
+import { SurveyMatDialogComponent } from './survey/components/survey-mat-dialog/survey-mat-dialog/survey-mat-dialog.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -60,7 +61,8 @@ export function initializeApp1(appInitService: AppInitService) {
     DeletePoeDialogComponent,
     DeleteTraineeDialogComponent,
     SurveyTableComponent,
-    DeleteSurveyDialogComponent
+    DeleteSurveyDialogComponent,
+    SurveyMatDialogComponent
   ],
   imports: [
     BrowserModule,
