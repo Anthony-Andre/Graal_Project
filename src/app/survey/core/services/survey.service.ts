@@ -30,7 +30,7 @@ export class SurveyService {
             survey.setLevel(inputSurvey.level)
             survey.setPoeType(inputSurvey.poeType)
             
-            //console.log(survey);
+            console.log(survey);
             return survey;
           })
         })

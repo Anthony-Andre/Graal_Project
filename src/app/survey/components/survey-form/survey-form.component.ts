@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +18,7 @@ import { SurveyDto } from '../../dto/survey-dto';
 })
 export class SurveyFormComponent implements OnInit {
 
-  // surveyForm!: FormGroup;
+  public addMode: boolean = true;
 
   // passenger!: FormArray;
   // surveyForm = new FormGroup({
@@ -49,16 +50,34 @@ export class SurveyFormComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private questionService: QuestionService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private surveyService: SurveyService,
+    private _location: Location
     ) { }
 
   ngOnInit(): void {
     this.getAllQuestions();    
     
 
-    //const Res1 = this.surveys
-    
-    
+    // /*-- Add by Raph : switch mode ADD ou UPDATE --*/
+    // const data: any = this.route.snapshot.data;
+    // console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
+    // this.surveyForm = data.form;
+
+    // this.surveyService.findAll().subscribe((surveys: Survey[]) => {
+    //   this.surveys = surveys;
+    // })
+
+
+    // if (this.surveyForm.value.id !== 0 && this.surveyForm.value.id !== undefined) {
+    //   this.addMode = false;
+    //   console.log('id =', this.surveyForm.value.id);
+    // } else {
+    //   this.addMode = true;
+    //   console.log('id =', this.surveyForm.value.id);
+    // }
+    // /*-- End by Raph--*/
+
   }
 
   
@@ -132,8 +151,7 @@ export class SurveyFormComponent implements OnInit {
   }
 
   public goHome(): void {
-    this.router.navigate(['/', 'home'])
-  }
+    this._location.back();  }
 
   public addQuestion(): void {
     
