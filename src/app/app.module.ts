@@ -30,6 +30,9 @@ import { ClearTraineesFromPoeDialogComponent } from './core/dialogs/clear-traine
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { DeletePoeDialogComponent } from './core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { DeleteTraineeDialogComponent } from './core/dialogs/delete-trainee-dialog/delete-trainee-dialog.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
+import { DeleteSurveyDialogComponent } from './survey/components/dialogs/delete-survey-dialog/delete-survey-dialog.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -55,7 +58,9 @@ export function initializeApp1(appInitService: AppInitService) {
     ClearTraineesFromPoeDialogComponent,
     SurveyFormComponent,
     DeletePoeDialogComponent,
-    DeleteTraineeDialogComponent
+    DeleteTraineeDialogComponent,
+    SurveyTableComponent,
+    DeleteSurveyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ export function initializeApp1(appInitService: AppInitService) {
     SharedModule,
     UserModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatStepperModule
 
   ],
   providers: [

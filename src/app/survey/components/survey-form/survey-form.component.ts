@@ -1,9 +1,12 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Level } from 'src/app/core/enums/level';
 import { PoeType } from 'src/app/core/enums/poe-type';
+import { Question } from 'src/app/question/core/models/question';
+import { QuestionService } from 'src/app/question/core/services/question.service';
 import { Survey } from '../../core/models/survey';
 import { SurveyService } from '../../core/services/survey.service';
 import { SurveyDto } from '../../dto/survey-dto';
@@ -15,35 +18,66 @@ import { SurveyDto } from '../../dto/survey-dto';
 })
 export class SurveyFormComponent implements OnInit {
 
-  //surveyForm!: FormGroup;
+  public addMode: boolean = true;
 
-  passenger!: FormArray;
-  surveyForm = new FormGroup({
-    title: new FormControl('',Validators.required),
-    addNewQuestion: new FormControl(''),
-    addCurrentQuestion: new FormControl(''),
-    type: new FormControl('',Validators.required),
-    level:new FormControl('',Validators.required),
+  // passenger!: FormArray;
+  // surveyForm = new FormGroup({
+  // title: new FormControl('',Validators.required),
+  // addNewQuestion: new FormControl(''),
+  // addCurrentQuestion: new FormControl(''),  
+  // level:new FormControl('',Validators.required),
+  // });
+
+  title = this.formBuilder.group({titleControl: ['', Validators.required]});
+  survey = this.formBuilder.group({
+    typeControl: ['',Validators.required],
+    levelControl: ['', Validators.required]});
+  addQuestions = this.formBuilder.group({
+    oldQuestionControl: [''],
+    newQuestionControl: ['']
   });
+
   
   public showInput = false;
   public showSelect = false;
-  public surveys: Array<Survey> = [];
-  public itemResearch: any[] = [];
+  public currentQuestion!: string;
+  public newQuestion!: string;
+  public questions: Array<Question> = [];
+  public questionsAdded: Array<Question>=[];
   options =[Level.ONE_MONTH,Level.SIX_MONTHS,Level.ONE_YEAR]
   options2 =[PoeType.POEI,PoeType.POEC]
   
   constructor(private router: Router,
     private route: ActivatedRoute,
+    private questionService: QuestionService,
+    private formBuilder: FormBuilder,
     private surveyService: SurveyService,
+    private _location: Location
     ) { }
 
   ngOnInit(): void {
-    this.getAllQuestions();
+    this.getAllQuestions();    
+    
 
-    //const Res1 = this.surveys
-    
-    
+    // /*-- Add by Raph : switch mode ADD ou UPDATE --*/
+    // const data: any = this.route.snapshot.data;
+    // console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
+    // this.surveyForm = data.form;
+
+    // this.surveyService.findAll().subscribe((surveys: Survey[]) => {
+    //   this.surveys = surveys;
+    // })
+
+
+    // if (this.surveyForm.value.id !== 0 && this.surveyForm.value.id !== undefined) {
+    //   this.addMode = false;
+    //   console.log('id =', this.surveyForm.value.id);
+    // } else {
+    //   this.addMode = true;
+    //   console.log('id =', this.surveyForm.value.id);
+    // }
+    // /*-- End by Raph--*/
+
   }
 
   
@@ -64,22 +98,9 @@ export class SurveyFormComponent implements OnInit {
   }
 
   getAllQuestions(){
-    this.surveyService.findAll().subscribe((survey: Survey[]) => {
-      this.surveys = survey;
-      //console.log(this.surveys[0] instanceof Survey);
-      console.log(this.surveys)
-
-      const Result = this.surveys
-      const len = Result.length
-      
-      for (let i=0;i<len;i++){
-        var skinName = Result.find(x=>x.getId() == i+1)?.getTitle();
-        //console.log(skinName)
-        this.itemResearch[i]=skinName
-        }
-
-        console.log(this.itemResearch)
-
+    this.questionService.findAll().subscribe((questions: Question[]) => {
+      this.questions = questions;
+      console.log(this.questions)
     })
   }
 
@@ -114,23 +135,27 @@ export class SurveyFormComponent implements OnInit {
 
 
 
-  onSubmit() {
-    console.log('Delegate add survey: ', this.surveyForm.value);
+  // onSubmit() {
+  //  console.log('Delegate add survey: ', this.surveyForm.value);
 
-    const surv: SurveyDto = new SurveyDto(this.surveyForm.value);
+  //  const surv: SurveyDto = new SurveyDto(this.surveyForm.value);
 
-    let subscription: Observable<any>;
-    subscription = this.surveyService.addSurvey(surv);
-    subscription.subscribe(() => this.nextStape())
+  //  let subscription: Observable<any>;
+  //  subscription = this.surveyService.addSurvey(surv);
+  //  subscription.subscribe(() => this.nextStape())
 
-  }
+  // }
 
   public nextStape(): void {
     this.router.navigate(['/', 'question'])
   }
 
   public goHome(): void {
-    this.router.navigate(['/', 'home'])
+    this._location.back();  }
+
+  public addQuestion(): void {
+    
+    
   }
 
 }

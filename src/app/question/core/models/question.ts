@@ -4,9 +4,8 @@ export class Question {
     private id: number = 0;
     private text: string = "";
     private answerType!: AnswerType;
-
-
-
+    private answerProposed!: Array<String>;
+    
     
     public getId(): number {
         return this.id;
@@ -30,5 +29,12 @@ export class Question {
 
     public setAnswerType(answerType: AnswerType): void {
         this.answerType = answerType;
+    }
+
+    public getAnswerProposed(): Array<String> {
+      return this.answerProposed;
+    }
+    public setAnswerProposed(value: Array<String>) {
+      this.answerProposed = value;
     }
 }

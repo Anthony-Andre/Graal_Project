@@ -1,9 +1,9 @@
-<ng-container *ngIf="surveyForm">
+<!-- <ng-container *ngIf="surveyForm"> 
 
-    <form class="basicForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
-        <!-- Onsubmit  -->
+    <form class="basicForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()" >
+        
 
-        <h1>Creer Questionnaire</h1>
+        <h1>Creation d'un questionnaire</h1>
 
         <label for="title">Veuillez Saisir le titre du Questionnaire</label>
         <input id="title" type="text" placeholder="title" formControlName="title">
@@ -40,4 +40,87 @@
 
     </form>
 
-</ng-container>
+-->
+
+<div class="questionnaire">
+    <h1 class="title">
+        Création d'un questionnaire
+    </h1>
+    <mat-stepper linear #stepper>
+        <mat-step [stepControl]="title">
+            <form [formGroup]="title">
+                <ng-template matStepLabel>Quel est le titre du questionnaire ?</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>Titre...</mat-label>
+                    <input matInput formControlName="titleControl" placeholder="Nom du questionnaire" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Suivant</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="survey">
+            <form [formGroup]="survey">
+                <ng-template matStepLabel>Type de la POE / Echéance du questionnaire</ng-template>
+                <!-- ici mettre les deux select, d'abord POEI/POEC puis ONE_MONTH/SIX_MONTHS/ONE_YEAR-->
+                <select name="poeType" id="type" placeholder="type" formControlName="typeControl">
+                    <option value="">Sélectionner un type de Poe</option>
+                    <option *ngFor="let item of options2">{{getOptionLabelPoeType(item)}}</option>
+                </select>
+                <select name="levelType" id="level" placeholder="level" formControlName="levelControl">
+                    <option value="">Sélectionner une échéance</option>
+                    <option *ngFor="let item of options">{{getOptionLabelLevel(item)}}</option>
+                </select>
+                <div>
+                    <button mat-button matStepperPrevious>Precedent</button>
+                    <button mat-button matStepperNext>Suivant</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="addQuestions">
+            <form [formGroup]="addQuestions">
+                <ng-template matStepLabel>Ajout de questions</ng-template>
+                <!-- ici mettre le select pour ajouter une question existante et le bouton add pour ajouter une nouvelle question -->
+                <label>Choix d'une question existante</label>
+                <button type="button" (click)="InsertSelect()">Add Current Question</button>
+                <select id="addCurrentQuestion" placeholder="add Current Question" formControlName="oldQuestionControl"
+                    *ngIf="showSelect">
+                    <option *ngFor="let item of questions" [value]="item">{{item.getText()}}</option>
+                </select>
+                <button type="button" (click)="addQuestion()" *ngIf="showSelect">Add Question Selected</button>
+                <label>Nouvelle question ?</label>
+                <button type="button" (click)="InsertQuestion()">Add new Question</button>
+                <input id="addNewQuestion" type="text" placeholder="Add new question"
+                    formControlName="newQuestionControl" *ngIf="showInput">
+                <div>
+                    <button mat-button matStepperPrevious>Precedent</button>
+                    <button mat-button matStepperNext>Suivant</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Terminé</ng-template>
+            <p>Vous avez terminé de remplir ce questionnaire</p>
+            <div>
+                <button mat-button matStepperPrevious>Precedent</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+                <button mat-button>OK</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+    <div *ngIf="questionsAdded.length">
+        <h2 class="title">
+            Liste des questions
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Text</th>
+                    <th>Type</th>
+                    <th>Proposed response</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
