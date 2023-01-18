@@ -10,6 +10,7 @@
             <th>Title</th>
             <th>Type de POE</th>
             <th>Level</th>
+            <th>Nombre de questions</th>
             <th>Modify</th>
             <th>Delete</th>
         </tr>
@@ -24,6 +25,7 @@
                 <td> {{ survey.getTitle() }} </td>
                 <td> {{ survey.getPoeType() }} </td>
                 <td> {{ survey.getLevel() }} </td>
+                <td> {{ survey.getQuestions().length }} </td>
                 <td><button type="button" class="buttonDelete" (click)="onUpDate(survey)">🖊️</button></td>
                 <td><button type="button" class="buttonDelete" (click)="onRemoveSurveyDialog(survey)">X</button></td>
             </tr>

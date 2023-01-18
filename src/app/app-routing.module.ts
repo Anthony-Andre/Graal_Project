@@ -115,8 +115,23 @@ export class AppRoutingModule {
       ]
     },
     {
+      path: 'survey',
+      component: SurveyTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
       path: 'survey/add',
       component: SurveyFormComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/update/:id',
+      component: SurveyFormComponent,
+      // resolve: { form: SurveyResolver },
       canActivate: [
         HasUserGuard
       ]
@@ -129,17 +144,9 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'survey',
-      component: SurveyTableComponent,
-      canActivate: [
-        HasUserGuard
-      ]
-    },
-    {
       path: '**', // Wild card (Redirige vers le home si l'url n'existe pas) - Toujours mettre en dernier
       redirectTo: 'home',
       pathMatch: 'full'
-    },
-
+    }
   ];
 }
