@@ -16,7 +16,7 @@ import { SurveyDto } from '../../dto/survey-dto';
 })
 export class SurveyFormComponent implements OnInit {
 
-  //surveyForm!: FormGroup;
+  public addMode: boolean = true;
 
   passenger!: FormArray;
   surveyForm = new FormGroup({
@@ -43,9 +43,25 @@ export class SurveyFormComponent implements OnInit {
   ngOnInit(): void {
     this.getAllQuestions();
 
-    //const Res1 = this.surveys
-    
-    
+    /*-- Add by Raph : switch mode ADD ou UPDATE --*/
+    const data: any = this.route.snapshot.data;
+    console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
+    this.surveyForm = data.form;
+
+    this.surveyService.findAll().subscribe((surveys: Survey[]) => {
+      this.surveys = surveys;
+    })
+
+
+    if (this.surveyForm.value.id !== 0 && this.surveyForm.value.id !== undefined) {
+      this.addMode = false;
+      console.log('id =', this.surveyForm.value.id);
+    } else {
+      this.addMode = true;
+      console.log('id =', this.surveyForm.value.id);
+    }
+    /*-- End by Raph--*/
+
   }
 
   

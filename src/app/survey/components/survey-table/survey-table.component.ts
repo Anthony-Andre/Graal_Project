@@ -55,8 +55,8 @@ export class SurveyTableComponent implements OnInit {
   }
 
   public onUpDate(survey: Survey): void {
-    console.log(`L'utilisateur souhaite modifier ${survey.getTitle()}`);
-    console.log(survey);
+    console.log(`L'utilisateur souhaite modifier '${survey.getTitle()}'`);
+    console.log(`Id du survey : `, survey.getId());    
     this.router.navigate(['/', 'survey', 'update', survey.getId()]);
   }
 
