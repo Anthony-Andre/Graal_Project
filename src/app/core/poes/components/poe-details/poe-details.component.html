@@ -12,8 +12,8 @@
 
         <p>Nom de la promotion : {{poe.getTitle()}}</p>
         <p>Type : {{ poe.getType() }}</p>
-        <p>Date de début : {{poe.getBeginDate().toLocaleDateString()}}</p>
-        <p>Date de fin : {{poe.getEndDate().toLocaleDateString()}}</p>
+        <p>Date de début : {{poe.getBeginDate() | date}}</p>
+        <p>Date de fin : {{poe.getEndDate() | date}}</p>
         <p>Nombre de stagiaires dans la poe : {{trainees.length}}</p>
         <label for="traineeList">
           <h1>Liste des stagiaires :</h1>
@@ -60,7 +60,8 @@
         <div id="botButtons">
           <button type="button" class="buttonAdd" *ngIf="!selectBarMode" (click)="addNewTrainee()">Ajouter un
             stagaire</button>
-          <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTraineesDialog(poe)">Supprimer les
+          <button type="button" class="buttonClear" *ngIf="!selectBarMode" (click)="clearTraineesDialog(poe)">Supprimer
+            les
             stagiaires</button>
         </div>
 
