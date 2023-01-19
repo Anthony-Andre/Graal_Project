@@ -30,7 +30,7 @@ export class SignupFormComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router
-    ) { }
+  ) { }
 
   username: string = '';
   password: string = '';
@@ -63,10 +63,10 @@ export class SignupFormComponent implements OnInit {
         this.router.navigate(['/', 'signin'])
       }, (err) => {
         //console.log(err);
-        this.error = 'Something went wrong during signup';
+        this.error = 'Oups, il y a un problème dans l\'air';
       });
     } else {
-      this.error = 'All fields are mandatory';
+      this.error = 'Tous les champs sont obligatoires';
     }
   }
 

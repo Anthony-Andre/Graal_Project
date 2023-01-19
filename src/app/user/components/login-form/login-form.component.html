@@ -55,7 +55,7 @@
 </form>
 
 -->
-
+<!--
 <div class="contour">
   <h1>Connexion</h1>
   <form name='signinForm' (submit)="doSignin()">
@@ -74,4 +74,32 @@
       <p>Don't have account? <a routerLink="/signup">Signup</a></p>
     </div>
   </form>
+</div>
+ -->
+
+<div id="card">
+  <div id="card-content">
+    <div id="logo">
+      <img src="../../../../assets/logo-aelion_1.png" alt="logo Aelion">
+    </div>
+    <div id="card-title">
+      <h2>Connexion</h2>
+      <div class="underline-title"></div>
+    </div>
+    <form (submit)="doSignin()" class="form">
+      <label for="user-email" style="padding-top:13px">
+        &nbsp;Nom d'utilisateur
+      </label>
+      <input [(ngModel)]="username" id="user-email" class="form-content" type="email" name="email" autocomplete="on"
+        required />
+      <div class="form-border"></div>
+      <label for="user-password" style="padding-top:22px">&nbsp;Mot de passe
+      </label>
+      <input [(ngModel)]="password" id="user-password" class="form-content" type="password" name="password" required />
+      <div class="form-border"></div>
+      <div class="errorsDiv" style="color : red" *ngIf='error'>{{error}}</div>
+      <input id="submit-btn" type="submit" name="submit" value="Se connecter" />
+      <a routerLink="/signup" id="signup">Vous n'avez pas de compte ?</a>
+    </form>
+  </div>
 </div>
