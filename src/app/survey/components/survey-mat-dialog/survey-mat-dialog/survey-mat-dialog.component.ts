@@ -14,61 +14,63 @@ import { Location } from '@angular/common';
 })
 export class SurveyMatDialogComponent implements OnInit {
 
-  @ViewChild('chooseOne') chooseOne!:ElementRef;
-  @ViewChild('chooseMany') chooseMany!:ElementRef;
+  @ViewChild('chooseOne') chooseOne!: ElementRef;
+  @ViewChild('chooseMany') chooseMany!: ElementRef;
   //@ViewChild('') input!: ElementRef
 
   constructor(private formBuilder: FormBuilder,
-    private questionService:QuestionService,
+    private questionService: QuestionService,
     private router: Router,
-    private _location:Location
-    ) { }
+    private _location: Location
+  ) { }
 
   ngOnInit(): void {
     //this.getAllAnswers();
   }
 
-  optionsAnswer =[AnswerType.YES_NO,AnswerType.CHOOSE_MANY,AnswerType.CHOOSE_ONE,AnswerType.FREE]
-  optionsYesNoAnswer:any[] = ['YES','NO']
+  optionsAnswer = [AnswerType.YES_NO, AnswerType.CHOOSE_MANY, AnswerType.CHOOSE_ONE, AnswerType.FREE]
+  optionsYesNoAnswer: any[] = ['YES', 'NO']
   anotherOptionList: string[] = [];
-  answerType:string=''
+  answerType: string = ''
   selectedOption!: string;
   printedOption!: string;
   selected: string = 'YES';
-  answerRegistered:string[]=[]
-  inputFreeAnswer:string='';
+  answerRegistered: string[] = []
+  inputFreeAnswer: string = '';
   //chooseOne!:string;
   //chooseMany!:string;
-  
 
-  surveyMatDialogForm = this.formBuilder.group({text: ['', Validators.required],
-  answerType: ['',Validators.required],
-  answerProposed:['']
-});
+
+  surveyMatDialogForm = this.formBuilder.group({
+    text: ['', Validators.required],
+    answerType: ['', Validators.required],
+    answerProposed: '',
+    answersProposed: [[]]
+  });
 
   //answerPurposed = this.formBuilder.group({
-    //chooseOne: ['',Validators.required],
-    //chooseMany: ['', Validators.required]});
+  //chooseOne: ['',Validators.required],
+  //chooseMany: ['', Validators.required]});
 
 
   //surveyMatDialogForm = new FormGroup({
-    //question:new FormControl('',Validators.required),
-   // chooseOneAnswer: new FormControl('',Validators.required),
-   // chooseManyAnswer: new FormControl('',Validators.required),
-    //answer:new FormControl('',Validators.required),
-    
+  //question:new FormControl('',Validators.required),
+  // chooseOneAnswer: new FormControl('',Validators.required),
+  // chooseManyAnswer: new FormControl('',Validators.required),
+  //answer:new FormControl('',Validators.required),
+
   //});
 
 
   getOptionLabelAnswerType(option: AnswerType) {
     this.anotherOptionList = [];
-    
+
     //console.log(JSON.stringify(option))
     switch (option) {
-      
+
       case AnswerType.YES_NO:
         return "YES_NO";
-        //this.anotherOptionList = "ONE_MONTH"
+      //this.anotherOptionList = "ONE_MONTH"
       case AnswerType.CHOOSE_MANY:
         return "CHOOSE_MANY";
       case AnswerType.CHOOSE_ONE:
@@ -77,59 +79,59 @@ export class SurveyMatDialogComponent implements OnInit {
         return "FREE"
       default:
         return ''
-        //this.anotherOptionList = []
-        //return ""
-       // throw new Error("Unsupported option");
+      //this.anotherOptionList = []
+      //return ""
+      // throw new Error("Unsupported option");
     }
   }
 
 
-  onSubmit(){
-    
-    const quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+  onSubmit() {
+
+    const quest: QuestionDto = new QuestionDto(this.surveyMatDialogForm.value)
     console.log(this.surveyMatDialogForm.value)
 
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result:any) => 
-     this._location.back())
-    
-    
+    subscription.subscribe((result: any) =>
+      this._location.back())
 
-    
+
+
+
   }
 
-  
+
   //getAllAnswers(){
 
   //}
 
-  getAllAnswers(dataAns:string){
+  getAllAnswers(dataAns: string) {
 
     console.log(dataAns);
     this.answerRegistered.push(dataAns)
     this.answerRegistered = this.answerRegistered.filter((el, i, a) => i === a.indexOf(el))
     console.log(this.answerRegistered)
-    
+
     //this.chooseOne = '';
     //this.chooseMany='';
 
     //this.chooseOne.nativeElement.value=''
     //this.chooseMany.nativeElement.value=''
-    
+
 
     //getted from binding
     //console.log(this.selected)
-    
+
     //this.printedOption = this.selectedOption;
     //console.log(this.printedOption)
   }
-  clearChooseOne(){
+  clearChooseOne() {
     this.chooseOne.nativeElement.value = '';
     //this.chooseOne=''
   }
 
-  clearChooseMany(){
+  clearChooseMany() {
     this.chooseMany.nativeElement.value = '';
     //this.chooseMany=''
   }
