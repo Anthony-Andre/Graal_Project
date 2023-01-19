@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { time } from 'console';
 import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
@@ -64,7 +65,7 @@ export class PoeTableComponent implements OnInit {
 
   }
 
-  public trierParEndDate() {
+  public sortByEndDate() {
       if (this.croissant) {
         this.croissant = false;
       this.poes.sort((a, b) => {
@@ -81,6 +82,15 @@ export class PoeTableComponent implements OnInit {
       })
     };
   }
+
+  // public sortByTitle() {
+    // console.log('byTitleCalled');
+    // this.poes.sort((a, b) => {
+    //   var timeA = Number(a.getTitle());
+    //   var timeB = Number(b.getTitle())
+    //   return timeA - timeB;
+    // })
+  // }
 
   public doSignout() {
     this.authService.signout();
