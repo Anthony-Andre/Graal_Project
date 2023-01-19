@@ -43,7 +43,7 @@ export class SurveyMatDialogComponent implements OnInit {
 
   surveyMatDialogForm = this.formBuilder.group({text: ['', Validators.required],
   answerType: ['',Validators.required],
-  answerProposed:['']
+  answersProposed:[[]]
 });
 
   //answerPurposed = this.formBuilder.group({
@@ -87,10 +87,12 @@ export class SurveyMatDialogComponent implements OnInit {
   onSubmit(){
     
     const quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+    quest.addAnswers(this.answerRegistered)
     console.log(this.surveyMatDialogForm.value)
 
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
+
     subscription.subscribe((result:any) => 
      this._location.back())
     
@@ -109,7 +111,7 @@ export class SurveyMatDialogComponent implements OnInit {
     console.log(dataAns);
     this.answerRegistered.push(dataAns)
     this.answerRegistered = this.answerRegistered.filter((el, i, a) => i === a.indexOf(el))
-    console.log(this.answerRegistered)
+    console.log('Answers',this.answerRegistered)
     
     //this.chooseOne = '';
     //this.chooseMany='';
