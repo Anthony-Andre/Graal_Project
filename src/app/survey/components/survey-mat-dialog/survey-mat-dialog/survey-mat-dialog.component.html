@@ -1,26 +1,44 @@
-<h1 class="title">Creer Questionnaire</h1>
+ <ng-container *ngIf="surveyMatDialogForm">
 
-<label for="title" class="getQuestion">Veuillez Saisir la question</label>
-<input id="title" type="text" placeholder="title" class="getQuestion2">
+    <form  [formGroup]="surveyMatDialogForm"  > 
 
-<label class="getQuestion">Veuillez choisir un type de réponse</label>
-<select name="answerType" id="answerType" placeholder="choisir type de réponse" [(ngModel)]="answerType" class="getQuestion2">
-    <option *ngFor="let item of optionsAnswer" [value]="getOptionLabelAnswerType(item)">{{getOptionLabelAnswerType(item)}}</option>
-</select>
+        <h1 class="title">Creer Question</h1>
 
-<label class="getQuestion">Veuillez inscrire la réponse</label>
-<select name="answerPurposed" id="answerPurposed" placeholder="Veuillez inscrire réponse" *ngIf="answerType == 'YES_NO'"class="getQuestion2" >
-    <option value="YES">YES</option>
-    <option value="NO">NO</option>
-</select>
+       <label for="title" class="getQuestion">Veuillez Saisir la question</label>
+       <input id="title" type="text" placeholder="title" class="getQuestion2" formControlName="text">
 
-<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'FREE'" class="getQuestion2">
-<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2">
-<button type="button" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2">Veuillez choisir la réponse</button>
-<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2">
-<button type="button" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2">Veuillez choisir les réponses</button>
+       <label class="getQuestion">Veuillez choisir un type de réponse</label>
+       <select name="answerType" id="answerType" placeholder="choisir type de réponse" [(ngModel)]="answerType" class="getQuestion2" formControlName="answerType">
+            <option *ngFor="let item of optionsAnswer" [value]="getOptionLabelAnswerType(item)">{{getOptionLabelAnswerType(item)}}</option>
+       </select>
+
+       <!--<label class="getQuestion">Veuillez inscrire la réponse</label>-->
+       <!--<select #dataAns name="answerPurposed" id="answerPurposed" placeholder="Veuillez inscrire réponse" (change)="getAllAnswers(dataAns.value)" *ngIf="answerType == 'YES_NO'"class="getQuestion2" >
+        <option [value]="" *ngFor="let item of optionsYesNoAnswer">{{item}}</option>
+           - <option value="YES">YES</option> -->
+           <!-- <option value="NO">NO</option> -->
+        <!--</select> -->
+
+       
+
+       <!--<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'FREE'" class="getQuestion2" [(ngModel)]="inputFreeAnswer">
+            <button type="button" *ngIf="answerType == 'FREE'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer)">Veuillez inscrire la réponse</button> -->
+       <input mdInput #chooseOne name="chooseOne" [value]='' id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2" [(ngModel)]="inputFreeAnswer" formControlName="answerProposed">
+            <button  type="button" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Veuillez choisir la réponse</button>
+       <input mdInput #chooseMany name="chooseMany" [value]='' id="answerPurposed" type="answerPurposed" placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2" [(ngModel)]="inputFreeAnswer" formControlName="answerProposed">
+            <button type="button" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Veuillez choisir les réponses</button>
 
 
-<label class="getQuestion">Réponse proposée</label>
-<input id="answerGet" type="text" placeholder="Réponse à saisir" class="getQuestion2">
+       <label class="getQuestion" >Réponse proposée</label>
+       
+        <li class="getQuestion2" *ngFor="let item of answerRegistered">
+            {{item}}
+        </li>
+       
 
+       <button type="button"  class="getQuestion2" (click)="onSubmit()">Valider</button>
+
+
+    </form> 
+
+</ng-container> 
