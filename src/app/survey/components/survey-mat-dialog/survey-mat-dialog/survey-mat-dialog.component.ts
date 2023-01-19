@@ -40,10 +40,11 @@ export class SurveyMatDialogComponent implements OnInit {
   //chooseOne!:string;
   //chooseMany!:string;
 
-  surveyMatDialogForm = this.formBuilder.group({text: ['', Validators.required],
-  answerType: ['',Validators.required],
-  answersProposed:[[]]
-});
+  surveyMatDialogForm = this.formBuilder.group({
+    text: ['', Validators.required],
+    answerType: ['', Validators.required],
+    answersProposed: [[]]
+  });
 
   //answerPurposed = this.formBuilder.group({
   //chooseOne: ['',Validators.required],
@@ -83,9 +84,9 @@ export class SurveyMatDialogComponent implements OnInit {
   }
 
 
-  onSubmit(){
-    
-    const quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+  onSubmit() {
+
+    const quest: QuestionDto = new QuestionDto(this.surveyMatDialogForm.value)
     quest.addAnswers(this.answerRegistered)
     console.log(this.surveyMatDialogForm.value)
 
@@ -106,11 +107,12 @@ export class SurveyMatDialogComponent implements OnInit {
 
   getAllAnswers(dataAns: string) {
 
+
     console.log(dataAns);
     this.answerRegistered.push(dataAns)
     this.answerRegistered = this.answerRegistered.filter((el, i, a) => i === a.indexOf(el))
-    console.log('Answers',this.answerRegistered)
-    
+    console.log('Answers', this.answerRegistered)
+
     //this.chooseOne = '';
     //this.chooseMany='';
 

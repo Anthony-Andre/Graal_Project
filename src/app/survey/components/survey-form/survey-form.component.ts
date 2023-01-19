@@ -98,6 +98,8 @@ export class SurveyFormComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("this.questions", this.questions);
+    console.log("this.surveyForm", this.surveyFormGroup);
     console.log('Delegate add survey: ', this.surveyFormGroup.value);
     const dto: SurveyDto = new SurveyDto(this.surveyFormGroup.value);
     console.log(this.surveyFormGroup.value)
@@ -151,11 +153,13 @@ export class SurveyFormComponent implements OnInit {
     this.questionService.findOne(parseInt(questionId))
       .subscribe((question: Question) => {
         this.questionToAdd = question;
+        console.log(this.questionToAdd);
         this.questions.push(question);
+        console.log(this.questions)
+        console.log(((<HTMLInputElement>document.getElementById("questions"))));
         this.allQuestions.splice(
           this.allQuestions.findIndex((q: Question) => q.getId() === question.getId()),
-          1)
-
+          1);
       });
 
   }

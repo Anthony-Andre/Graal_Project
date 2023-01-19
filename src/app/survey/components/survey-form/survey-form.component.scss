@@ -43,6 +43,7 @@ tfoot {
 }
 
 .surveyForm {
+  font-family: $main-font;
   display: flex;
   padding: 2em auto;
   flex-direction: column;
@@ -58,8 +59,25 @@ tfoot {
   width: 25%;
 }
 
-.surveyForm select {
+.surveyForm select,
+.surveyForm button {
   padding: 1em;
   font-family: $main-font;
   text-align: center;
+}
+
+.surveyForm button {
+  cursor: pointer;
+}
+
+.currentQuestion {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+  margin: auto;
 }
