@@ -30,6 +30,7 @@ export class PoeTableComponent implements OnInit {
   public hasUser: boolean = this.authService.isUserSignedin();
   public nbStagiaires!: number;
   public confirmation: string = "false";
+  public croissant: boolean = false;
 
   constructor(
     private poeService: PoeService,
@@ -44,6 +45,7 @@ export class PoeTableComponent implements OnInit {
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
+
     })
 
 
@@ -60,6 +62,24 @@ export class PoeTableComponent implements OnInit {
       this.greetingService.getByUserOrAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
     }
 
+  }
+
+  public trierParEndDate() {
+      if (this.croissant) {
+        this.croissant = false;
+      this.poes.sort((a, b) => {
+        var endDateTimeA =  Number(new Date(a.getEndDate()));
+        var endDateTimeB =  Number(new Date(b.getEndDate()));
+          return endDateTimeB - endDateTimeA;
+      })
+     } else {
+      this.croissant = true;
+        this.poes.sort((a, b) => {
+          var endDateTimeA =  Number(new Date(a.getEndDate()));
+          var endDateTimeB =  Number(new Date(b.getEndDate()));
+            return endDateTimeA - endDateTimeB;
+      })
+    };
   }
 
   public doSignout() {
