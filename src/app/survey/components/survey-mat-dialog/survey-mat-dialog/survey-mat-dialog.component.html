@@ -25,16 +25,10 @@
 
           <!--<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'FREE'" class="getQuestion2" [(ngModel)]="inputFreeAnswer">
             <button type="button" *ngIf="answerType == 'FREE'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer)">Veuillez inscrire la réponse</button> -->
-          <input mdInput #chooseOne name="chooseOne" [value]='' id="answerPurposed" type="answerPurposed"
-               placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2"
-               [(ngModel)]="inputFreeAnswer" formControlName="answerProposed">
-          <button type="button" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2"
-               (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Veuillez choisir la réponse</button>
-          <input mdInput #chooseMany name="chooseMany" [value]='' id="answerPurposed" type="answerPurposed"
-               placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2"
-               [(ngModel)]="inputFreeAnswer" formControlName="answerProposed">
-          <button type="button" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2"
-               (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Veuillez choisir les réponses</button>
+       <input mdInput #chooseOne name="chooseOne" [value]='' id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2" [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
+            <button  type="button" *ngIf="answerType == 'CHOOSE_ONE'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Veuillez choisir la réponse</button>
+       <input mdInput #chooseMany name="chooseMany" [value]='' id="answerPurposed" type="answerPurposed" placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2" [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
+            <button type="button" *ngIf="answerType == 'CHOOSE_MANY'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Veuillez choisir les réponses</button>
 
 
           <label class="getQuestion">Réponse proposée</label>
