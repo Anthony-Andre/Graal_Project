@@ -45,13 +45,13 @@ export class FormBuilderService {
           Validators.required
         ]
       ],
-      endDate: [
+      level: [
         this.survey.getLevel(),
         [
           Validators.required
         ]
       ],
-      type: [
+      questions: [
         this.survey.getQuestions(),
         [
           Validators.required

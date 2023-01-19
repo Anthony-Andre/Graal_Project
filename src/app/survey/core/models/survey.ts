@@ -8,7 +8,7 @@ export class Survey {
     private poeType!: PoeType;
     private level!: Level;
     private questions: Array<Question> = [];
-    
+
 
 
     public getId(): number {
@@ -44,9 +44,10 @@ export class Survey {
     }
 
     public getQuestions(): Array<Question> {
-      return this.questions;
+        return this.questions;
     }
+
     public setQuestions(value: Array<Question>) {
-      this.questions = value;
+        this.questions = value;
     }
 }

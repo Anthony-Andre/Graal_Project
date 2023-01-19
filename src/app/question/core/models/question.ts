@@ -4,9 +4,9 @@ export class Question {
     private id: number = 0;
     private text: string = "";
     private answerType!: AnswerType;
-    private answerProposed!: Array<String>;
-    
-    
+    private answersProposed!: Array<String>;
+
+
     public getId(): number {
         return this.id;
     }
@@ -31,10 +31,10 @@ export class Question {
         this.answerType = answerType;
     }
 
-    public getAnswerProposed(): Array<String> {
-      return this.answerProposed;
+    public getAnswersProposed(): Array<String> {
+        return this.answersProposed;
     }
-    public setAnswerProposed(value: Array<String>) {
-      this.answerProposed = value;
+    public setAnswersProposed(value: Array<String>): void {
+        this.answersProposed = value;
     }
 }

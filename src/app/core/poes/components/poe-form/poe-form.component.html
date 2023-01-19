@@ -8,46 +8,15 @@
         <label for="title">Veuillez saisir le nom d'une Poe:</label>
         <input id="title" type="text" placeholder="title" formControlName="title">
 
-        <!-- TODO : en dessous, remplacer par un menu déroulant 
-
-        <label for="type">Type de Poe:</label>
-        <input id="type" type="text" placeholder="type" formControlName="type">
-
-        -->
-
         <select name="poeType" id="type" placeholder="type" formControlName="type">
             <option value="POEI">POEI</option>
             <option value="POEC">POEC</option>
         </select>
 
-        
-
-
-
-        <!--  <div id="beginDate">
-            <mat-form-field appearance="fill">
-                <mat-label>Begindate</mat-label>
-                <input matInput [matDatepicker]="dp" formControlName="beginDate">
-                <mat-hint>Format : JJ-MM-YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-                <mat-datepicker #dp></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div id="endDate">
-            <mat-form-field appearance="fill">
-                <mat-label>EndDate</mat-label>
-                <input matInput [matDatepicker]="bp" formControlName="endDate">
-                <mat-hint>Format : JJ-MM-YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="bp"></mat-datepicker-toggle>
-                <mat-datepicker #bp></mat-datepicker>
-            </mat-form-field>
-        </div> -->
-
         <div class="form-field">
             <mat-form-field appearance="fill">
-                <mat-label>Begin and End dates</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
+                <mat-label>Dates de début et fin de la POE:</mat-label>
+                <mat-date-range-input class="datesPoe" [rangePicker]="picker">
                     <input matStartDate formControlName="beginDate" placeholder="Start date">
                     <input matEndDate formControlName="endDate" placeholder="End date">
                 </mat-date-range-input>

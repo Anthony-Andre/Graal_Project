@@ -1,22 +1,23 @@
 $head-and-foot-color : rgb(212, 145, 62);
 $head-and-foot-text-color : rgb(0, 0, 0);
+$main-font: 'Acme', sans-serif;
 
 .questionnaire {
-    padding-top: 2em;
-    background-color: white;
-    padding-bottom: 2em;
+  padding-top: 2em;
+  background-color: white;
+  padding-bottom: 2em;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 table {
-    margin: auto;
-    margin-top: 4em;
-    border-collapse: collapse;
-    text-align: center;
-    background-color: rgb(189, 184, 184);
+  margin: auto;
+  margin-top: 4em;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: rgb(189, 184, 184);
 }
 
 td,
@@ -27,10 +28,10 @@ th {
 }
 
 thead {
-    th {
-      width: 10em;
-      height: 3em;
-    }
+  th {
+    width: 10em;
+    height: 3em;
+  }
 }
 
 thead,
@@ -39,4 +40,26 @@ tfoot {
     background-color: $head-and-foot-color;
     color: $head-and-foot-text-color;
   }
+}
+
+.surveyForm {
+  display: flex;
+  padding: 2em auto;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
+
+.surveyForm select,
+.surveyForm input,
+.surveyForm button {
+  margin: 1em auto;
+  width: 25%;
+}
+
+.surveyForm select {
+  padding: 1em;
+  font-family: $main-font;
+  text-align: center;
 }

@@ -27,8 +27,9 @@ export class QuestionService {
             question.setId(inputQuestion.id);
             question.setText(inputQuestion.text)
             question.setAnswerType(inputQuestion.answerType)
-            
-            
+            question.setAnswersProposed(inputQuestion.answersProposed)
+
+
             //console.log(survey);
             return question;
           })
@@ -46,9 +47,10 @@ export class QuestionService {
         question.setId(inputQuestion.id);
         question.setText(inputQuestion.text)
         question.setAnswerType(inputQuestion.answerType)
-            
-            
-            //console.log(survey);
+        question.setAnswersProposed(inputQuestion.answersProposed)
+
+
+        //console.log(survey);
         return question;
       })
     )
@@ -67,9 +69,10 @@ export class QuestionService {
           question.setId(questionDto.id);
           question.setText(questionDto.text)
           question.setAnswerType(questionDto.answerType)
-            
-            
-            //console.log(survey);
+          question.setAnswersProposed(questionDto.answersProposed)
+
+
+          //console.log(survey);
           return question;
         })
       );
