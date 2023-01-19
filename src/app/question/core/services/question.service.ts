@@ -56,7 +56,7 @@ export class QuestionService {
     )
   }
 
-  public addSurvey(question: QuestionDto): Observable<Question> {
+  public addQuestion(question: QuestionDto): Observable<Question> {
     console.log('add question : ', question)
     return this.httpClient.patch<QuestionDto>(
       this.controllerBaseUrl,

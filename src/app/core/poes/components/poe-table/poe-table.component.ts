@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { time } from 'console';
 import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
@@ -17,6 +18,7 @@ import { GreetingService } from 'src/app/user/services/greeting.service';
 })
 export class PoeTableComponent implements OnInit {
 
+
   isSignedin = false;
 
   signedinUser: string = '';
@@ -30,6 +32,7 @@ export class PoeTableComponent implements OnInit {
   public hasUser: boolean = this.authService.isUserSignedin();
   public nbStagiaires!: number;
   public confirmation: string = "false";
+  public croissant: boolean = false;
 
   constructor(
     private poeService: PoeService,
@@ -44,6 +47,7 @@ export class PoeTableComponent implements OnInit {
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
+
     })
 
 
@@ -141,6 +145,63 @@ export class PoeTableComponent implements OnInit {
   public moyenneStagiaires(): number {
     return this.tousLesStagiaires() / this.poes.length;
   }
+
+  public sortByEndDate() {
+    if (this.croissant) {
+      this.croissant = false;
+    this.poes.sort((a, b) => {
+      var endDateTimeA =  Number(new Date(a.getEndDate()));
+      var endDateTimeB =  Number(new Date(b.getEndDate()));
+        return endDateTimeB - endDateTimeA;
+    })
+   } else {
+    this.croissant = true;
+      this.poes.sort((a, b) => {
+        var endDateTimeA =  Number(new Date(a.getEndDate()));
+        var endDateTimeB =  Number(new Date(b.getEndDate()));
+          return endDateTimeA - endDateTimeB;
+    })
+  };
+}
+
+public sortByTitle() {
+  if (!this.croissant) {
+    this.croissant = true
+    this.poes.sort((a, b) => {
+      var nameA = a.getTitle();
+      var nameB = b.getTitle();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+      })
+  } else {
+  this.croissant = false;
+  this.poes.sort((a, b) => {
+    var nameA = a.getTitle();
+    var nameB = b.getTitle();
+    if (nameA > nameB) {
+      return -1;
+    }
+    if (nameA < nameB) {
+      return 1;
+    }
+    return 0;
+    })
+  }
+}
+
+  // public sortByTitle() {
+  //   console.log('sort called');
+    
+  //   function SortArray(x: any, y: any){
+  //     return x.getLastName().localeCompare(y.getLastName());
+  //   }
+  //   return this.poes.sort(SortArray);
+  // }
 
 }
 
