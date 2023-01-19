@@ -14,4 +14,9 @@ export class SurveyDto {
     Object.assign(this, formValues);
     // this.poeType = formValues.type; 
   }
+
+  public setQuestions(questions: Array<Question>) {
+    this.questions = questions;
+  }
+
 }
