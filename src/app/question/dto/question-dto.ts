@@ -8,5 +8,8 @@ export class QuestionDto {
 
     public constructor(formValues: any) {
         Object.assign(this, formValues);
+        //this.text=formValues.titleControl;
+        //this.answerType=formValues.answerChoose
+        //this.answerProposed=formValues.answerProposed
       }
 }

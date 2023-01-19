@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Level } from 'src/app/core/enums/level';
 import { PoeType } from 'src/app/core/enums/poe-type';
@@ -20,35 +20,28 @@ import { SurveyMatDialogComponent } from '../survey-mat-dialog/survey-mat-dialog
 })
 export class SurveyFormComponent implements OnInit {
 
+
   public addMode: boolean = true;
+  survey: Survey = new Survey();
+  surveyFormGroup!: FormGroup;
+  questionToAdd: Question = new Question();
+  questions: Array<Question> = [];
+  allQuestions: Array<Question> = [];
 
-  // passenger!: FormArray;
-  // surveyForm = new FormGroup({
-  // title: new FormControl('',Validators.required),
-  // addNewQuestion: new FormControl(''),
-  // addCurrentQuestion: new FormControl(''),  
-  // level:new FormControl('',Validators.required),
-  // });
-
-  title = this.formBuilder.group({titleControl: ['', Validators.required]});
-  survey = this.formBuilder.group({
-    typeControl: ['',Validators.required],
-    levelControl: ['', Validators.required]});
+  title = this.formBuilder.group({ titleControl: ['', Validators.required] });
+  surveyForm = this.formBuilder.group({
+    typeControl: ['', Validators.required],
+    levelControl: ['', Validators.required]
+  });
   addQuestions = this.formBuilder.group({
     oldQuestionControl: [new Question()],
     newQuestionControl: [new Question()]
   });
 
-  @ViewChild(SurveyMatDialogComponent) comp!:SurveyMatDialogComponent
+  @ViewChild(SurveyMatDialogComponent) comp!: SurveyMatDialogComponent
   public showInput = false;
   public showSelect = false;
-  public currentQuestion!: string;
-  public newQuestion!: string;
-  public questions: Array<Question> = [];
-  public questionsAdded: Array<Question>=[];
-  options =[Level.ONE_MONTH,Level.SIX_MONTHS,Level.ONE_YEAR]
-  options2 =[PoeType.POEI,PoeType.POEC]
-  
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private questionService: QuestionService,
@@ -56,124 +49,117 @@ export class SurveyFormComponent implements OnInit {
     private surveyService: SurveyService,
     private _location: Location,
     public dialog: MatDialog,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    this.getAllQuestions();
-    console.log("questions :", this.questions);  
-    console.log("oldquestion : ", this.addQuestions.value.oldQuestionControl.getText());
-    
-
-    // /*-- Add by Raph : switch mode ADD ou UPDATE --*/
-    // const data: any = this.route.snapshot.data;
-    // console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
-    // this.surveyForm = data.form;
-
-    // this.surveyService.findAll().subscribe((surveys: Survey[]) => {
-    //   this.surveys = surveys;
-    // })
 
 
-    // if (this.surveyForm.value.id !== 0 && this.surveyForm.value.id !== undefined) {
-    //   this.addMode = false;
-    //   console.log('id =', this.surveyForm.value.id);
-    // } else {
-    //   this.addMode = true;
-    //   console.log('id =', this.surveyForm.value.id);
-    // }
-    // /*-- End by Raph--*/
+    const data: any = this.route.snapshot.data;
+    console.log(data);
+    this.surveyFormGroup = data.form;
+
+    if (this.surveyFormGroup.value.id !== 0 && this.surveyFormGroup.value.id !== undefined) {
+      this.addMode = false;
+    } else {
+      this.addMode = true;
+    }
+
+    this.questionService.findAll().subscribe((questions: Question[]) => {
+      this.allQuestions = questions;
+    });
+
+    if (this.addMode === false) {
+      this.route.params
+        .subscribe((routeParams: Params) => {
+          const surveyId: number = routeParams['id'];
+          this.surveyService.findOne(surveyId)
+            .subscribe((survey: Survey) => {
+              this.survey = survey;
+              this.survey.getQuestions().map((anyQuestion: any) => {
+                const question: Question = new Question();
+                question.setId(anyQuestion.id);
+                question.setText(anyQuestion.text);
+                question.setAnswerType(anyQuestion.answerType);
+                question.setAnswersProposed(anyQuestion.answersProposed);
+                this.questions.push(question);
+                console.log(this.questions)
+                return question;
+              }
+              )
+            });
+        })
+    }
+
 
   }
 
-  
+  public get c(): { [key: string]: AbstractControl } {
+    return this.surveyFormGroup.controls;
+  }
 
-  InsertQuestion(){
+  onSubmit() {
+    console.log('Delegate add survey: ', this.surveyFormGroup.value);
+    const dto: SurveyDto = new SurveyDto(this.surveyFormGroup.value);
+    console.log(this.surveyFormGroup.value)
+    let subscription: Observable<any>;
+
+    if (this.addMode) {
+      subscription = this.surveyService.addSurvey(dto);
+    } else {
+      subscription = this.surveyService.addSurvey(this.surveyFormGroup.value); // A remplacer par un update ? 
+    }
+    subscription.subscribe(() => this.goHome())
+  }
+
+  InsertQuestion() {
     //console.log('Insert')
     this.showInput = !this.showInput
     //this.passenger.push(
-      //new FormGroup({
-     //   addNewQuestion: new FormControl(''),
-     // })
+    //new FormGroup({
+    //   addNewQuestion: new FormControl(''),
+    // })
     //);
 
 
-    this.dialog.open(SurveyMatDialogComponent,{
+    this.dialog.open(SurveyMatDialogComponent, {
       ///data:s,
       height: '450px',
       width: '600px'
-      
-     })
-    .afterClosed().subscribe((result) =>{
+
+    })
+      .afterClosed().subscribe((result) => {
       })
   }
 
-  InsertSelect(){
-    this.showSelect = !this.showSelect     
+  InsertSelect() {
+    this.showSelect = !this.showSelect
   }
 
-  getAllQuestions(){
-    this.questionService.findAll().subscribe((questions: Question[]) => {
-      this.questions = questions;
-      console.log(this.questions)
-    })
-  }
-
-  getOptionLabelLevel(option: Level) {
-    switch (option) {
-      case Level.ONE_MONTH:
-        return "ONE_MONTH";
-      case Level.SIX_MONTHS:
-        return "SIX_MONTHS";
-        case Level.ONE_YEAR:
-          return "ONE_YEAR";
-      default:
-        
-        throw new Error("Unsupported option");
-    }
-  }
-
-  getOptionLabelPoeType(option: PoeType) {
-    switch (option) {
-      case PoeType.POEI:
-        return "POEI";
-      case PoeType.POEC:
-        return "POEC";
-      default:
-        throw new Error("Unsupported option");
-    }
-  }
-
-  
-
-   
-
-
-
-  // onSubmit() {
-  //  console.log('Delegate add survey: ', this.surveyForm.value);
-
-  //  const surv: SurveyDto = new SurveyDto(this.surveyForm.value);
-
-  //  let subscription: Observable<any>;
-  //  subscription = this.surveyService.addSurvey(surv);
-  //  subscription.subscribe(() => this.nextStape())
-
-  // }
 
   public nextStape(): void {
     this.router.navigate(['/', 'question'])
   }
 
   public goHome(): void {
-    this._location.back();  }
+    this._location.back();
+  }
 
-  public addQuestion(): void {
-    console.log("addQuestions", this.addQuestions);
-    console.log("this.questions :", this.questions);
-    var currentQuestion = this.addQuestions.value.oldQuestionControl;
-    console.log("Question courante: ", currentQuestion);
-      
-  }  
+  public addCurrentQuestion(): void {
+    var questionId = ((<HTMLInputElement>document.getElementById("addCurrentQuestion")).value);
+    console.log("idQuestion :", questionId);
+
+    this.questionService.findOne(parseInt(questionId))
+      .subscribe((question: Question) => {
+        this.questionToAdd = question;
+        this.questions.push(question);
+        this.allQuestions.splice(
+          this.allQuestions.findIndex((q: Question) => q.getId() === question.getId()),
+          1)
+
+      });
+
+  }
+
 }
 
 

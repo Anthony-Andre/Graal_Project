@@ -16,12 +16,13 @@ export class SurveyTableComponent implements OnInit {
   // public surveyService!: SurveyService;
   public surveys: Array<Survey> = [];
   public confirmation: string = "false";
+  public croissant: boolean = false;
 
 
   constructor(
     private surveyService: SurveyService,
     private router: Router,
-    private dialog : MatDialog
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,13 +52,75 @@ export class SurveyTableComponent implements OnInit {
           )
         }
       });
-    }    
+    }
   }
 
   public onUpDate(survey: Survey): void {
     console.log(`L'utilisateur souhaite modifier '${survey.getTitle()}'`);
-    console.log(`Id du survey : `, survey.getId());    
+    console.log(`Id du survey : `, survey.getId());
     this.router.navigate(['/', 'survey', 'update', survey.getId()]);
+  }
+
+  public sortByTitle() {
+    // tri par ordre croissant/décroissant par Title
+    if (!this.croissant) {
+      this.croissant = true
+      this.surveys.sort((a, b) => {
+        var nameA = a.getTitle();
+        var nameB = b.getTitle();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+        })
+    } else {
+    this.croissant = false;
+    this.surveys.sort((a, b) => {
+      var nameA = a.getTitle();
+      var nameB = b.getTitle();
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      return 0;
+      })
+    }
+  }
+
+  public sortByLevel() {
+    // tri par ordre croissant/décroissant par Level
+    if (!this.croissant) {
+      this.croissant = true
+      this.surveys.sort((a, b) => {
+        var nameA = a.getTitle();
+        var nameB = b.getTitle();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+        })
+    } else {
+    this.croissant = false;
+    this.surveys.sort((a, b) => {
+      var nameA = a.getTitle();
+      var nameB = b.getTitle();
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      return 0;
+      })
+    }
   }
 
 }
