@@ -112,7 +112,7 @@ export class SurveyFormComponent implements OnInit {
   getAllQuestions(){
     this.questionService.findAll().subscribe((questions: Question[]) => {
       this.questions = questions;
-      console.log(this.questions)
+      //console.log(this.questions)
     })
   }
 
