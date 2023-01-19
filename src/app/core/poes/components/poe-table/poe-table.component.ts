@@ -164,6 +164,36 @@ export class PoeTableComponent implements OnInit {
   };
 }
 
+public sortByTitle() {
+  if (!this.croissant) {
+    this.croissant = true
+    this.poes.sort((a, b) => {
+      var nameA = a.getTitle();
+      var nameB = b.getTitle();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+      })
+  } else {
+  this.croissant = false;
+  this.poes.sort((a, b) => {
+    var nameA = a.getTitle();
+    var nameB = b.getTitle();
+    if (nameA > nameB) {
+      return -1;
+    }
+    if (nameA < nameB) {
+      return 1;
+    }
+    return 0;
+    })
+  }
+}
+
   // public sortByTitle() {
   //   console.log('sort called');
     
@@ -173,35 +203,6 @@ export class PoeTableComponent implements OnInit {
   //   return this.poes.sort(SortArray);
   // }
 
-  public sortByTitle() {
-    if (!this.croissant) {
-      this.croissant = true
-      this.poes.sort((a, b) => {
-        var nameA = a.getTitle();
-        var nameB = b.getTitle();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-        })
-    } else {
-    this.croissant = false;
-    this.poes.sort((a, b) => {
-      var nameA = a.getTitle();
-      var nameB = b.getTitle();
-      if (nameA > nameB) {
-        return -1;
-      }
-      if (nameA < nameB) {
-        return 1;
-      }
-      return 0;
-      })
-    }
-  }
 }
 
 
