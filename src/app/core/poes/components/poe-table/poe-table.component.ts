@@ -104,6 +104,7 @@ export class PoeTableComponent implements OnInit {
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
     this.poeService.mailToTrainees(poe);
+
   }
 
   public filterChanged(event: String | null): void {
