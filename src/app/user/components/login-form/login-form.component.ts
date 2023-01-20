@@ -76,6 +76,7 @@ export class LoginFormComponent implements OnInit {
 
   username: string = '';
   password: string = '';
+  stayConnected: boolean = false;
   public hasUser: boolean = false;
 
   isSignedin = false;
@@ -94,7 +95,7 @@ export class LoginFormComponent implements OnInit {
 
   doSignin() {
     if (this.username !== '' && this.username !== null && this.password !== '' && this.password !== null) {
-      const request: Request = { userName: this.username, userPwd: this.password };
+      const request: Request = { userName: this.username, userPwd: this.password, stayConnected: this.stayConnected };
 
       this.authService.signin(request).subscribe((result) => {
         //this.router.navigate(['/home']);

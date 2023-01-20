@@ -54,7 +54,7 @@ export class SignupFormComponent implements OnInit {
 
   doSignup() {
     if (this.username !== '' && this.username !== null && this.password !== '' && this.password !== null && this.selectedRoles.length > 0) {
-      const request: Request = { userName: this.username, userPwd: this.password, roles: this.selectedRoles };
+      const request: Request = { userName: this.username, userPwd: this.password, roles: this.selectedRoles, stayConnected: false };
 
       this.authService.signup(request).subscribe((result) => {
         //console.log(result);

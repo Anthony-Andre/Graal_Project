@@ -97,6 +97,9 @@
       </label>
       <input [(ngModel)]="password" id="user-password" class="form-content" type="password" name="password" required />
       <div class="form-border"></div>
+      <div class="field-control">
+        <mat-slide-toggle [(ngModel)]="stayConnected" name="stayConnected">Rester connecté</mat-slide-toggle>
+      </div>
       <div class="errorsDiv" style="color : red" *ngIf='error'>{{error}}</div>
       <input id="submit-btn" type="submit" name="submit" value="Se connecter" />
       <a routerLink="/signup" id="signup">Vous n'avez pas de compte ?</a>
