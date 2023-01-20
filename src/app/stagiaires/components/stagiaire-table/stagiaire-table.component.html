@@ -8,7 +8,14 @@
     <tr>
       <th>#</th>
       <th>&nbsp;</th>
-      <th (click)="sortByLastName()">Lastname</th>
+      <th (click)="sortByLastName()">Lastname
+        <ng-container *ngIf="!croissantLastName">
+          <i alt="fleche" class="fa-solid fa-caret-down"></i>
+        </ng-container>
+        <ng-container *ngIf="croissantLastName">
+          <i alt="fleche" class="fa-solid fa-caret-up"></i>
+        </ng-container>
+      </th>
       <th>Firstname</th>
       <th>Birthdate</th>
       <th>Modify</th>

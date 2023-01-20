@@ -36,7 +36,7 @@ export class StagiaireTableComponent implements OnInit {
   public isDetailHidden$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public selectedStagiaire: Stagiaire | null = null;
   public confirmation: string = "false";
-  public croissant: boolean = false;
+  public croissantLastName: boolean = false;
 
   constructor(
     private stagiaireService: StagiaireService,
@@ -130,8 +130,8 @@ export class StagiaireTableComponent implements OnInit {
 
   public sortByLastName() {
     // on change l'état pour tri croissant ou décroissant puis on tri les stagiaires par lastNames
-    if (!this.croissant) {
-      this.croissant = true
+    if (!this.croissantLastName) {
+      this.croissantLastName = true
       this.stagiaires.sort((a, b) => {
         var nameA = a.getLastName();
         var nameB = b.getLastName();
@@ -144,7 +144,7 @@ export class StagiaireTableComponent implements OnInit {
         return 0;
         })
     } else {
-    this.croissant = false;
+    this.croissantLastName = false;
     this.stagiaires.sort((a, b) => {
       var nameA = a.getLastName();
       var nameB = b.getLastName();
