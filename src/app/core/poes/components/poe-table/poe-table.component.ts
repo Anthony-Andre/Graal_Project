@@ -149,6 +149,7 @@ export class PoeTableComponent implements OnInit {
   }
 
   public sortByEndDate() {
+    this.croissantTitle = false;
     if (this.croissantEndDate) {
       this.croissantEndDate = false;
     this.poes.sort((a, b) => {
@@ -166,45 +167,22 @@ export class PoeTableComponent implements OnInit {
   };
 }
 
-public sortByTitle() {
-  if (!this.croissantTitle) {
-    this.croissantTitle = true
-    this.poes.sort((a, b) => {
-      var nameA = a.getTitle();
-      var nameB = b.getTitle();
-      if (nameA < nameB) {
-        return -1;
+  public sortByTitle() {
+    this.croissantEndDate = false;
+    if (this.croissantTitle) {
+      this.croissantTitle = false;
+      function SortArray(x: Poe, y: Poe){
+        return x.getTitle().localeCompare(y.getTitle());
       }
-      if (nameA > nameB) {
-        return 1;
+      return this.poes.sort(SortArray);    
+    } else {
+      this.croissantTitle = true;
+      function SortArray(x: Poe, y: Poe){
+        return y.getTitle().localeCompare(x.getTitle());
       }
-      return 0;
-      })
-  } else {
-  this.croissantTitle = false;
-  this.poes.sort((a, b) => {
-    var nameA = a.getTitle();
-    var nameB = b.getTitle();
-    if (nameA > nameB) {
-      return -1;
+      return this.poes.sort(SortArray);    
     }
-    if (nameA < nameB) {
-      return 1;
-    }
-    return 0;
-    })
   }
-}
-
-  // public sortByTitle() {
-  //   console.log('sort called');
-    
-  //   function SortArray(x: any, y: any){
-  //     return x.getLastName().localeCompare(y.getLastName());
-  //   }
-  //   return this.poes.sort(SortArray);
-  // }
-
 }
 
 
