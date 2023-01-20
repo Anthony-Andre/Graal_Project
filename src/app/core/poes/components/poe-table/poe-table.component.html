@@ -45,8 +45,7 @@
                 <td><button type="button" class="buttonDelete" (click)="onRemovePoeDialog(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
                 <td>La réponse est oui</td>
-                <td><button type="button" (click)="onMail(poe)">Envoyer</button></td>
-
+                <td><button class="mailButton" type="button" (click)="onMail(poe)"><i title="Envoyer" class="fa-solid fa-envelope"></i></button></td>
             </tr>
         </ng-container>
     </tbody>
