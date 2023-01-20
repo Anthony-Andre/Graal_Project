@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AnswerType } from 'src/app/core/enums/AnswerType';
 import { QuestionService } from 'src/app/question/core/services/question.service';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-survey-mat-dialog',
@@ -37,13 +38,19 @@ export class SurveyMatDialogComponent implements OnInit {
   selected: string = 'YES';
   answerRegistered: string[] = []
   inputFreeAnswer: string = '';
+  inputFreeAnswer1: string = '';
+  inputFreeAnswer2: string = '';
   inputArrayFreeAnswer:string[]=['']
+  dataAns!:string
+  inputChooseOne:string=''
+  inputChooseMany:string=''
   //chooseOne!:string;
   //chooseMany!:string;
 
-  surveyMatDialogForm = this.formBuilder.group({text: ['', [Validators.required,Validators.pattern]],
+  surveyMatDialogForm = this.formBuilder.group({text: ['', [Validators.required]],
   answerType: ['',Validators.required],
-  answersProposed:[[]]
+  answersProposed:[[]],
+  
 });
 
   //answerPurposed = this.formBuilder.group({
@@ -98,8 +105,8 @@ export class SurveyMatDialogComponent implements OnInit {
 
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>
-      this._location.back())
+    subscription.subscribe(() =>{})
+      //this._location.back())
       }
 
   if (ansType == 'YES_NO'){
@@ -107,8 +114,8 @@ export class SurveyMatDialogComponent implements OnInit {
     quest.addAnswers(ansProposed)
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>
-      this._location.back())
+    subscription.subscribe((result: any) =>{})
+      //this._location.back())
       }
 
   if(ansType == 'FREE'){
@@ -116,8 +123,8 @@ export class SurveyMatDialogComponent implements OnInit {
     quest.addAnswers(ansProposed)
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>
-      this._location.back())
+    subscription.subscribe((result: any) =>{})
+      //this._location.back())
       }
   
 
@@ -148,13 +155,67 @@ export class SurveyMatDialogComponent implements OnInit {
     //this.printedOption = this.selectedOption;
     //console.log(this.printedOption)
   }
+
+  getValues(event:Event){
+    const Val = (event.target as HTMLTextAreaElement).value
+    console.log('setNewUserName', Val)
+    if (Val == 'YES_NO' || 'FREE'){
+      for(var index=0;index < this.answerRegistered.length;index ++){
+      this.answerRegistered.splice(index)
+      }
+    }
+
+    if (Val == 'CHOOSE_ONE' || 'CHOOSE_ANY'){
+    this.inputFreeAnswer=''
+    console.log('Ans',this.answerRegistered)
+    }
+
+  }
+
+ 
+
+
   clearChooseOne() {
-    this.chooseOne.nativeElement.value = '';
+    //this.inputFreeAnswer1=''
+    //this.inputChooseOne=null
+    //this.chooseOne.nativeElement.value = '';
     //this.chooseOne=''
   }
 
   clearChooseMany() {
-    this.chooseMany.nativeElement.value = '';
+    //this.inputFreeAnswer2=''
+    //this.inputChooseMany=''
+    //this.chooseMany.nativeElement.value = '';
     //this.chooseMany=''
+  }
+
+  public static formQuestionOnly(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+
+        if (!control.value) return null;
+
+        const today: moment.Moment = moment(); // Récupère la date du jour
+        today.subtract(18, 'y');
+
+
+        // Récupérer la valeur saisie
+        const enteredDate: moment.Moment = moment(control.value);
+        if (enteredDate.isAfter(today)) {
+            return {formQuestionOnly: true};
+        }
+        return null;
+    }
+  }
+
+  spliceAnswer(arr:string[],id:number){
+    arr=this.answerRegistered
+    const arr_id = arr[id]
+    const ind = arr.findIndex(x => x === arr_id)
+    console.log(arr_id)
+    console.log(ind)
+    
+    this.answerRegistered.splice(ind,1)
+    //let len = this.answerRegistered.length
+
   }
 }
