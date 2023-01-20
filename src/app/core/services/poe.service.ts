@@ -182,6 +182,10 @@ export class PoeService {
       )
   }
 
+  public mailToTrainees(poe: Poe): void {
+    this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToTrainees`, '');      
+  }
+
 
 
 
