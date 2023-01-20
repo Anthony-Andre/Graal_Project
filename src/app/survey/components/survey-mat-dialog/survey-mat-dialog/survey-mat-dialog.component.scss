@@ -1,3 +1,12 @@
+$head-and-foot-color : rgb(212, 145, 62);
+$head-and-foot-text-color : rgb(0, 0, 0);
+$main-font: 'Acme', sans-serif;
+
+.surveyDialog input,
+.surveyDialog select {
+    font-family: $main-font;
+}
+
 .title {
     text-align: center;
 }
@@ -9,9 +18,32 @@
     justify-content: center;
 }
 
-.getQuestion2{
+.getQuestion2 {
     display: block;
-  margin-right: auto;
-  margin-left: auto;
-  text-align:center;
+    text-align: center;
+    list-style-type: disc;
+}
+
+.question,
+.answers {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.question {
+    height: 2em;
+}
+
+.answerList {
+    list-style-type: disc;
+}
+
+.question label,
+#answerPurposed {
+    margin-right: 1em;
+}
+
+.validate {
+    width: 8em;
 }

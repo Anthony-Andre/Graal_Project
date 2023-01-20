@@ -37,16 +37,14 @@ export class SurveyMatDialogComponent implements OnInit {
   selected: string = 'YES';
   answerRegistered: string[] = []
   inputFreeAnswer: string = '';
+  inputArrayFreeAnswer:string[]=['']
   //chooseOne!:string;
   //chooseMany!:string;
 
-
-  surveyMatDialogForm = this.formBuilder.group({
-    text: ['', Validators.required],
-    answerType: ['', Validators.required],
-    answerProposed: '',
-    answersProposed: [[]]
-  });
+  surveyMatDialogForm = this.formBuilder.group({text: ['', [Validators.required,Validators.pattern]],
+  answerType: ['',Validators.required],
+  answersProposed:[[]]
+});
 
   //answerPurposed = this.formBuilder.group({
   //chooseOne: ['',Validators.required],
@@ -75,6 +73,7 @@ export class SurveyMatDialogComponent implements OnInit {
         return "CHOOSE_MANY";
       case AnswerType.CHOOSE_ONE:
         return "CHOOSE_ONE";
+        
       case AnswerType.FREE:
         return "FREE"
       default:
@@ -86,21 +85,43 @@ export class SurveyMatDialogComponent implements OnInit {
   }
 
 
-  onSubmit() {
-
-    const quest: QuestionDto = new QuestionDto(this.surveyMatDialogForm.value)
+  onSubmit(){
+    
+    const quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+    let ansType = this.surveyMatDialogForm.get('answerType')?.value
+    let ansProposed = this.surveyMatDialogForm.get('answerProposed')?.value
+    if( ansType == 'CHOOSE_ONE' || ansType == 'CHOOSE_MANY'){
+    quest.addAnswers(this.answerRegistered)
     console.log(this.surveyMatDialogForm.value)
+    console.log('Select',this.surveyMatDialogForm.get('answerType')?.value)
+    
 
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
     subscription.subscribe((result: any) =>
       this._location.back())
+      }
 
+  if (ansType == 'YES_NO'){
+    ansProposed = this.optionsYesNoAnswer
+    quest.addAnswers(ansProposed)
+    let subscription: Observable<any>;
+    subscription = this.questionService.addQuestion(quest)
+    subscription.subscribe((result: any) =>
+      this._location.back())
+      }
 
+  if(ansType == 'FREE'){
+    ansProposed = this.inputArrayFreeAnswer
+    quest.addAnswers(ansProposed)
+    let subscription: Observable<any>;
+    subscription = this.questionService.addQuestion(quest)
+    subscription.subscribe((result: any) =>
+      this._location.back())
+      }
+  
 
-
-  }
-
+}
 
   //getAllAnswers(){
 
@@ -108,10 +129,11 @@ export class SurveyMatDialogComponent implements OnInit {
 
   getAllAnswers(dataAns: string) {
 
+
     console.log(dataAns);
     this.answerRegistered.push(dataAns)
     this.answerRegistered = this.answerRegistered.filter((el, i, a) => i === a.indexOf(el))
-    console.log(this.answerRegistered)
+    console.log('Answers', this.answerRegistered)
 
     //this.chooseOne = '';
     //this.chooseMany='';

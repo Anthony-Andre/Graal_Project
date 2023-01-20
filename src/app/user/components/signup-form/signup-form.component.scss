@@ -1,22 +1,169 @@
+.form-check-label {
+    margin: auto;
+}
+
 .roles {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
-.form-check-label {
-    margin: auto  ;
+.role {
+    text-align: center;
 }
 
-.errorsDiv {
-    width: 100%;
-    margin-left: 50%;
-    padding: 15px 0 5px 0;
-}
 
 
 .link-button {
     border: solid rgb(0, 0, 0);
+
     &:hover {
         border: solid rgb(255, 255, 255);
-      }
+    }
+}
+
+$main-color : rgb(212, 145, 62);
+$std-color : rgb(255, 255, 255); // Front color 
+$main-font: 'Acme', sans-serif;
+
+.contour {
+    border: solid rgb(0, 0, 0);
+    margin: 2em auto;
+    padding: 2em;
+    width: 25%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+form {
+    justify-content: center;
+}
+
+.lineForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.lineForm p,
+.lineForm input,
+.lineForm label,
+.lineForm div {
+    height: 2em;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.link-button {
+    margin: auto;
+    width: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+label {
+    font-family: $main-font;
+    font-size: 11pt;
+}
+
+#forgot-pass {
+    color: #2dbd6e;
+    font-family: $main-font;
+    font-size: 10pt;
+    margin-top: 3px;
+    text-align: right;
+}
+
+#card {
+    background: #fbfbfb;
+    border-radius: 8px;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+    height: auto;
+    margin: 2rem auto;
+    width: 329px;
+}
+
+#card-content {
+    padding: 12px 44px;
+}
+
+#card-title {
+    font-family: $main-font;
+    letter-spacing: 4px;
+    padding-bottom: 23px;
+    padding-top: 13px;
+    text-align: center;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+}
+
+#card-title h2 {
+    font-family: $main-font;
+}
+
+#signup {
+    color: $main-color;
+    font-family: $main-font;
+    font-size: 10pt;
+    margin-top: 16px;
+    text-align: center;
+}
+
+#submit-btn {
+    background: $main-color;
+    border: none;
+    border-radius: 21px;
+    box-shadow: 0px 1px 8px $main-color;
+    cursor: pointer;
+    color: white;
+    font-family: $main-font;
+    height: 42.3px;
+    margin: 0 auto;
+    margin-top: 30px;
+    transition: 0.25s;
+    width: 153px;
+}
+
+#submit-btn:hover {
+    box-shadow: 0px 1px 18px$main-color;
+}
+
+.form {
+    align-items: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-border {
+    background: $main-color;
+    height: 1px;
+    width: 100%;
+}
+
+.form-content {
+    background: #fbfbfb;
+    border: none;
+    outline: none;
+    padding-top: 14px;
+}
+
+.underline-title {
+    background: $main-color;
+    height: 2px;
+    margin: -1.1rem auto 0 auto;
+    width: 89px;
+}
+
+.form input {
+    font-family: $main-font;
 }

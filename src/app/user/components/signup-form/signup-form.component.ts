@@ -30,7 +30,7 @@ export class SignupFormComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router
-    ) { }
+  ) { }
 
   username: string = '';
   password: string = '';
@@ -54,7 +54,7 @@ export class SignupFormComponent implements OnInit {
 
   doSignup() {
     if (this.username !== '' && this.username !== null && this.password !== '' && this.password !== null && this.selectedRoles.length > 0) {
-      const request: Request = { userName: this.username, userPwd: this.password, roles: this.selectedRoles };
+      const request: Request = { userName: this.username, userPwd: this.password, roles: this.selectedRoles, stayConnected: false };
 
       this.authService.signup(request).subscribe((result) => {
         //console.log(result);
@@ -63,10 +63,10 @@ export class SignupFormComponent implements OnInit {
         this.router.navigate(['/', 'signin'])
       }, (err) => {
         //console.log(err);
-        this.error = 'Something went wrong during signup';
+        this.error = 'Oups, il y a un problème dans l\'air';
       });
     } else {
-      this.error = 'All fields are mandatory';
+      this.error = 'Tous les champs sont obligatoires';
     }
   }
 

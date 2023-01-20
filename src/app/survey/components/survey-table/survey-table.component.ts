@@ -16,7 +16,8 @@ export class SurveyTableComponent implements OnInit {
   // public surveyService!: SurveyService;
   public surveys: Array<Survey> = [];
   public confirmation: string = "false";
-  public croissant: boolean = false;
+  public croissantTitle: boolean = false;
+  public croissantLevel: boolean = false;
 
 
   constructor(
@@ -63,8 +64,8 @@ export class SurveyTableComponent implements OnInit {
 
   public sortByTitle() {
     // tri par ordre croissant/décroissant par Title
-    if (!this.croissant) {
-      this.croissant = true
+    if (!this.croissantTitle) {
+      this.croissantTitle = true
       this.surveys.sort((a, b) => {
         var nameA = a.getTitle();
         var nameB = b.getTitle();
@@ -77,7 +78,7 @@ export class SurveyTableComponent implements OnInit {
         return 0;
         })
     } else {
-    this.croissant = false;
+    this.croissantTitle = false;
     this.surveys.sort((a, b) => {
       var nameA = a.getTitle();
       var nameB = b.getTitle();
@@ -94,8 +95,8 @@ export class SurveyTableComponent implements OnInit {
 
   public sortByLevel() {
     // tri par ordre croissant/décroissant par Level
-    if (!this.croissant) {
-      this.croissant = true
+    if (!this.croissantLevel) {
+      this.croissantLevel = true
       this.surveys.sort((a, b) => {
         var nameA = a.getTitle();
         var nameB = b.getTitle();
@@ -108,7 +109,7 @@ export class SurveyTableComponent implements OnInit {
         return 0;
         })
     } else {
-    this.croissant = false;
+    this.croissantLevel = false;
     this.surveys.sort((a, b) => {
       var nameA = a.getTitle();
       var nameB = b.getTitle();

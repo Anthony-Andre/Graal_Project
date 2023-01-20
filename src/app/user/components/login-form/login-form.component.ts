@@ -76,6 +76,7 @@ export class LoginFormComponent implements OnInit {
 
   username: string = '';
   password: string = '';
+  stayConnected: boolean = false;
   public hasUser: boolean = false;
 
   isSignedin = false;
@@ -94,16 +95,16 @@ export class LoginFormComponent implements OnInit {
 
   doSignin() {
     if (this.username !== '' && this.username !== null && this.password !== '' && this.password !== null) {
-      const request: Request = { userName: this.username, userPwd: this.password };
+      const request: Request = { userName: this.username, userPwd: this.password, stayConnected: this.stayConnected };
 
       this.authService.signin(request).subscribe((result) => {
         //this.router.navigate(['/home']);
         this.router.navigateByUrl('home');
       }, () => {
-        this.error = 'Either invalid credentials or some went wrong';
+        this.error = 'Oups, il y a une erreur dans l\'air (Mauvaise combinaison Nom d\'utilisateur / Mot de passe)';
       });
     } else {
-      this.error = 'Invalid Credentials';
+      this.error = "Merci de renseigner tous les champs";
     }
   }
 

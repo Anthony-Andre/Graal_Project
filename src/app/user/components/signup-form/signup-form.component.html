@@ -1,3 +1,4 @@
+<!--
 <div id="signup-box">
   <h2>Signup Here</h2>
   <form class="basicForm" name='signupForm' (submit)="doSignup()">
@@ -30,4 +31,45 @@
       </tr>
     </table>
   </form>
+</div>
+-->
+
+<div id="card">
+  <div id="card-content">
+    <div id="logo">
+      <img src="../../../../assets/logo-aelion_1.png" alt="logo Aelion">
+    </div>
+    <div id="card-title">
+      <h2>Création de compte</h2>
+      <div class="underline-title"></div>
+    </div>
+    <form (submit)="doSignup()" class="form">
+      <label for="user-email" style="padding-top:13px">
+        &nbsp;Nom d'utilisateur
+      </label>
+      <input [(ngModel)]="username" id="user-email" class="form-content" type="email" name="email" autocomplete="on"
+        required />
+      <div class="form-border"></div>
+      <label for="user-password" style="padding-top:22px">&nbsp;Mot de passe
+      </label>
+      <input [(ngModel)]="password" id="user-password" class="form-content" type="password" name="password" required />
+      <div class="form-border"></div>
+      <div class="errorsDiv" style="color : red" *ngIf='error'>{{error}}</div>
+      <div class="errorsDiv" style="color : green" *ngIf='success'>{{success}}</div>
+
+      <div class="roles">
+        <label class="role">Rôle:</label>
+        <div class="role" *ngFor="let role of user_roles">
+          <input [(ngModel)]="role.selected" name="{{ role.name }}" type="checkbox" id="{{role.name}}"
+            (change)="onChangeCategory($event, role)">
+          <label class="form-check-label" for="{{role.name}}">
+            {{role.name}}
+          </label>
+        </div>
+      </div>
+
+      <input id="submit-btn" type="submit" name="submit" value="Créer un compte" />
+      <a routerLink="/signin" id="signup">Vous avez déjà un compte ?</a>
+    </form>
+  </div>
 </div>

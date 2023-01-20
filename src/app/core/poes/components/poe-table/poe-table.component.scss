@@ -8,6 +8,7 @@ table {
   border-collapse: collapse;
   text-align: center;
   background-color: #ffffff57;
+  max-width: 80%;
 }
 
 // Mise en grille du tableau : 
@@ -71,4 +72,9 @@ tfoot {
 #welcome {
   text-align: center;
   margin-top: 2em;
+}
+
+.flecheTriEndDate {
+  height: 40%;
+  margin-bottom: -4px;
 }

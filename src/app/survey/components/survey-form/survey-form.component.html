@@ -1,47 +1,3 @@
-<!-- <ng-container *ngIf="surveyForm"> 
-
-    <form class="basicForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()" >
-        
-
-        <h1>Creation d'un questionnaire</h1>
-
-        <label for="title">Veuillez Saisir le titre du Questionnaire</label>
-        <input id="title" type="text" placeholder="title" formControlName="title">
-
-        <button type="button" (click)="InsertQuestion()">Add New Question</button>
-        <input id="addNewQuestion" type="text" placeholder="Add New Question" formControlName="addNewQuestion"
-            *ngIf="showInput">
-        <select name="" id="">
-            <option value="boolean">boolean</option>
-            <option value="boolean">choix multiple</option>
-            <option value="">libre</option>
-        </select>
-        <button type="button" (click)="InsertSelect()">Add Current Question</button>
-        <select id="addCurrentQuestion" placeholder="add Current Question" formControlName="addCurrentQuestion"
-            *ngIf="showSelect">
-            <option *ngFor="let item of itemResearch">{{item}}</option>
-        </select>
-
-
-
-        <select name="levelType" id="level" placeholder="level" formControlName="level">
-            <option *ngFor="let item of options">{{getOptionLabelLevel(item)}}</option>
-        </select>
-
-
-
-        <select name="poeType" id="type" placeholder="type" formControlName="type">
-            <option *ngFor="let item of options2">{{getOptionLabelPoeType(item)}}</option>
-        </select>
-
-
-        <button type="button" [disabled]="!surveyForm.valid" (click)="onSubmit()">Go Questionnaire</button>
-        <button type="button" (click)="goHome()">Retour</button>
-
-    </form>
-
--->
-
 <div [formGroup]="surveyFormGroup" class="questionnaire">
     <h1 class="title">
         Création d'un questionnaire
@@ -96,14 +52,15 @@
                 <!-- Select Question existante : -->
                 <div class="currentQuestion">
                     <label>Ajouter une question existante</label>
-                    <div><select id="addCurrentQuestion" name="currentQuestion" placeholder="add Current Question">
+                    <div class="question">
+                        <select id="addCurrentQuestion" name="currentQuestion" placeholder="add Current Question">
                             <option value="">Sélectionner une question</option>
                             <option *ngFor="let question of allQuestions" value="{{question.getId()}}">
                                 {{question.getText()}}
                             </option>
                         </select>
-                        <button type="button" (click)="addCurrentQuestion()">Add Question
-                            Selected</button>
+                        <button type="button" (click)="addCurrentQuestion()">Ajouter cette question</button>
+                        <input type="hidden" id="questions" value="{{questions}}" formControlName="questions">
                     </div>
 
                 </div>
@@ -112,8 +69,9 @@
 
                 <div class="newQuestion">
                     <label>Nouvelle question ?</label>
-                    <button type="button" (click)="InsertQuestion()">Add new Question</button>
-                    <input type="hidden" formControlName="questions">
+                    <div class="question"><button type="button" (click)="InsertQuestion()">Add new Question</button>
+                    </div>
+
                 </div>
 
                 <div>
@@ -124,18 +82,21 @@
         </mat-step>
 
         <mat-step>
-            <ng-template matStepLabel>Terminé</ng-template>
-            <p>Vous avez terminé de remplir ce questionnaire</p>
-            <div>
-                <button mat-button matStepperPrevious>Precedent</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-                <button mat-button (click)="onSubmit()">OK</button>
+            <div class="surveyForm">
+                <ng-template matStepLabel>Terminé</ng-template>
+                <p>Vous avez terminé de remplir ce questionnaire</p>
+                <div>
+                    <button mat-button matStepperPrevious>Étape précédente</button>
+                    <button mat-button (click)="stepper.reset()">Recommencer</button>
+                    <button mat-button (click)="onSubmit()">Enregistrer</button>
+                </div>
             </div>
         </mat-step>
     </mat-stepper>
 
 
     <!-- Liste des questions du formulaire : -->
+
     <div *ngIf="questions.length">
         <h2 class="title">
             Liste des questions
