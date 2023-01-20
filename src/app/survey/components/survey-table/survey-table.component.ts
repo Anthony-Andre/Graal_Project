@@ -63,6 +63,25 @@ export class SurveyTableComponent implements OnInit {
     this.router.navigate(['/', 'survey', 'update', survey.getId()]);
   }
 
+  public filterChanged(event: String | null): void {
+    console.log(`Filter has changed to : ${event}`);
+    this.stopDate = event;
+  }
+
+  public changeView(survey: Survey): boolean {
+    if (this.stopDate === null) {
+      return true;
+    }
+    if (this.stopDate === "oneMonth") { // dateOfTheDay pas ok ici
+      return (survey.getLevel().toString() === 'ONE_MONTH');
+    }
+    if (this.stopDate === "sixMonths") {
+      return (survey.getLevel().toString() === 'SIX_MONTHS');
+    }
+    return (survey.getLevel().toString() === 'ONE_YEAR');
+  }
+
+
   public sortByTitle() {
     // tri par ordre croissant/décroissant par Title
     this.croissantLevel = false;
@@ -111,11 +130,6 @@ export class SurveyTableComponent implements OnInit {
       return 0;
       })
     }
-  }
-
-  public filterChanged(event: String | null): void {
-    console.log(`Filter has changed to : ${event}`);
-    this.stopDate = event;
   }
 
 }

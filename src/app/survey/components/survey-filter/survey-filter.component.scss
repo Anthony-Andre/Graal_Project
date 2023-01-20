@@ -1,0 +1,28 @@
+.filtreDate {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    margin-top: 2em;
+    border-radius: 50px;
+    border: solid;
+    width: 24em;
+  }
+  
+  button {
+    border: none;
+    width: 10em;
+    height: 2.5em;
+    background-color: transparent;
+    border-radius: 1.5em;
+    cursor: pointer;
+  
+    &.active {
+      font-weight: bold;
+      background-color: rgb(221, 169, 117);
+      transition: background-color .5s ease-in .3s;
+      color: rgb(255, 255, 255);
+    //   box-shadow: 10px 5px 5px rgb(255, 255, 255);
+    //   transition: box-shadow .5s ease-in .3s;
+    }
+  }
