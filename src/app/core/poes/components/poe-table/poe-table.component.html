@@ -29,6 +29,7 @@
             <th>Delete</th>
             <th>Nombre de stagiaires</th>
             <th>Mail envoyé</th>
+            <th>Envoyer mail d'enquête</th>
         </tr>
     </thead>
 
@@ -44,6 +45,7 @@
                 <td><button type="button" class="buttonDelete" (click)="onRemovePoeDialog(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
                 <td>La réponse est oui</td>
+                <td><button>Envoyer</button></td>
 
             </tr>
         </ng-container>

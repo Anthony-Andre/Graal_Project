@@ -18,8 +18,14 @@ export class AuthService {
 
   signin(request: Request): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'signin', request, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(map((resp) => {
-      sessionStorage.setItem('user', request.userName);
-      sessionStorage.setItem('token', 'HTTP_TOKEN ' + resp.token);
+      if (request.stayConnected == false) {
+        sessionStorage.setItem('user', request.userName);
+        sessionStorage.setItem('token', 'HTTP_TOKEN ' + resp.token);
+      } else {
+        localStorage.setItem('user', request.userName);
+        localStorage.setItem('token', 'HTTP_TOKEN ' + resp.token);
+      }
+
       this.hasUser$.next(true);
       console.log("login:", this.isUserSignedin());
       console.log("hasUser$", this.hasUser$.getValue())
@@ -34,6 +40,8 @@ export class AuthService {
   }
 
   signout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
     this.hasUser$.next(false);
@@ -46,16 +54,31 @@ export class AuthService {
   }
 
   isUserSignedin() {
-    return sessionStorage.getItem('token') !== null;
+    if (localStorage.getItem('token') !== null) {
+      return localStorage.getItem('token') !== null;
+    } else {
+      return sessionStorage.getItem('token') !== null;
+    }
   }
 
   getSignedinUser() {
-    return sessionStorage.getItem('user') as string;
+    if (localStorage.getItem('token') !== null) {
+      return localStorage.getItem('user') as string;
+    } else {
+      return sessionStorage.getItem('user') as string;
+    }
+
   }
 
   getToken() {
-    let token = sessionStorage.getItem('token') as string;
-    return token;
+    if (localStorage.getItem('token') !== null) {
+      let token = localStorage.getItem('token') as string;
+      return token;
+    } else {
+      let token = sessionStorage.getItem('token') as string;
+      return token;
+    }
+
   }
 
 }
