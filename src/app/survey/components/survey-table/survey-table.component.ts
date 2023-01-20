@@ -18,6 +18,7 @@ export class SurveyTableComponent implements OnInit {
   public confirmation: string = "false";
   public croissantTitle: boolean = false;
   public croissantLevel: boolean = false;
+  public stopDate: String | null = null;
 
 
   constructor(
@@ -61,6 +62,25 @@ export class SurveyTableComponent implements OnInit {
     console.log(`Id du survey : `, survey.getId());
     this.router.navigate(['/', 'survey', 'update', survey.getId()]);
   }
+
+  public filterChanged(event: String | null): void {
+    console.log(`Filter has changed to : ${event}`);
+    this.stopDate = event;
+  }
+
+  public changeView(survey: Survey): boolean {
+    if (this.stopDate === null) {
+      return true;
+    }
+    if (this.stopDate === "oneMonth") { // dateOfTheDay pas ok ici
+      return (survey.getLevel().toString() === 'ONE_MONTH');
+    }
+    if (this.stopDate === "sixMonths") {
+      return (survey.getLevel().toString() === 'SIX_MONTHS');
+    }
+    return (survey.getLevel().toString() === 'ONE_YEAR');
+  }
+
 
   public sortByTitle() {
     // tri par ordre croissant/décroissant par Title

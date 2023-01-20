@@ -1,13 +1,11 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { time } from 'console';
+import { Router } from '@angular/router';
 import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
-import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { AuthService } from 'src/app/user/services/auth-service.service';
 import { GreetingService } from 'src/app/user/services/greeting.service';
 
@@ -38,10 +36,7 @@ export class PoeTableComponent implements OnInit {
 
   constructor(
     private poeService: PoeService,
-    private stagiaireService: StagiaireService,
     private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
     private authService: AuthService,
     private greetingService: GreetingService,
     private dialog : MatDialog) { }

@@ -1,6 +1,5 @@
 
-<!-- <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter> -->
-<!-- filtrer par type poe ? -->
+<app-survey-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-survey-filter>
 
 
 <table class="table">
@@ -33,7 +32,7 @@
     <tbody>
         <ng-container *ngFor="let survey of surveys">
             <!-- <tr class="stagiaireLine" *ngIf="changeView(poe)"> remettre un changeView lié au filter (par type poe/titre) ? -->
-            <tr class="surveyLine">
+            <tr class="surveyLine" *ngIf="changeView(survey)">
                 <!-- <td (click)="onClick(survey)"><button type="button" class="buttonDelete">{{ survey.getId() }} </button></td> -->
                 <td> {{ survey.getId() }} </td>
                 <td> {{ survey.getTitle() }} </td>
