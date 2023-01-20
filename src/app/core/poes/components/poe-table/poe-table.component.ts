@@ -1,13 +1,11 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { time } from 'console';
+import { Router } from '@angular/router';
 import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
-import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { AuthService } from 'src/app/user/services/auth-service.service';
 import { GreetingService } from 'src/app/user/services/greeting.service';
 
@@ -38,10 +36,7 @@ export class PoeTableComponent implements OnInit {
 
   constructor(
     private poeService: PoeService,
-    private stagiaireService: StagiaireService,
     private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
     private authService: AuthService,
     private greetingService: GreetingService,
     private dialog : MatDialog) { }
@@ -154,6 +149,7 @@ export class PoeTableComponent implements OnInit {
   }
 
   public sortByEndDate() {
+    this.croissantTitle = false;
     if (this.croissantEndDate) {
       this.croissantEndDate = false;
     this.poes.sort((a, b) => {
@@ -171,45 +167,22 @@ export class PoeTableComponent implements OnInit {
   };
 }
 
-public sortByTitle() {
-  if (!this.croissantTitle) {
-    this.croissantTitle = true
-    this.poes.sort((a, b) => {
-      var nameA = a.getTitle();
-      var nameB = b.getTitle();
-      if (nameA < nameB) {
-        return -1;
+  public sortByTitle() {
+    this.croissantEndDate = false;
+    if (this.croissantTitle) {
+      this.croissantTitle = false;
+      function SortArray(x: Poe, y: Poe){
+        return x.getTitle().localeCompare(y.getTitle());
       }
-      if (nameA > nameB) {
-        return 1;
+      return this.poes.sort(SortArray);    
+    } else {
+      this.croissantTitle = true;
+      function SortArray(x: Poe, y: Poe){
+        return y.getTitle().localeCompare(x.getTitle());
       }
-      return 0;
-      })
-  } else {
-  this.croissantTitle = false;
-  this.poes.sort((a, b) => {
-    var nameA = a.getTitle();
-    var nameB = b.getTitle();
-    if (nameA > nameB) {
-      return -1;
+      return this.poes.sort(SortArray);    
     }
-    if (nameA < nameB) {
-      return 1;
-    }
-    return 0;
-    })
   }
-}
-
-  // public sortByTitle() {
-  //   console.log('sort called');
-    
-  //   function SortArray(x: any, y: any){
-  //     return x.getLastName().localeCompare(y.getLastName());
-  //   }
-  //   return this.poes.sort(SortArray);
-  // }
-
 }
 
 

@@ -18,6 +18,7 @@ export class SurveyTableComponent implements OnInit {
   public confirmation: string = "false";
   public croissantTitle: boolean = false;
   public croissantLevel: boolean = false;
+  public stopDate: String | null = null;
 
 
   constructor(
@@ -62,44 +63,51 @@ export class SurveyTableComponent implements OnInit {
     this.router.navigate(['/', 'survey', 'update', survey.getId()]);
   }
 
+  public filterChanged(event: String | null): void {
+    console.log(`Filter has changed to : ${event}`);
+    this.stopDate = event;
+  }
+
+  public changeView(survey: Survey): boolean {
+    if (this.stopDate === null) {
+      return true;
+    }
+    if (this.stopDate === "oneMonth") { // dateOfTheDay pas ok ici
+      return (survey.getLevel().toString() === 'ONE_MONTH');
+    }
+    if (this.stopDate === "sixMonths") {
+      return (survey.getLevel().toString() === 'SIX_MONTHS');
+    }
+    return (survey.getLevel().toString() === 'ONE_YEAR');
+  }
+
+
   public sortByTitle() {
     // tri par ordre croissant/décroissant par Title
-    if (!this.croissantTitle) {
-      this.croissantTitle = true
-      this.surveys.sort((a, b) => {
-        var nameA = a.getTitle();
-        var nameB = b.getTitle();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-        })
+    this.croissantLevel = false;
+    if (this.croissantTitle) {
+      this.croissantTitle = false;
+      function SortArray(x: any, y: any){
+        return x.getTitle().localeCompare(y.getTitle());
+      }
+      return this.surveys.sort(SortArray);    
     } else {
-    this.croissantTitle = false;
-    this.surveys.sort((a, b) => {
-      var nameA = a.getTitle();
-      var nameB = b.getTitle();
-      if (nameA > nameB) {
-        return -1;
+      this.croissantTitle = true;
+      function SortArray(x: any, y: any){
+        return y.getTitle().localeCompare(x.getTitle());
       }
-      if (nameA < nameB) {
-        return 1;
-      }
-      return 0;
-      })
+      return this.surveys.sort(SortArray);    
     }
   }
 
   public sortByLevel() {
     // tri par ordre croissant/décroissant par Level
+    this.croissantTitle = false;
     if (!this.croissantLevel) {
       this.croissantLevel = true
       this.surveys.sort((a, b) => {
-        var nameA = a.getTitle();
-        var nameB = b.getTitle();
+        var nameA = a.getLevel();
+        var nameB = b.getLevel();
         if (nameA < nameB) {
           return -1;
         }
@@ -111,8 +119,8 @@ export class SurveyTableComponent implements OnInit {
     } else {
     this.croissantLevel = false;
     this.surveys.sort((a, b) => {
-      var nameA = a.getTitle();
-      var nameB = b.getTitle();
+      var nameA = a.getLevel();
+      var nameB = b.getLevel();
       if (nameA > nameB) {
         return -1;
       }

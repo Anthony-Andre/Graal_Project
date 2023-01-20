@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+<p>survey-filter works!</p>
+=======
+<div class="filtreDate">
+
+    <button type="button" [ngClass]="{'active': getButtonState('btnOneMonth')}"
+      (click)="changeButtonState('btnOneMonth')">
+      1 mois
+    </button>
+  
+    <button type="button" [ngClass]="{'active': getButtonState('btnSixMonths')}"
+      (click)="changeButtonState('btnSixMonths')">
+      6 mois
+    </button>
+  
+    <button type="button" [ngClass]="{'active': getButtonState('btnOneYear')}" (click)="changeButtonState('btnOneYear')">
+      1 an
+    </button>
+  
+    <button type="button" [ngClass]="{'active': getButtonState('btnAll')}" (click)="changeButtonState('btnAll')">
+      Le boutton qui fait clique
+    </button>
+  
+  </div>
+>>>>>>> filter
