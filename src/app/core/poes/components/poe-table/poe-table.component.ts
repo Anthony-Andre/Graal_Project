@@ -32,7 +32,9 @@ export class PoeTableComponent implements OnInit {
   public hasUser: boolean = this.authService.isUserSignedin();
   public nbStagiaires!: number;
   public confirmation: string = "false";
-  public croissant: boolean = false;
+  public croissantEndDate: boolean = false;
+  public croissantTitle: boolean = false;
+
 
   constructor(
     private poeService: PoeService,
@@ -147,15 +149,15 @@ export class PoeTableComponent implements OnInit {
   }
 
   public sortByEndDate() {
-    if (this.croissant) {
-      this.croissant = false;
+    if (this.croissantEndDate) {
+      this.croissantEndDate = false;
     this.poes.sort((a, b) => {
       var endDateTimeA =  Number(new Date(a.getEndDate()));
       var endDateTimeB =  Number(new Date(b.getEndDate()));
         return endDateTimeB - endDateTimeA;
     })
    } else {
-    this.croissant = true;
+    this.croissantEndDate = true;
       this.poes.sort((a, b) => {
         var endDateTimeA =  Number(new Date(a.getEndDate()));
         var endDateTimeB =  Number(new Date(b.getEndDate()));
@@ -165,8 +167,8 @@ export class PoeTableComponent implements OnInit {
 }
 
 public sortByTitle() {
-  if (!this.croissant) {
-    this.croissant = true
+  if (!this.croissantTitle) {
+    this.croissantTitle = true
     this.poes.sort((a, b) => {
       var nameA = a.getTitle();
       var nameB = b.getTitle();
@@ -179,7 +181,7 @@ public sortByTitle() {
       return 0;
       })
   } else {
-  this.croissant = false;
+  this.croissantTitle = false;
   this.poes.sort((a, b) => {
     var nameA = a.getTitle();
     var nameB = b.getTitle();
