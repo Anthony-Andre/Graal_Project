@@ -55,7 +55,6 @@ export class SurveyFormComponent implements OnInit {
 
 
     const data: any = this.route.snapshot.data;
-    console.log(data);
     this.surveyFormGroup = data.form;
 
     if (this.surveyFormGroup.value.id !== 0 && this.surveyFormGroup.value.id !== undefined) {
@@ -82,7 +81,6 @@ export class SurveyFormComponent implements OnInit {
                 question.setAnswerType(anyQuestion.answerType);
                 question.setAnswersProposed(anyQuestion.answersProposed);
                 this.questions.push(question);
-                console.log(this.questions)
                 return question;
               }
               )
@@ -98,9 +96,8 @@ export class SurveyFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Delegate add survey: ', this.surveyFormGroup.value);
     const dto: SurveyDto = new SurveyDto(this.surveyFormGroup.value);
-    console.log(this.surveyFormGroup.value)
+    dto.setQuestions(this.questions);
     let subscription: Observable<any>;
 
     if (this.addMode) {
@@ -112,14 +109,7 @@ export class SurveyFormComponent implements OnInit {
   }
 
   InsertQuestion() {
-    //console.log('Insert')
     this.showInput = !this.showInput
-    //this.passenger.push(
-    //new FormGroup({
-    //   addNewQuestion: new FormControl(''),
-    // })
-    //);
-
 
     this.dialog.open(SurveyMatDialogComponent, {
       ///data:s,
@@ -146,7 +136,6 @@ export class SurveyFormComponent implements OnInit {
 
   public addCurrentQuestion(): void {
     var questionId = ((<HTMLInputElement>document.getElementById("addCurrentQuestion")).value);
-    console.log("idQuestion :", questionId);
 
     this.questionService.findOne(parseInt(questionId))
       .subscribe((question: Question) => {
@@ -154,8 +143,7 @@ export class SurveyFormComponent implements OnInit {
         this.questions.push(question);
         this.allQuestions.splice(
           this.allQuestions.findIndex((q: Question) => q.getId() === question.getId()),
-          1)
-
+          1);
       });
 
   }

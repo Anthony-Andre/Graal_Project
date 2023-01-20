@@ -18,7 +18,6 @@
     <li>
       <a *ngIf="!hasUser" [routerLink]="['/', 'login']">Login</a>
       <a *ngIf="hasUser" href="" (click)="onLogout()"><i class="fa-solid fa-person-through-window"></i></a>
-
     </li>
   </ul>
 </header>

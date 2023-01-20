@@ -129,11 +129,12 @@ export class SurveyMatDialogComponent implements OnInit {
 
   getAllAnswers(dataAns: string) {
 
+
     console.log(dataAns);
     this.answerRegistered.push(dataAns)
     this.answerRegistered = this.answerRegistered.filter((el, i, a) => i === a.indexOf(el))
-    console.log('Answers',this.answerRegistered)
-    
+    console.log('Answers', this.answerRegistered)
+
     //this.chooseOne = '';
     //this.chooseMany='';
 

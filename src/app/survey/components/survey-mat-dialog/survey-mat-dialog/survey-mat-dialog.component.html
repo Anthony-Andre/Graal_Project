@@ -1,18 +1,23 @@
 <ng-container *ngIf="surveyMatDialogForm">
 
-     <form [formGroup]="surveyMatDialogForm">
+     <form class="surveyDialog" [formGroup]="surveyMatDialogForm">
 
           <h1 class="title">Creer Question</h1>
 
-          <label for="title" class="getQuestion">Veuillez Saisir la question</label>
-          <input id="title" type="text" placeholder="title" class="getQuestion2" formControlName="text">
+          <div class="question">
+               <label for="title" class="getQuestion">Question :</label>
+               <input id="title" type="text" placeholder="title" class="getQuestion2" formControlName="text">
+          </div>
 
-          <label class="getQuestion">Veuillez choisir un type de réponse</label>
-          <select name="answerType" id="answerType" placeholder="choisir type de réponse" [(ngModel)]="answerType"
-               class="getQuestion2" formControlName="answerType">
-               <option *ngFor="let item of optionsAnswer" [value]="getOptionLabelAnswerType(item)">
-                    {{getOptionLabelAnswerType(item)}}</option>
-          </select>
+          <div class="question">
+               <label class="getQuestion">Type de réponse attendu :</label>
+               <select name="answerType" id="answerType" placeholder="choisir type de réponse" [(ngModel)]="answerType"
+                    class="getQuestion2" formControlName="answerType">
+                    <option *ngFor="let item of optionsAnswer" [value]="getOptionLabelAnswerType(item)">
+                         {{getOptionLabelAnswerType(item)}}</option>
+               </select>
+          </div>
+
 
           <!--<label class="getQuestion">Veuillez inscrire la réponse</label>-->
           <!--<select #dataAns name="answerPurposed" id="answerPurposed" placeholder="Veuillez inscrire réponse" (change)="getAllAnswers(dataAns.value)" *ngIf="answerType == 'YES_NO'"class="getQuestion2" >
@@ -40,8 +45,19 @@
           <!--<input type="text" value="[{{answerRegistered}}]" formControlName="answersProposed"> -->
 
 
-          <button type="button" class="getQuestion2" (click)="onSubmit()">Valider</button>
+          <label *ngIf="answerRegistered.length" class="getQuestion">Réponses proposées</label>
 
+          <div class="answers">
+               <ul class="answerList">
+                    <li *ngFor="let item of answerRegistered">
+                         {{item}}
+                    </li>
+               </ul>
+          </div>
+
+          <div class="question">
+               <button type="button" class="validate" (click)="onSubmit()">Valider</button>
+          </div>
 
      </form>
 
