@@ -19,9 +19,24 @@ $main-font: 'Acme', sans-serif;
 }
 
 .getQuestion2 {
-    display: block;
-    text-align: center;
-    list-style-type: disc;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+    //display: block;
+    //align-items: center;
+    //justify-content: center;
+    //display: block;
+    //text-align: center;
+    //list-style-type: disc;
+}
+
+.GetQuest{
+    display:flex;
+    position:relative;
+    left:200px;
+    text-align:center;
+
 }
 
 .question,
@@ -46,4 +61,9 @@ $main-font: 'Acme', sans-serif;
 
 .validate {
     width: 8em;
+}
+.Answer1{
+    text-align: center;
+    display: absolute;
+    margin: auto;
 }

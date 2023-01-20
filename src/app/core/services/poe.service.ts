@@ -15,6 +15,7 @@ export class PoeService {
 
   private poes: Array<Poe> = [];
   private controllerBaseUrl: string = `${environment.apiBaseUrl}/poe`;
+  private mailStatus: number = 0;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -126,7 +127,7 @@ export class PoeService {
 
   public addTrainees(poe: Poe, stagiaires: Array<Stagiaire>): Observable<Poe> {
     const stagiaireIds: any[] = [];
-    for (let stagiaire of stagiaires) {stagiaireIds.push(stagiaire.getId);}
+    for (let stagiaire of stagiaires) { stagiaireIds.push(stagiaire.getId); }
     return this.httpClient.patch<Poe>(
       `${this.controllerBaseUrl}/${poe.getId()}/addTrainees`,
       stagiaireIds
@@ -183,7 +184,17 @@ export class PoeService {
   }
 
   public mailToTrainees(poe: Poe): void {
-    this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToTrainees`, '').subscribe();
     console.log(`Appel au service pour envoi de mail OK`);
+    this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToTrainees`, '')
+      .subscribe((inputStatus: any) => {
+        console.log(inputStatus);
+        this.mailStatus = inputStatus;
+        console.log("mailstatus : ", this.mailStatus);
+      }
+      );
+  }
+
+  public getMailStatus(): number {
+    return this.mailStatus;
   }
 }
