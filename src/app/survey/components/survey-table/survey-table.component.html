@@ -7,9 +7,23 @@
     <thead>
         <tr>
             <th>#</th>
-            <th (click)="sortByTitle()">Title</th>
+            <th (click)="sortByTitle()">Title
+                <ng-container *ngIf="!croissantTitle">
+                    <i alt="fleche" class="fa-solid fa-caret-down"></i>
+                </ng-container>
+                <ng-container *ngIf="croissantTitle">
+                    <i alt="fleche" class="fa-solid fa-caret-up"></i>
+                </ng-container>
+            </th>
             <th>Type de POE</th>
-            <th (click)="sortByLevel()">Level</th>
+            <th (click)="sortByLevel()">Level
+                <ng-container *ngIf="!croissantLevel">
+                    <i alt="fleche" class="fa-solid fa-caret-down"></i>
+                </ng-container>
+                <ng-container *ngIf="croissantLevel">
+                    <i alt="fleche" class="fa-solid fa-caret-up"></i>
+                </ng-container>
+            </th>
             <th>Nombre de questions</th>
             <th>Modify</th>
             <th>Delete</th>

@@ -8,9 +8,22 @@
         <tr>
             <th>#</th>
             <!-- <th (click)="sortByTitle()">Title</th> -->
-            <th (click)="sortByTitle()">Title</th>
+            <th (click)="sortByTitle()">Title
+                <ng-container *ngIf="!croissantTitle">
+                    <i alt="fleche" class="fa-solid fa-caret-down"></i>
+                </ng-container>
+                <ng-container *ngIf="croissantTitle">
+                    <i alt="fleche" class="fa-solid fa-caret-up"></i>
+                </ng-container>
+            </th>
             <th>BeginDate</th>
-            <th (click)="sortByEndDate()">EndDate</th>
+            <th (click)="sortByEndDate()">EndDate
+                <ng-container *ngIf="!croissantEndDate">
+                    <i alt="fleche" class="fa-solid fa-caret-down"></i>
+                </ng-container>
+                <ng-container *ngIf="croissantEndDate">
+                    <i alt="fleche" class="fa-solid fa-caret-up"></i>
+                </ng-container>            
             <th>Type</th>
             <th>Modify</th>
             <th>Delete</th>
