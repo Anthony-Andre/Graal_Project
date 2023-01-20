@@ -22,7 +22,7 @@ export class SurveyTableComponent implements OnInit {
   constructor(
     private surveyService: SurveyService,
     private router: Router,
-    private dialog : MatDialog
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -52,12 +52,12 @@ export class SurveyTableComponent implements OnInit {
           )
         }
       });
-    }    
+    }
   }
 
   public onUpDate(survey: Survey): void {
     console.log(`L'utilisateur souhaite modifier '${survey.getTitle()}'`);
-    console.log(`Id du survey : `, survey.getId());    
+    console.log(`Id du survey : `, survey.getId());
     this.router.navigate(['/', 'survey', 'update', survey.getId()]);
   }
 

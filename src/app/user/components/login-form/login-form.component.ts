@@ -100,10 +100,10 @@ export class LoginFormComponent implements OnInit {
         //this.router.navigate(['/home']);
         this.router.navigateByUrl('home');
       }, () => {
-        this.error = 'Either invalid credentials or some went wrong';
+        this.error = 'Oups, il y a une erreur dans l\'air (Mauvaise combinaison Nom d\'utilisateur / Mot de passe)';
       });
     } else {
-      this.error = 'Invalid Credentials';
+      this.error = "Merci de renseigner tous les champs";
     }
   }
 

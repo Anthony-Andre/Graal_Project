@@ -125,6 +125,7 @@ export class AppRoutingModule {
     {
       path: 'survey/add',
       component: SurveyFormComponent,
+      resolve: { form: SurveyResolver },
       canActivate: [
         HasUserGuard
       ]

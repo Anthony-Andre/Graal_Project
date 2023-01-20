@@ -17,10 +17,13 @@ export class SurveyResolver implements Resolve<FormGroup> {
   public constructor(
     private surveyService: SurveyService,
     private formBuilderService: FormBuilderService
-  ){}
+  ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {
+
+
     const id: number = +route.paramMap.get('id')!;
+    console.log("id:", id);
     let survey: Survey;
     let form: FormGroup;
 
@@ -30,12 +33,12 @@ export class SurveyResolver implements Resolve<FormGroup> {
       return of(form);
     } else {
       return this.surveyService.findOne(id)
-      .pipe(
-        take(1),
-        map((oSurvey: Survey) => {
-          return this.formBuilderService.build(oSurvey).getForm();
-        })
-      )
+        .pipe(
+          take(1),
+          map((oSurvey: Survey) => {
+            return this.formBuilderService.build(oSurvey).getForm();
+          })
+        )
     }
-}
+  }
 }

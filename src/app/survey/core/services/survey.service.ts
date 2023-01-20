@@ -29,7 +29,8 @@ export class SurveyService {
             survey.setTitle(inputSurvey.title)
             survey.setLevel(inputSurvey.level)
             survey.setPoeType(inputSurvey.poeType)
-            
+            survey.setQuestions(inputSurvey.questions)
+
             console.log(survey);
             return survey;
           })
@@ -48,6 +49,7 @@ export class SurveyService {
         survey.setTitle(inputSurvey.title);
         survey.setLevel(inputSurvey.level)
         survey.setPoeType(inputSurvey.poeType)
+        survey.setQuestions(inputSurvey.questions);
         return survey;
       })
     )
@@ -67,7 +69,7 @@ export class SurveyService {
           survey.setTitle(surveyDto.title)
           survey.setLevel(surveyDto.level)
           survey.setPoeType(surveyDto.poeType)
-          
+          survey.setQuestions(surveyDto.questions)
           return survey;
         })
       );
@@ -93,7 +95,7 @@ export class SurveyService {
           survey.setTitle(inputSurvey.title);
           survey.setLevel(inputSurvey.level);
           survey.setPoeType(inputSurvey.poeType);
-          
+
           const questions: Array<Question> = [];
           //survey.setQuestions(inputSurvey.questions);
           return survey;
@@ -103,7 +105,7 @@ export class SurveyService {
 
   public addQuestions(survey: Survey, questions: Array<Question>): Observable<Survey> {
     const questionIds: any[] = [];
-    for (let question of questions) {questionIds.push(question.getId);}
+    for (let question of questions) { questionIds.push(question.getId); }
     return this.httpClient.patch<Survey>(
       `${this.controllerBaseUrl}/${survey.getId()}/addQuestions`,
       questionIds
@@ -115,7 +117,7 @@ export class SurveyService {
         survey.setTitle(inputSurvey.title);
         survey.setLevel(inputSurvey.level);
         survey.setPoeType(inputSurvey.poeType)
-        
+
         //survey.setQuestions(inputSurvey.questions);
         return survey;
       })
