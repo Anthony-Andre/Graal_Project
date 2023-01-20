@@ -17,6 +17,8 @@ import { SurveyFormComponent } from './survey/components/survey-form/survey-form
 import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolver/survey.resolver';
+import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
+import { TraineeSurveyResolver } from './survey/resolver/trainee-survey.resolver';
 
 const routes: Routes = [];
 
@@ -144,6 +146,11 @@ export class AppRoutingModule {
       canActivate: [
         HasUserGuard
       ]
+    },
+    {
+      path: 'survey/:idSurvey/trainee/:id',
+      component: TraineeSurveyComponent,
+      resolve: { form: TraineeSurveyResolver }
     },
     {
       path: '**', // Wild card (Redirige vers le home si l'url n'existe pas) - Toujours mettre en dernier

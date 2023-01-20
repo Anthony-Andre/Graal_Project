@@ -74,6 +74,49 @@
 
                 </div>
 
+                <h1 class="title">Liste des questions présentes dans le formulaire :</h1>
+
+                <div class="container" *ngIf="questions.length">
+
+                    <div class="table">
+                        <div class="table-header">
+                            <div class="header__item"><a id="name" class="filter__link" href="#">ID de la question</a>
+                            </div>
+                            <div class="header__item"><a id="wins" class="filter__link filter__link--number"
+                                    href="#">Question</a>
+                            </div>
+                            <div class="header__item"><a id="draws" class="filter__link filter__link--number"
+                                    href="#">Type de la
+                                    question</a>
+                            </div>
+                            <div class="header__item"><a id="losses" class="filter__link filter__link--number"
+                                    href="#">Réponses
+                                    proposées</a>
+                            </div>
+                            <div class="header__item"><a id="total" class="filter__link filter__link--number"
+                                    href="#">Supprimer la
+                                    question</a>
+                            </div>
+                        </div>
+                        <div *ngFor="let question of questions" class="table-content">
+                            <div class="table-row">
+                                <div class="table-data">{{question.getId()}}</div>
+                                <div class="table-data">{{question.getText()}}</div>
+                                <div class="table-data">{{question.getAnswerType()}}</div>
+                                <div class="table-data">
+                                    <ul class="answers">
+                                        <li *ngFor="let answer of question.getAnswersProposed()">
+                                            {{answer}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="table-data"><button (click)="deleteQuestion(question.getId())">X</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     <button mat-button matStepperPrevious>Precedent</button>
                     <button mat-button matStepperNext>Suivant</button>
@@ -94,34 +137,10 @@
         </mat-step>
     </mat-stepper>
 
+    <!-- Liste 2.0 des questions -->
 
-    <!-- Liste des questions du formulaire : -->
 
-    <div *ngIf="questions.length">
-        <h2 class="title">
-            Liste des questions
-        </h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Text</th>
-                    <th>Type</th>
-                    <th>Proposed responses</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let question of questions">
-                    <td>{{question.getId()}}</td>
-                    <td>{{question.getText()}}</td>
-                    <td>{{question.getAnswerType()}}</td>
-                    <td>
-                        <ul>
-                            <li *ngFor="let answer of question.getAnswersProposed()">{{answer}}</li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+
+
 </div>
