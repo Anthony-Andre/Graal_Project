@@ -1,0 +1,96 @@
+<!-- 
+<div [formGroup]="surveyFormGroup" class="questionnaire">
+
+  <div class="questions" *ngFor="let question of questions">
+    <h1>{{question.getText()}}</h1>
+    <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
+      <input type="radio" name="{{answer}}" value="{{answer}}">
+      <label for="{{answer}}">{{answer}}</label>
+    </div>
+  </div>
+
+</div>
+
+-->
+
+<div class="testbox">
+  <form>
+
+    <h1>Bonjour {{stagiaire.getFirstName()}}</h1>
+
+    <div class="presentation">
+      <p>Nous te remercions d'avoir pris le temps de suivre notre lien. Nous ne te demandons que quelques minutes
+        supplémentaires de ton temps afin de répondre à ce questionnaire</p>
+    </div>
+
+
+    <div class="questions" *ngFor="let question of questions">
+
+      <div *ngIf="question.getAnswerType().toLocaleString() === 'YES_NO'">
+        <h1>C'est une question Yes No</h1>
+        <h2>{{question.getText()}}</h2>
+      </div>
+
+      <div *ngIf="question.getAnswerType().toLocaleString() === 'FREE'">
+        <h1>C'est une question Free</h1>
+        <h2>{{question.getText()}}</h2>
+      </div>
+
+      <div *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_ONE'">
+        <h1>C'est une question Choose_One</h1>
+        <h2>{{question.getText()}}</h2>
+      </div>
+
+      <div *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_MANY'">
+        <h1>C'est une question Choose_Many</h1>
+        <h2>{{question.getText()}}</h2>
+      </div>
+
+    </div>
+
+
+    <!-- 
+    <div class="questionsYesNo" *ngFor="let question of questionsYesNo">
+      <h1>{{question.getText()}}</h1>
+      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
+
+        
+
+        <input type="radio" name="{{answer}}" value="{{answer}}">
+        <label for="{{answer}}">{{answer}}</label>
+      </div>
+    </div>
+
+    .<div class="questionsFree" *ngFor="let question of questionsFree">
+      <h1>{{question.getText()}}</h1>
+      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
+        <input name="{{answer}}" type="text">
+        <label for="{{answer}}">{{answer}}</label>
+      </div>
+    </div>
+
+    <div class="questionsYesNo" *ngFor="let question of questionsYesNo">
+      <h1>{{question.getText()}}</h1>
+      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
+        <input type="radio" name="{{answer}}" value="{{answer}}">
+        <label for="{{answer}}">{{answer}}</label>
+      </div>
+    </div>
+
+    <div class="questionsYesNo" *ngFor="let question of questionsYesNo">
+      <h1>{{question.getText()}}</h1>
+      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
+        <input type="radio" name="{{answer}}" value="{{answer}}">
+        <label for="{{answer}}">{{answer}}</label>
+      </div>
+    </div>
+
+-->
+
+
+
+    <div class="btn-block">
+      <button type="submit">Envoyer vos réponses</button>
+    </div>
+  </form>
+</div>
