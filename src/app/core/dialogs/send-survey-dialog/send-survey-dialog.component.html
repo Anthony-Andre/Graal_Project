@@ -1,27 +1,29 @@
-<h1 mat-dialog-title> Envoi du questionnaire </h1>
-<div mat-dialog-content>
-    <!-- Select created survey -->    
-    <div>
-        <label>Choix d'un questionnaire existant</label>
-        <select id="addCreatedSurvey" name="createdSurvey" placeholder="add created survey">
-            <option value="">Sélection du questionnaire</option>
-            <option *ngFor="let survey of allSurveys" value="{{survey.getId()}}">{{survey.getTitle()}}</option>
-        </select>
-        <button type="button" (click)="addCreatedSurvey()">Ajouter ce questionnaire</button>
-    </div>
+<div id="bloc_page">
+   <h1 mat-dialog-title> Envoi du questionnaire </h1>
+    <div mat-dialog-content>
+        <!-- Select created survey -->    
+        <div class="selectSurvey">
+            <div>
+                <select id="addCreatedSurvey" name="createdSurvey" placeholder="add created survey">
+                    <option value="">Sélection du questionnaire</option>
+                    <option *ngFor="let survey of allSurveys" value="{{survey.getId()}}">{{survey.getTitle()}}</option>
+                </select>
+                <button type="button" (click)="addCreatedSurvey()">Ajouter</button>
+            </div>
+        </div>
 
-    <!-- Add new survey-->    
-    <div>
-        <label>Ou</label>
-        <div>
-            <a routerLink="/survey/add" id="addSurvey" mat-dialog-close="false">Votre questionnaire n'est pas dans la liste ? Créez-le</a>
+        <!-- Add new survey-->    
+
+        <div id="linked_line">
+            <p>Ou <a routerLink="/survey/add" id="addSurvey" mat-dialog-close="false">Créez-le ici</a></p>
+            
         </div>
     </div>
-</div>
-<label>Questionnaire sélectionné</label>
-<div>{{getSurveyTitle()}}</div>
-<div mat-dialog-actions>
-    <button mat-button mat-dialog-close="{{surveyId}}">Envoyer</button>
-    <button mat-button mat-dialog-close="0">Annuler</button>
-</div>
 
+    <div>Questionnaire sélectionné :</div>
+    <div>{{getSurveyTitle()}}</div>
+    <div class="bot-buttons-div" mat-dialog-actions>
+        <button class="bot-buttons" mat-button mat-dialog-close="{{surveyId}}">Envoyer</button>
+        <button class="bot-buttons" mat-button mat-dialog-close="0">Annuler</button>
+    </div>
+</div>

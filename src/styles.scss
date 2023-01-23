@@ -4,7 +4,8 @@
 $main-color : rgb(212, 145, 62);
 $std-color : rgb(255, 255, 255); // Front color 
 $main-font: 'Acme', sans-serif;
-;
+$background-nav-font: rgba(205, 92, 92, 0.747);
+
 
 /************************* REINITIALISATION  *************************/
 
@@ -38,7 +39,7 @@ body {
 
 header {
   display: flex;
-  background-color: rgba(205, 92, 92, 0.747);
+  background-color: $background-nav-font;
   align-items: center;
   height: 5em;
 }
