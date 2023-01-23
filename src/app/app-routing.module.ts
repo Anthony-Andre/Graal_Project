@@ -17,6 +17,7 @@ import { SurveyFormComponent } from './survey/components/survey-form/survey-form
 import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolver/survey.resolver';
+import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
 
 const routes: Routes = [];
 
@@ -141,6 +142,13 @@ export class AppRoutingModule {
     {
       path: 'question',
       component: QuestionFormComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'question-table',
+      component: QuestionTableComponent,
       canActivate: [
         HasUserGuard
       ]
