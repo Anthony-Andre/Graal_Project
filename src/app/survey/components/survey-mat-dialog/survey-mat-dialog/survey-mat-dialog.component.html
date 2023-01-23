@@ -11,8 +11,9 @@
 
           <div class="question">
                <label class="getQuestion">Type de réponse attendu :</label>
-               <select name="answerType" id="answerType" placeholder="choisir type de réponse" (change)="getValues($event)" [(ngModel)]="answerType"
-                    class="getQuestion2" formControlName="answerType">
+               <select name="answerType" id="answerType" placeholder="choisir type de réponse"
+                    (change)="getValues($event)" [(ngModel)]="answerType" class="getQuestion2"
+                    formControlName="answerType">
                     <option *ngFor="let item of optionsAnswer" [value]="getOptionLabelAnswerType(item)">
                          {{getOptionLabelAnswerType(item)}}</option>
                </select>
@@ -30,10 +31,18 @@
 
           <!--<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'FREE'" class="getQuestion2" [(ngModel)]="inputFreeAnswer">
             <button type="button" *ngIf="answerType == 'FREE'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer)">Veuillez inscrire la réponse</button> -->
-       <input mdInput #chooseOne  name="chooseOne" [value]="inputChooseOne" id="answerPurposed1" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="GetQuest" [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
-            <button id="inputChooseOne" name="inputChooseOne" type="button" *ngIf="answerType == 'CHOOSE_ONE'" class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Veuillez insérer la réponse</button>
-       <input mdInput #chooseMany  name="chooseMany" [value]="inputChooseMany" id="answerPurposed2" type="answerPurposed" placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="GetQuest" [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
-            <button id="inputChooseMany" name="inputChooseMany" type="button" *ngIf="answerType == 'CHOOSE_MANY'" class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Veuillez insérer les réponses</button>
+          <input mdInput #chooseOne name="chooseOne" [value]="inputChooseOne" id="answerPurposed1" type="answerPurposed"
+               placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="GetQuest"
+               [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
+          <button id="inputChooseOne" name="inputChooseOne" type="button" *ngIf="answerType == 'CHOOSE_ONE'"
+               class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Veuillez insérer la
+               réponse</button>
+          <input mdInput #chooseMany name="chooseMany" [value]="inputChooseMany" id="answerPurposed2"
+               type="answerPurposed" placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="GetQuest"
+               [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
+          <button id="inputChooseMany" name="inputChooseMany" type="button" *ngIf="answerType == 'CHOOSE_MANY'"
+               class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Veuillez insérer les
+               réponses</button>
 
 
           <!--<label class="getQuestion">Réponse proposée</label>
@@ -51,18 +60,19 @@
                <ul class="answerList">
                     <li *ngFor="let item of answerRegistered,let i=index">
                          {{item}}
-                    
-                    <button class="Answer1"  (click)="spliceAnswer(answerRegistered,i)">
-                         delete
-                    </button>
+
+                         <button class="Answer1" (click)="spliceAnswer(answerRegistered,i)">
+                              delete
+                         </button>
                     </li>
 
                </ul>
           </div>
 
           <div class="question">
-               <button type="button" class="validate" (click)="onSubmit()" [mat-dialog-close] [disabled]="!surveyMatDialogForm.valid">Valider</button>
-               <button type="button" class="validate"  [mat-dialog-close]>X</button>
+               <button type="button" class="validate" (click)="onSubmit()" [mat-dialog-close]
+                    [disabled]="!surveyMatDialogForm.valid">Valider</button>
+               <button type="button" class="validate" [mat-dialog-close]>X</button>
           </div>
 
      </form>

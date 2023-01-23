@@ -78,3 +78,28 @@ tfoot {
   height: 40%;
   margin-bottom: -4px;
 }
+
+@keyframes slideLeft {
+  from {
+    margin-left: 0;
+  }
+
+  to {
+    margin-left: 70px;
+  }
+}
+
+.mailButton {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 25px;
+  width: 22px;
+  height: 22px;
+  // :active {
+  //   animation-duration: 2s;
+  //   animation-name: slideLeft;
+  // }
+}
+
+.red {
+  color:rgb(197, 0, 0);
+}

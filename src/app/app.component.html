@@ -14,6 +14,9 @@
     <li *ngIf="hasUser">
       <a [routerLink]="['/', 'survey']">Surveys</a>
     </li>
+    <li *ngIf="hasUser">
+      <a [routerLink]="['/', 'question-table']">Question</a>
+    </li>
 
     <li>
       <a *ngIf="!hasUser" [routerLink]="['/', 'login']">Login</a>

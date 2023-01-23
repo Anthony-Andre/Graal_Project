@@ -9,6 +9,7 @@ export class PoeDto {
   public beginDate!: Date;
   public endDate!: Date;
   public type!: PoeType;
+  public mailSend: Boolean = false;
 
   public constructor(formValues: any) {
     Object.assign(this, formValues);
