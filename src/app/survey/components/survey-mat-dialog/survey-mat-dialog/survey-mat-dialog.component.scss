@@ -20,9 +20,9 @@ $main-font: 'Acme', sans-serif;
 
 .getQuestion2 {
     display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     //display: block;
     //align-items: center;
     //justify-content: center;
@@ -31,12 +31,15 @@ $main-font: 'Acme', sans-serif;
     //list-style-type: disc;
 }
 
-.GetQuest{
-    display:flex;
-    position:relative;
-    left:200px;
-    text-align:center;
+.GetQuest {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+}
 
+.GetQuest {
+    margin-top: 1em;
 }
 
 .question,
@@ -62,7 +65,8 @@ $main-font: 'Acme', sans-serif;
 .validate {
     width: 8em;
 }
-.Answer1{
+
+.Answer1 {
     text-align: center;
     display: absolute;
     margin: auto;

@@ -41,18 +41,19 @@ export class SurveyMatDialogComponent implements OnInit {
   inputFreeAnswer: string = '';
   inputFreeAnswer1: string = '';
   inputFreeAnswer2: string = '';
-  inputArrayFreeAnswer:string[]=['']
-  dataAns!:string
-  inputChooseOne:string=''
-  inputChooseMany:string=''
+  inputArrayFreeAnswer: string[] = ['']
+  dataAns!: string
+  inputChooseOne: string = ''
+  inputChooseMany: string = ''
   //chooseOne!:string;
   //chooseMany!:string;
 
-  surveyMatDialogForm = this.formBuilder.group({text: ['', [Validators.required]],
-  answerType: ['',Validators.required],
-  answersProposed:[[]],
-  
-});
+  surveyMatDialogForm = this.formBuilder.group({
+    text: ['', [Validators.required]],
+    answerType: ['', Validators.required],
+    answersProposed: [[]],
+
+  });
 
   //answerPurposed = this.formBuilder.group({
   //chooseOne: ['',Validators.required],
@@ -81,7 +82,7 @@ export class SurveyMatDialogComponent implements OnInit {
         return "CHOOSE_MANY";
       case AnswerType.CHOOSE_ONE:
         return "CHOOSE_ONE";
-        
+
       case AnswerType.FREE:
         return "FREE"
       default:
@@ -93,50 +94,49 @@ export class SurveyMatDialogComponent implements OnInit {
   }
 
 
-  onSubmit(){
-    
-    const quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+  onSubmit() {
+
+    const quest: QuestionDto = new QuestionDto(this.surveyMatDialogForm.value)
     let ansType = this.surveyMatDialogForm.get('answerType')?.value
     let ansProposed = this.surveyMatDialogForm.get('answerProposed')?.value
-    if( ansType == 'CHOOSE_ONE' || ansType == 'CHOOSE_MANY'){
-    quest.addAnswers(this.answerRegistered)
-    console.log(this.surveyMatDialogForm.value)
-    console.log('Select',this.surveyMatDialogForm.get('answerType')?.value)
-    
+    if (ansType == 'CHOOSE_ONE' || ansType == 'CHOOSE_MANY') {
+      quest.addAnswers(this.answerRegistered)
+      console.log(this.surveyMatDialogForm.value)
+      console.log('Select', this.surveyMatDialogForm.get('answerType')?.value)
 
-    let subscription: Observable<any>;
-    subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe(() =>{})
+
+      let subscription: Observable<any>;
+      subscription = this.questionService.addQuestion(quest)
+      subscription.subscribe(() => { })
       //this._location.back())
-      }
+    }
 
-  if (ansType == 'YES_NO'){
-    ansProposed = this.optionsYesNoAnswer
-    quest.addAnswers(ansProposed)
-    let subscription: Observable<any>;
-    subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>{})
+    if (ansType == 'YES_NO') {
+      ansProposed = this.optionsYesNoAnswer
+      quest.addAnswers(ansProposed)
+      let subscription: Observable<any>;
+      subscription = this.questionService.addQuestion(quest)
+      subscription.subscribe((result: any) => { })
       //this._location.back())
-      }
+    }
 
-  if(ansType == 'FREE'){
-    ansProposed = this.inputArrayFreeAnswer
-    quest.addAnswers(ansProposed)
-    let subscription: Observable<any>;
-    subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>{})
+    if (ansType == 'FREE') {
+      ansProposed = this.inputArrayFreeAnswer
+      quest.addAnswers(ansProposed)
+      let subscription: Observable<any>;
+      subscription = this.questionService.addQuestion(quest)
+      subscription.subscribe((result: any) => { })
       //this._location.back())
-      }
-  
+    }
 
-}
+
+  }
 
   //getAllAnswers(){
 
   //}
 
   getAllAnswers(dataAns: string) {
-
 
     console.log(dataAns);
     this.answerRegistered.push(dataAns)
@@ -157,23 +157,23 @@ export class SurveyMatDialogComponent implements OnInit {
     //console.log(this.printedOption)
   }
 
-  getValues(event:Event){
+  getValues(event: Event) {
     const Val = (event.target as HTMLTextAreaElement).value
     console.log('setNewUserName', Val)
-    if (Val == 'YES_NO' || 'FREE'){
-      for(var index=0;index < this.answerRegistered.length;index ++){
-      this.answerRegistered.splice(index)
+    if (Val == 'YES_NO' || 'FREE') {
+      for (var index = 0; index < this.answerRegistered.length; index++) {
+        this.answerRegistered.splice(index)
       }
     }
 
-    if (Val == 'CHOOSE_ONE' || 'CHOOSE_ANY'){
-    this.inputFreeAnswer=''
-    console.log('Ans',this.answerRegistered)
+    if (Val == 'CHOOSE_ONE' || 'CHOOSE_ANY') {
+      this.inputFreeAnswer = ''
+      console.log('Ans', this.answerRegistered)
     }
 
   }
 
- 
+
 
 
   clearChooseOne() {
@@ -184,6 +184,8 @@ export class SurveyMatDialogComponent implements OnInit {
   }
 
   clearChooseMany() {
+    console.log((<HTMLInputElement>document.getElementById("answerPurposed2")));
+    (<HTMLInputElement>document.getElementById("answerPurposed2")).value = "";
     //this.inputFreeAnswer2=''
     //this.inputChooseMany=''
     //this.chooseMany.nativeElement.value = '';
@@ -193,53 +195,53 @@ export class SurveyMatDialogComponent implements OnInit {
   public static formQuestionOnly(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
 
-        if (!control.value) return null;
+      if (!control.value) return null;
 
-        const today: moment.Moment = moment(); // Récupère la date du jour
-        today.subtract(18, 'y');
+      const today: moment.Moment = moment(); // Récupère la date du jour
+      today.subtract(18, 'y');
 
 
-        // Récupérer la valeur saisie
-        const enteredDate: moment.Moment = moment(control.value);
-        if (enteredDate.isAfter(today)) {
-            return {formQuestionOnly: true};
-        }
-        return null;
+      // Récupérer la valeur saisie
+      const enteredDate: moment.Moment = moment(control.value);
+      if (enteredDate.isAfter(today)) {
+        return { formQuestionOnly: true };
+      }
+      return null;
     }
   }
 
-  spliceAnswer(arr:string[],id:number){
-    arr=this.answerRegistered
+  spliceAnswer(arr: string[], id: number) {
+    arr = this.answerRegistered
     const arr_id = arr[id]
     const ind = arr.findIndex(x => x === arr_id)
     console.log(arr_id)
     console.log(ind)
-    
-    this.answerRegistered.splice(ind,1)
-    
+
+    this.answerRegistered.splice(ind, 1)
+
     //let len = this.answerRegistered.length
 
   }
 
   //encryptData(data:any) {
 
-    //try {
-     // return CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
-    //} catch (e) {
-   //   console.log(e);
-   // }
+  //try {
+  // return CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
+  //} catch (e) {
+  //   console.log(e);
+  // }
   //}
 
   //decryptData(data:any) {
 
-   // try {
-     // const bytes = CryptoJS.AES.decrypt(data, this.encryptSecretKey);
-     // if (bytes.toString()) {
-     //   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-     // }
-     // return data;
-   // } catch (e) {
-   //   console.log(e);
+  // try {
+  // const bytes = CryptoJS.AES.decrypt(data, this.encryptSecretKey);
+  // if (bytes.toString()) {
+  //   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  // }
+  // return data;
+  // } catch (e) {
+  //   console.log(e);
   //  }
   //}
 }
