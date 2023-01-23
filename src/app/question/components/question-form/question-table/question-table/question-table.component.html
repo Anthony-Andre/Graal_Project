@@ -1,0 +1,27 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Type de réponse</th>
+            <th>Question</th>
+            <th>Delete</th>
+        </tr>
+    </thead>  
+
+    <tbody>
+        <ng-container *ngFor="let question of questions">
+            <!-- <tr class="stagiaireLine" *ngIf="changeView(poe)"> remettre un changeView lié au filter (par type poe/titre) ? -->
+            <tr class="surveyLine">
+                <!-- <td (click)="onClick(survey)"><button type="button" class="buttonDelete">{{ survey.getId() }} </button></td> -->
+                <td> {{ question.getId() }} </td>
+                <td> {{ question.getAnswerType() }} </td>
+                <td> {{ question.getText() }} </td>
+                
+                
+                
+                <td><button type="button" class="buttonDelete" (click)="onRemove(question)">X</button></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+

@@ -8,6 +8,7 @@ export class Poe {
     private endDate!: Date;
     private type!: PoeType;
     private trainees!: Array<Stagiaire>;
+    private mailSend: Boolean = false;
 
 
     public getId(): number {
@@ -58,6 +59,12 @@ export class Poe {
         this.trainees = trainees;
     }
 
+    public getMailSend(): Boolean {
+      return this.mailSend;
+    }
+    public setMailSend(value: Boolean) {
+      this.mailSend = value;
+    }
 }
 
 

@@ -36,7 +36,11 @@ import { DeleteSurveyDialogComponent } from './survey/components/dialogs/delete-
 import { SurveyMatDialogComponent } from './survey/components/survey-mat-dialog/survey-mat-dialog/survey-mat-dialog.component';
 import { SurveyFilterComponent } from './survey/components/survey-filter/survey-filter.component';
 import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
+<<<<<<< HEAD
 import { SendSurveyDialogComponent } from './core/dialogs/send-survey-dialog/send-survey-dialog.component';
+=======
+import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
+>>>>>>> b694ae5549cd3a1062e9c82a9fbfd5e419340648
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -68,7 +72,11 @@ export function initializeApp1(appInitService: AppInitService) {
     SurveyMatDialogComponent,
     SurveyFilterComponent,
     TraineeSurveyComponent,
+<<<<<<< HEAD
     SendSurveyDialogComponent
+=======
+    QuestionTableComponent
+>>>>>>> b694ae5549cd3a1062e9c82a9fbfd5e419340648
   ],
   imports: [
     BrowserModule,

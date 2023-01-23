@@ -28,8 +28,7 @@
             <th>Modify</th>
             <th>Delete</th>
             <th>Nombre de stagiaires</th>
-            <th>Mail envoyé</th>
-            <th>Envoyer mail d'enquête</th>
+            <th *ngIf="stopDate !== null">Envoyer mail d'enquête</th>
         </tr>
     </thead>
 
@@ -44,9 +43,19 @@
                 <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">🖊️</button></td>
                 <td><button type="button" class="buttonDelete" (click)="onRemovePoeDialog(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
-                <td>La réponse est oui</td>
-                <td><button type="button" (click)="onMail(poe)">Envoyer</button></td>
-
+                <td *ngIf="stopDate !== null">
+                    <button class="mailButton" type="button" (click)="onMail(poe)">
+                        <ng-container *ngIf="(mailStatus === 0)">
+                            <i title="Envoyer" class="fa-solid fa-envelope"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(mailStatus === 200)">
+                            <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(mailStatus >= 400)">
+                            <i title="Erreur" class="fa-solid fa-envelope red"></i>
+                        </ng-container>
+                    </button>
+                </td>
             </tr>
         </ng-container>
     </tbody>

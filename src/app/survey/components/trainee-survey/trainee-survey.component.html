@@ -14,7 +14,10 @@
 -->
 
 <div class="testbox">
+
   <form>
+
+    <img src="../../../../assets/logo-aelion_1.png" alt="Logo Aelion">
 
     <h1>Bonjour {{stagiaire.getFirstName()}}</h1>
 
@@ -23,28 +26,42 @@
         supplémentaires de ton temps afin de répondre à ce questionnaire</p>
     </div>
 
+    <div *ngFor="let question of questions">
 
-    <div class="questions" *ngFor="let question of questions">
+      <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'YES_NO'">
+        <legend>{{question.getText()}}</legend>
+        <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
+          <input type="radio" name="{{question}}">
+          <label for="{{question}}">{{answer}}</label>
+        </div>
+      </fieldset>
 
-      <div *ngIf="question.getAnswerType().toLocaleString() === 'YES_NO'">
-        <h1>C'est une question Yes No</h1>
-        <h2>{{question.getText()}}</h2>
-      </div>
+      <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'FREE'">
+        <legend>{{question.getText()}}</legend>
+        <textarea placeholder="Votre réponse ici ..."></textarea>
+      </fieldset>
 
-      <div *ngIf="question.getAnswerType().toLocaleString() === 'FREE'">
-        <h1>C'est une question Free</h1>
-        <h2>{{question.getText()}}</h2>
-      </div>
+      <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_ONE'">
+        <legend>{{question.getText()}}</legend>
+        <div class="answerContainer">
+          <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
+            <input type="radio" name="{{question}}"><span>{{answer}}</span>
+          </div>
+        </div>
 
-      <div *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_ONE'">
-        <h1>C'est une question Choose_One</h1>
-        <h2>{{question.getText()}}</h2>
-      </div>
+      </fieldset>
 
-      <div *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_MANY'">
-        <h1>C'est une question Choose_Many</h1>
-        <h2>{{question.getText()}}</h2>
-      </div>
+      <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_MANY'">
+        <legend>{{question.getText()}}</legend>
+        <div class="answerContainer">
+          <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
+            <input type="radio" name="{{question}}">
+            <label for="{{question}}">{{answer}}</label>
+          </div>
+        </div>
+      </fieldset>
+
+
 
     </div>
 

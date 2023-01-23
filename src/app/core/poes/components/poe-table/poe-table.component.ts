@@ -20,9 +20,7 @@ export class PoeTableComponent implements OnInit {
 
 
   isSignedin = false;
-
   signedinUser: string = '';
-
   greeting: any[] = [];
 
   public poes: Array<Poe> = [];
@@ -63,7 +61,7 @@ export class PoeTableComponent implements OnInit {
       this.greetingService.getByAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/admin - You are not authorized'));
       this.greetingService.getByUserOrAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
     }
-
+    
   }
 
   public doSignout() {
@@ -111,9 +109,7 @@ export class PoeTableComponent implements OnInit {
       let surveyIdOnString = result;
       this.surveyId = parseInt(surveyIdOnString);
       this.poeService.mailToPoe(poe, this.surveyId);
-    }
-    )
-
+    });    
   }
 
   public filterChanged(event: String | null): void {
