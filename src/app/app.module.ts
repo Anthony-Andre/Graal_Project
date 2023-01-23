@@ -35,6 +35,7 @@ import { SurveyTableComponent } from './survey/components/survey-table/survey-ta
 import { DeleteSurveyDialogComponent } from './survey/components/dialogs/delete-survey-dialog/delete-survey-dialog.component';
 import { SurveyMatDialogComponent } from './survey/components/survey-mat-dialog/survey-mat-dialog/survey-mat-dialog.component';
 import { SurveyFilterComponent } from './survey/components/survey-filter/survey-filter.component';
+import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -64,7 +65,8 @@ export function initializeApp1(appInitService: AppInitService) {
     SurveyTableComponent,
     DeleteSurveyDialogComponent,
     SurveyMatDialogComponent,
-    SurveyFilterComponent
+    SurveyFilterComponent,
+    TraineeSurveyComponent
   ],
   imports: [
     BrowserModule,

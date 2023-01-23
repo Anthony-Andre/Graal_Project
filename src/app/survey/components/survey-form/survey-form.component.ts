@@ -53,7 +53,6 @@ export class SurveyFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     const data: any = this.route.snapshot.data;
     this.surveyFormGroup = data.form;
 
@@ -103,7 +102,8 @@ export class SurveyFormComponent implements OnInit {
     if (this.addMode) {
       subscription = this.surveyService.addSurvey(dto);
     } else {
-      subscription = this.surveyService.addSurvey(this.surveyFormGroup.value); // A remplacer par un update ? 
+
+      subscription = this.surveyService.addSurvey(dto); // A remplacer par un update ? 
     }
     subscription.subscribe(() => this.goHome())
   }
@@ -145,6 +145,18 @@ export class SurveyFormComponent implements OnInit {
           this.allQuestions.findIndex((q: Question) => q.getId() === question.getId()),
           1);
       });
+  }
+
+  public deleteQuestion(questionId: number): void {
+    console.log("questions[] avant delete: ", this.questions);
+    this.questionService.findOne(questionId)
+      .subscribe((question: Question) => {
+        this.allQuestions.push(question);
+        this.questions.splice(
+          this.questions.findIndex((q: Question) => q.getId() === question.getId()),
+          1);
+      });
+
 
   }
 
