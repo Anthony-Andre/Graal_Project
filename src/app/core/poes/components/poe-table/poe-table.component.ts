@@ -18,9 +18,7 @@ export class PoeTableComponent implements OnInit {
 
 
   isSignedin = false;
-
   signedinUser: string = '';
-
   greeting: any[] = [];
 
   public poes: Array<Poe> = [];
@@ -32,6 +30,7 @@ export class PoeTableComponent implements OnInit {
   public confirmation: string = "false";
   public croissantEndDate: boolean = false;
   public croissantTitle: boolean = false;
+  public mailStatus!: number;
 
 
   constructor(
@@ -61,6 +60,8 @@ export class PoeTableComponent implements OnInit {
       this.greetingService.getByUserOrAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
     }
 
+    this.mailStatus = this.poeService.getMailStatus();
+    
   }
 
   public doSignout() {
@@ -104,6 +105,8 @@ export class PoeTableComponent implements OnInit {
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
     this.poeService.mailToTrainees(poe);
+    // this.mailStatus = this.poeService.getMailStatus();
+    // console.log('mailStatus : ', this.mailStatus);
   }
 
   public filterChanged(event: String | null): void {
