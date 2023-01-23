@@ -40,6 +40,7 @@ import { SendSurveyDialogComponent } from './core/dialogs/send-survey-dialog/sen
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
 
 
+
 export function initializeApp1(appInitService: AppInitService) {
   return (): Promise<any> => {
     return appInitService.init();
