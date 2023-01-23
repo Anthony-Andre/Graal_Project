@@ -36,6 +36,7 @@ import { DeleteSurveyDialogComponent } from './survey/components/dialogs/delete-
 import { SurveyMatDialogComponent } from './survey/components/survey-mat-dialog/survey-mat-dialog/survey-mat-dialog.component';
 import { SurveyFilterComponent } from './survey/components/survey-filter/survey-filter.component';
 import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
+import { SendSurveyDialogComponent } from './core/dialogs/send-survey-dialog/send-survey-dialog.component';
 
 
 export function initializeApp1(appInitService: AppInitService) {
@@ -66,7 +67,8 @@ export function initializeApp1(appInitService: AppInitService) {
     DeleteSurveyDialogComponent,
     SurveyMatDialogComponent,
     SurveyFilterComponent,
-    TraineeSurveyComponent
+    TraineeSurveyComponent,
+    SendSurveyDialogComponent
   ],
   imports: [
     BrowserModule,

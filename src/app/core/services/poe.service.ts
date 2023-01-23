@@ -183,15 +183,18 @@ export class PoeService {
       )
   }
 
-  public mailToTrainees(poe: Poe): void {
+  public mailToTrainees(poe: Poe, confirmation: string): void {
     console.log(`Appel au service pour envoi de mail OK`);
-    this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToTrainees`, '')
+    if (confirmation === "true") {
+      this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToTrainees`, '')
       .subscribe((inputStatus: any) => {
         console.log(inputStatus);
         this.mailStatus = inputStatus;
         console.log("mailstatus : ", this.mailStatus);
       }
       );
+    }
+   
   }
 
   public getMailStatus(): number {

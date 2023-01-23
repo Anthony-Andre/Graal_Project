@@ -1,0 +1,27 @@
+<h1 mat-dialog-title> Envoi du questionnaire </h1>
+<div mat-dialog-content>
+    <!-- Select created survey -->    
+    <div>
+        <label>Choix d'un questionnaire existant</label>
+        <select id="addCreatedSurvey" name="createdSurvey" placeholder="add created survey">
+            <option value="">Sélection du questionnaire</option>
+            <option *ngFor="let survey of allSurveys" value="{{survey.getId()}}">{{survey.getTitle()}}</option>
+        </select>
+        <button type="button" (click)="addSurvey()">Ajouter ce questionnaire</button>
+    </div>
+
+    <!-- Add new survey-->    
+    <div>
+        <label>Ou</label>
+        <div>
+            <button type="button" (click)="addNewSurvey()">Ajout d'un nouveau questionnaire</button>
+        </div>
+    </div>
+    
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close="true">Envoyer</button>
+    <button mat-button mat-dialog-close="false">Annuler</button>
+</div>
+

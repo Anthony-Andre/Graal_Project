@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
+import { SendSurveyDialogComponent } from 'src/app/core/dialogs/send-survey-dialog/send-survey-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
@@ -103,7 +104,12 @@ export class PoeTableComponent implements OnInit {
 
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
-    this.poeService.mailToTrainees(poe);
+    const dialogRef = this.dialog.open(SendSurveyDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmation = result;
+      this.poeService.mailToTrainees(poe, this.confirmation);
+    }
+    )
 
   }
 
