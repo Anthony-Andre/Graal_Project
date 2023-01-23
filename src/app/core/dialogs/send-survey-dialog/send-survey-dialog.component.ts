@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Survey } from 'src/app/survey/core/models/survey';
+import { SurveyService } from 'src/app/survey/core/services/survey.service';
 
 @Component({
   selector: 'app-send-survey-dialog',
@@ -9,25 +10,42 @@ import { Survey } from 'src/app/survey/core/models/survey';
 })
 export class SendSurveyDialogComponent implements OnInit {
 
-  survey1: Survey = new Survey();
-  allSurveys: Array<Survey> = [
-    this.survey1
-  ];
+ 
+  allSurveys!: Array<Survey>;
+  surveySelected!: Survey;
+  surveyId!: number;
 
-  constructor(private dialogRef: MatDialogRef<SendSurveyDialogComponent>) { }
+
+  constructor(
+    private surveyService: SurveyService,
+    private dialogRef: MatDialogRef<SendSurveyDialogComponent>
+    ) { }
   
   ngOnInit(): void {
-    this.survey1.setId(3);
-    this.survey1.setTitle("Test");
+    this.surveyService.findAll().subscribe((surveys: Array<Survey>) => this.allSurveys = surveys);
   }
 
-  addSurvey(): void {
-    console.log("L'utilisateur souhaite envoyer le questionnaire", this.survey1.getTitle());
+  addCreatedSurvey(): void {
+    var surveyCreatedId = ((<HTMLInputElement>document.getElementById("addCreatedSurvey")).value);
+    this.surveyService.findOne(parseInt(surveyCreatedId)).subscribe((survey: Survey) => {
+      this.surveySelected = survey;
+      this.surveyId = this.surveySelected.getId();
+      console.log("L'utilisateur souhaite envoyer le questionnaire", this.surveySelected.getTitle());
+      }
+      );    
   }
 
-  addNewSurvey(): void {
-    console.log("L'utilisateur souhaite ajouter un nouveau questionnaire");
+  getSurveyTitle(): string {
+    if (this.surveySelected !== undefined) {return this.surveySelected.getTitle();}
+    return "";
   }
+
+  
+  
+
+
+
+  
 
  
 

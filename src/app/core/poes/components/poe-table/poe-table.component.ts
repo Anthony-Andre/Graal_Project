@@ -7,6 +7,7 @@ import { SendSurveyDialogComponent } from 'src/app/core/dialogs/send-survey-dial
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
+import { Survey } from 'src/app/survey/core/models/survey';
 import { AuthService } from 'src/app/user/services/auth-service.service';
 import { GreetingService } from 'src/app/user/services/greeting.service';
 
@@ -33,6 +34,7 @@ export class PoeTableComponent implements OnInit {
   public confirmation: string = "false";
   public croissantEndDate: boolean = false;
   public croissantTitle: boolean = false;
+  public surveyId!: number;
 
 
   constructor(
@@ -106,8 +108,9 @@ export class PoeTableComponent implements OnInit {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
     const dialogRef = this.dialog.open(SendSurveyDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      this.confirmation = result;
-      this.poeService.mailToTrainees(poe, this.confirmation);
+      let surveyIdOnString = result;
+      this.surveyId = parseInt(surveyIdOnString);
+      this.poeService.mailToPoe(poe, this.surveyId);
     }
     )
 

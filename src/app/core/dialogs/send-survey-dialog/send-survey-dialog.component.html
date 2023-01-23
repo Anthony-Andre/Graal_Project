@@ -7,21 +7,21 @@
             <option value="">Sélection du questionnaire</option>
             <option *ngFor="let survey of allSurveys" value="{{survey.getId()}}">{{survey.getTitle()}}</option>
         </select>
-        <button type="button" (click)="addSurvey()">Ajouter ce questionnaire</button>
+        <button type="button" (click)="addCreatedSurvey()">Ajouter ce questionnaire</button>
     </div>
 
     <!-- Add new survey-->    
     <div>
         <label>Ou</label>
         <div>
-            <button type="button" (click)="addNewSurvey()">Ajout d'un nouveau questionnaire</button>
+            <a routerLink="/survey/add" id="addSurvey" mat-dialog-close="false">Votre questionnaire n'est pas dans la liste ? Créez-le</a>
         </div>
     </div>
-    
-
 </div>
+<label>Questionnaire sélectionné</label>
+<div>{{getSurveyTitle()}}</div>
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close="true">Envoyer</button>
-    <button mat-button mat-dialog-close="false">Annuler</button>
+    <button mat-button mat-dialog-close="{{surveyId}}">Envoyer</button>
+    <button mat-button mat-dialog-close="0">Annuler</button>
 </div>
 
