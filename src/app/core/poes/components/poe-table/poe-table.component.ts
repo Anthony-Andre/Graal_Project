@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DeletePoeDialogComponent } from 'src/app/core/dialogs/delete-poe-dialog/delete-poe-dialog.component';
+import { SendSurveyDialogComponent } from 'src/app/core/dialogs/send-survey-dialog/send-survey-dialog.component';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/services/poe.service';
+import { Survey } from 'src/app/survey/core/models/survey';
 import { AuthService } from 'src/app/user/services/auth-service.service';
 import { GreetingService } from 'src/app/user/services/greeting.service';
 
@@ -32,6 +34,7 @@ export class PoeTableComponent implements OnInit {
   public confirmation: string = "false";
   public croissantEndDate: boolean = false;
   public croissantTitle: boolean = false;
+  public surveyId!: number;
 
 
   constructor(
@@ -103,7 +106,13 @@ export class PoeTableComponent implements OnInit {
 
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
-    this.poeService.mailToTrainees(poe);
+    const dialogRef = this.dialog.open(SendSurveyDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      let surveyIdOnString = result;
+      this.surveyId = parseInt(surveyIdOnString);
+      this.poeService.mailToPoe(poe, this.surveyId);
+    }
+    )
 
   }
 

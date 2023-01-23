@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
+import { Survey } from 'src/app/survey/core/models/survey';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
 import { Stagiaire } from '../models/stagiaire';
@@ -183,15 +184,18 @@ export class PoeService {
       )
   }
 
-  public mailToTrainees(poe: Poe): void {
+  public mailToPoe(poe: Poe, surveyId: number): void {
     console.log(`Appel au service pour envoi de mail OK`);
-    this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToTrainees`, '')
+    if (surveyId) {
+      this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToPoe/${surveyId}`, '')
       .subscribe((inputStatus: any) => {
         console.log(inputStatus);
         this.mailStatus = inputStatus;
         console.log("mailstatus : ", this.mailStatus);
       }
       );
+    }
+   
   }
 
   public getMailStatus(): number {
