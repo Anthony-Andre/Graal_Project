@@ -111,14 +111,22 @@ export class SurveyFormComponent implements OnInit {
   InsertQuestion() {
     this.showInput = !this.showInput
 
+    //let questions_test = this.questions
     this.dialog.open(SurveyMatDialogComponent, {
-      ///data:s,
+      data:this.questions,
       height: '450px',
-      width: '600px'
+      width: '600px', 
+
+     
 
     })
       .afterClosed().subscribe((result) => {
+        //this.questions= questions_test
+        //this.questions = questions
+        //console.log(result)
       })
+
+      
   }
 
   InsertSelect() {

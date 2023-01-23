@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Optional, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,6 +7,8 @@ import { QuestionService } from 'src/app/question/core/services/question.service
 import { QuestionDto } from 'src/app/question/dto/question-dto';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
+import { SurveyFormComponent } from '../../survey-form/survey-form.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -16,6 +18,8 @@ import * as moment from 'moment';
 })
 export class SurveyMatDialogComponent implements OnInit {
 
+  id!:string;
+  local_data!:any
   @ViewChild('chooseOne') chooseOne!: ElementRef;
   @ViewChild('chooseMany') chooseMany!: ElementRef;
   //@ViewChild('') input!: ElementRef
@@ -23,8 +27,14 @@ export class SurveyMatDialogComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private questionService: QuestionService,
     private router: Router,
-    private _location: Location
-  ) { }
+    private _location: Location,
+    public dialogRef:MatDialogRef<SurveyFormComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: QuestionDto
+  ) {
+    //console.log(this.data);
+        this.local_data = {...data};
+        this.id = this.local_data.action;
+  }
 
   ngOnInit(): void {
     //this.getAllAnswers();
@@ -100,8 +110,9 @@ export class SurveyMatDialogComponent implements OnInit {
     let ansProposed = this.surveyMatDialogForm.get('answerProposed')?.value
     if( ansType == 'CHOOSE_ONE' || ansType == 'CHOOSE_MANY'){
     quest.addAnswers(this.answerRegistered)
-    console.log(this.surveyMatDialogForm.value)
-    console.log('Select',this.surveyMatDialogForm.get('answerType')?.value)
+    this.data = quest
+    //console.log(this.surveyMatDialogForm.value)
+    //console.log('Select',this.surveyMatDialogForm.get('answerType')?.value)
     
 
     let subscription: Observable<any>;
@@ -113,6 +124,7 @@ export class SurveyMatDialogComponent implements OnInit {
   if (ansType == 'YES_NO'){
     ansProposed = this.optionsYesNoAnswer
     quest.addAnswers(ansProposed)
+    this.data = quest
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
     subscription.subscribe((result: any) =>{})
@@ -122,12 +134,14 @@ export class SurveyMatDialogComponent implements OnInit {
   if(ansType == 'FREE'){
     ansProposed = this.inputArrayFreeAnswer
     quest.addAnswers(ansProposed)
+    this.data = quest
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
     subscription.subscribe((result: any) =>{})
       //this._location.back())
       }
   
+      console.log(this.data)
 
 }
 
@@ -138,10 +152,10 @@ export class SurveyMatDialogComponent implements OnInit {
   getAllAnswers(dataAns: string) {
 
 
-    console.log(dataAns);
+    //console.log(dataAns);
     this.answerRegistered.push(dataAns)
     this.answerRegistered = this.answerRegistered.filter((el, i, a) => i === a.indexOf(el))
-    console.log('Answers', this.answerRegistered)
+    //console.log('Answers', this.answerRegistered)
 
     //this.chooseOne = '';
     //this.chooseMany='';
@@ -159,7 +173,7 @@ export class SurveyMatDialogComponent implements OnInit {
 
   getValues(event:Event){
     const Val = (event.target as HTMLTextAreaElement).value
-    console.log('setNewUserName', Val)
+    //console.log('setNewUserName', Val)
     if (Val == 'YES_NO' || 'FREE'){
       for(var index=0;index < this.answerRegistered.length;index ++){
       this.answerRegistered.splice(index)
@@ -168,7 +182,7 @@ export class SurveyMatDialogComponent implements OnInit {
 
     if (Val == 'CHOOSE_ONE' || 'CHOOSE_ANY'){
     this.inputFreeAnswer=''
-    console.log('Ans',this.answerRegistered)
+    //console.log('Ans',this.answerRegistered)
     }
 
   }
