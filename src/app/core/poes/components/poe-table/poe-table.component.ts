@@ -105,7 +105,7 @@ export class PoeTableComponent implements OnInit {
 
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
-    const dialogRef = this.dialog.open(SendSurveyDialogComponent);
+    const dialogRef = this.dialog.open(SendSurveyDialogComponent, {data: {stopDate : this.stopDate}});
     dialogRef.afterClosed().subscribe(result => {
       let surveyIdOnString = result;
       this.surveyId = parseInt(surveyIdOnString);
@@ -126,9 +126,9 @@ export class PoeTableComponent implements OnInit {
       return true;
     }
     if (this.stopDate === "oneMonth" && (new Date(poe.getEndDate()) < new Date(this.dateOfTheDay))) {
-      console.log("Date du jour: ", new Date());
-      console.log("Date de la POE : ", poe.getEndDate());
-      console.log(this.dateOfTheDay);
+      // console.log("Date du jour: ", new Date());
+      // console.log("Date de la POE : ", poe.getEndDate());
+      // console.log(this.dateOfTheDay);
 
       return this.getDayDiff(new Date(this.dateOfTheDay), new Date(poe.getEndDate())) > 31 && this.getDayDiff(new Date(this.dateOfTheDay), new Date(poe.getEndDate())) < 179;
     }
