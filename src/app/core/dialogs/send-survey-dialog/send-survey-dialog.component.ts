@@ -38,7 +38,18 @@ export class SendSurveyDialogComponent implements OnInit {
 
   addCreatedSurvey(event: Event): void {
     this.surveyId = parseInt((event.target as HTMLTextAreaElement).value);
+<<<<<<< HEAD
     console.log("surveyId in dialog: ",this.surveyId)      
+=======
+    console.log('survey in getValues', this.surveyId, 'typeof surveyid : ', typeof(this.surveyId));
+    // var surveyCreatedId = ((<HTMLInputElement>document.getElementById("addCreatedSurvey")).value);
+    this.surveyService.findOne(this.surveyId).subscribe((survey: Survey) => {
+      this.surveySelected = survey;
+      this.surveyId = this.surveySelected.getId();
+      console.log("L'utilisateur souhaite envoyer le questionnaire", this.surveySelected.getTitle());
+    }
+    );    
+>>>>>>> 48cc833fb58c9ceebef8910735d50014ee4f5459
   }
 
   // getSurveyTitle(): string {
