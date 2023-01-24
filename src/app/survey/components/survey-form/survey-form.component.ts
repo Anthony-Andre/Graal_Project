@@ -124,11 +124,8 @@ export class SurveyFormComponent implements OnInit {
     this.dialog.open(SurveyMatDialogComponent, {
       //data:{dto:this.questionsDto},
       data:this.questionsDto,
-      height: '450px',
-      width: '600px', 
-
-     
-
+      height: 'auto',
+      width: '500px',
     })
       .afterClosed().subscribe((result) => {
         
@@ -144,8 +141,6 @@ export class SurveyFormComponent implements OnInit {
         
         console.log(result)
       })
-
-      
   }
 
   InsertSelect() {

@@ -1,6 +1,20 @@
 $head-and-foot-color : rgb(212, 145, 62);
 $head-and-foot-text-color : rgb(0, 0, 0);
 $main-font: 'Acme', sans-serif;
+$main-color : rgb(212, 145, 62);
+
+.underline-title {
+    background: $main-color;
+    height: 2px;
+    margin: -1.8rem auto 0 auto;
+    width: 252px;
+}
+
+.inputs-placeholder {
+  input::placeholder{
+    color: $main-color !important;
+  }
+}
 
 .questionnaire {
   padding-top: 2em;
@@ -202,7 +216,26 @@ h6 {
   list-style: none;
 }
 
+#createQuestion {
+  color: #0000FF;
+  text-decoration: underline;
+  &:hover {
+    color: #5e03f0;
+    cursor: pointer;
+  }
+}
+
 .title {
   text-align: center;
   margin: 2rem auto;
 }
+
+.botButtons {
+  button {
+    &:hover {
+      border: solid 1px rgba($main-color, $alpha: 0.7);
+      color: rgba($main-color, $alpha: 1);
+    }
+  }
+}
+

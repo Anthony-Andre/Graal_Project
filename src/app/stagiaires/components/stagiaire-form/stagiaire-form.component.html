@@ -3,6 +3,7 @@
     <form class="basicForm" [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()">
 
         <h1>{{addMode ? 'Ajouter un Stagiaire' : 'Modifier le Stagiaire'}}</h1>
+        <div class="underline-title"></div>
 
         <label for="lastName">Veuillez saisir le nom du stagiaire:</label>
         <input id="lastName" type="text" placeholder="Nom" formControlName="lastname">

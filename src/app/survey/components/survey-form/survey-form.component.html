@@ -1,16 +1,16 @@
 <div [formGroup]="surveyFormGroup" class="questionnaire">
-    <h1 class="title">
-        Création d'un questionnaire
-    </h1>
+    <h1 class="title">{{addMode ? 'Création d\'un questionnaire' : 'Modifier le questionnaire'}}</h1>
+    <div class="underline-title"></div>
+
     <mat-stepper linear #stepper>
         <mat-step [stepControl]="surveyFormGroup.value.title">
             <div class="surveyForm">
                 <ng-template matStepLabel>Quel est le titre du questionnaire ?</ng-template>
-                <mat-form-field appearance="fill">
+                <mat-form-field class="inputs-placeholder" appearance="fill">
                     <mat-label>Titre...</mat-label>
                     <input matInput formControlName="title" placeholder="Nom du questionnaire" required>
                 </mat-form-field>
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperNext>Suivant</button>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <option value="ONE_YEAR">1 AN</option>
                 </select>
 
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperPrevious>Precedent</button>
                     <button mat-button matStepperNext>Suivant</button>
                 </div>
@@ -67,94 +67,64 @@
 
                 <!-- Ajout Nouvelle question : -->
 
-                <div class="newQuestion">
+                <!-- <div class="newQuestion">
                     <label>Nouvelle question ?</label>
-                    <div class="question"><button type="button" (click)="InsertQuestion()">Ajouter une nouvelle
-                            question</button>
+                    <div class="question">
+                        <button type="button" (click)="InsertQuestion()">
+                            Ajouter une nouvelle question
+                        </button>
                     </div>
+                </div> -->
 
-                </div>
+                <div id="createQuestion" (click)="InsertQuestion()">Créez une question</div>
 
-                <h1 class="title">Question créée:</h1>
-
-
-                <div class="container" *ngIf="questionsDto.text !== '' ">
-
-                    <div class="table">
-                        <div class="table-header">
-                            <div class="header__item"><a id="name" class="filter__link" href="#">Titre de la question</a>
-                            </div>
-                            <div class="header__item"><a id="wins" class="filter__link filter__link--number"
-                                    href="#">Type de réponse</a>
-                            </div>
-                            <div class="header__item"><a id="draws" class="filter__link filter__link--number"
-                                href="#">Réponses Proposées</a>
-                        </div>
-                            
-                        </div>
-                        <div  class="table-content">
-                            <div class="table-row">
-                                <div class="table-data">{{questionsDto.text}}</div>
-                                <div class="table-data">{{questionsDto.answerType}}</div>
-                                <div class="table-data">{{questionsDto.answersProposed}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <div *ngIf="questions.length">
 
                 <h1 class="title">Liste des questions présentes dans le formulaire :</h1>
 
-                <div class="container" *ngIf="questions.length">
+                    <div class="container">
 
-                    <div class="table">
-                        <div class="table-header">
-                            <div class="header__item"><a id="name" class="filter__link" href="#">ID de la question</a>
-                            </div>
-                            <div class="header__item"><a id="wins" class="filter__link filter__link--number"
-                                    href="#">Question</a>
-                            </div>
-                            <div class="header__item"><a id="draws" class="filter__link filter__link--number"
-                                    href="#">Type de la
-                                    question</a>
-                            </div>
-                            <div class="header__item"><a id="losses" class="filter__link filter__link--number"
-                                    href="#">Réponses
-                                    proposées</a>
-                            </div>
-                            <div class="header__item"><a id="total" class="filter__link filter__link--number"
-                                    href="#">Supprimer la
-                                    question</a>
-                            </div>
-                        </div>
-                        <div *ngFor="let question of questions" class="table-content">
-                            <div class="table-row">
-                                <div class="table-data">{{question.getId()}}</div>
-                                <div class="table-data">{{question.getText()}}</div>
-                                <div class="table-data">{{question.getAnswerType()}}</div>
-                                <div class="table-data">
-                                    <ul class="answers">
-                                        <li *ngFor="let answer of question.getAnswersProposed()">
-                                            {{answer}}
-                                        </li>
-                                    </ul>
+                        <div class="table">
+                            <div class="table-header">
+                                <div class="header__item"><a id="name" class="filter__link" href="#">ID de la question</a>
                                 </div>
-                                <div class="table-data"><button (click)="deleteQuestion(question.getId())">X</button>
+                                <div class="header__item"><a id="wins" class="filter__link filter__link--number"
+                                        href="#">Question</a>
+                                </div>
+                                <div class="header__item"><a id="draws" class="filter__link filter__link--number"
+                                        href="#">Type de la
+                                        question</a>
+                                </div>
+                                <div class="header__item"><a id="losses" class="filter__link filter__link--number"
+                                        href="#">Réponses
+                                        proposées</a>
+                                </div>
+                                <div class="header__item"><a id="total" class="filter__link filter__link--number"
+                                        href="#">Supprimer la
+                                        question</a>
+                                </div>
+                            </div>
+                            <div *ngFor="let question of questions" class="table-content">
+                                <div class="table-row">
+                                    <div class="table-data">{{question.getId()}}</div>
+                                    <div class="table-data">{{question.getText()}}</div>
+                                    <div class="table-data">{{question.getAnswerType()}}</div>
+                                    <div class="table-data">
+                                        <ul class="answers">
+                                            <li *ngFor="let answer of question.getAnswersProposed()">
+                                                {{answer}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="table-data"><button (click)="deleteQuestion(question.getId())">X</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!--<li *ngIf="questionsDto">
-                     <i>{{questionsDto.text}}</i>
-                     <i>{{questionsDto.answerType}}</i>
-                     <i>{{questionsDto.answersProposed}}</i>
-                  </li> -->
-
-
-
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperPrevious>Precedent</button>
                     <button mat-button matStepperNext>Suivant</button>
                 </div>
@@ -165,7 +135,7 @@
             <div class="surveyForm">
                 <ng-template matStepLabel>Terminé</ng-template>
                 <p>Vous avez terminé de remplir ce questionnaire</p>
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperPrevious>Étape précédente</button>
                     <button mat-button (click)="stepper.reset()">Recommencer</button>
                     <button mat-button (click)="onSubmit()">Enregistrer</button>
