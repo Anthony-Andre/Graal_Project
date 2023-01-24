@@ -15,7 +15,7 @@
 
 <div class="testbox">
 
-  <form>
+  <form [formGroup]="surveyFormGroup">
 
     <img src="../../../../assets/logo-aelion_1.png" alt="Logo Aelion">
 
@@ -28,34 +28,38 @@
 
     <div *ngFor="let question of questions">
 
+      <!-- Question Yes No -->
       <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'YES_NO'">
         <legend>{{question.getText()}}</legend>
         <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
-          <input type="radio" name="{{question}}">
+          <input type="radio" formControlName="{{question.getText()}}">
           <label for="{{question}}">{{answer}}</label>
         </div>
       </fieldset>
 
+      <!-- Question Free -->
       <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'FREE'">
         <legend>{{question.getText()}}</legend>
-        <textarea placeholder="Votre réponse ici ..."></textarea>
+        <textarea formControlName="{{question.getText()}}" placeholder="Votre réponse ici ..."></textarea>
       </fieldset>
 
+      <!-- Question Choose One -->
       <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_ONE'">
         <legend>{{question.getText()}}</legend>
         <div class="answerContainer">
           <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
-            <input type="radio" name="{{question}}"><span>{{answer}}</span>
+            <input formControlName="{{question.getText()}}" type="radio"
+              name="{{question.getText()}}"><span>{{answer}}</span>
           </div>
         </div>
-
       </fieldset>
 
+      <!-- Question Choose Many-->
       <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_MANY'">
         <legend>{{question.getText()}}</legend>
         <div class="answerContainer">
           <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
-            <input type="radio" name="{{question}}">
+            <input formControlName="{{question.getText()}}" type="radio" name="{{question.getText()}}">
             <label for="{{question}}">{{answer}}</label>
           </div>
         </div>
@@ -107,7 +111,7 @@
 
 
     <div class="btn-block">
-      <button type="submit">Envoyer vos réponses</button>
+      <button type="submit" (click)="onSubmit()">Envoyer vos réponses</button>
     </div>
   </form>
 </div>

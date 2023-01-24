@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Survey } from '../../models/survey';
 import { Inject } from '@angular/core';
+import { AnsweredSurvey } from '../../models/answered-survey';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ import { Inject } from '@angular/core';
 export class TraineeSurveyFormService {
 
   private form!: FormGroup;
-  private survey: Survey = new Survey();
-  private updateMode: boolean = false;
+  private survey: AnsweredSurvey = new AnsweredSurvey();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,44 +26,29 @@ export class TraineeSurveyFormService {
     return this.form;
   }
 
-  public build(survey: Survey): TraineeSurveyFormService {
+  public build(survey: AnsweredSurvey): TraineeSurveyFormService {
     this.survey = survey
-    if (survey.getId() !== 0) {
-      this.updateMode = true;
-    }
 
     this.form = this.formBuilder.group({
-      title: [
-        this.survey.getTitle(),
+      trainee: [
+        this.survey.getStagiaire,
         [
           Validators.required
         ]
       ],
-      poeType: [
-        this.survey.getPoeType(),
+      survey: [
+        this.survey.getSurvey(),
         [
           Validators.required
         ]
       ],
-      level: [
-        this.survey.getLevel(),
+      answers: [
+        this.survey.getAnswers(),
         [
           Validators.required
         ]
       ],
-      questions: [
-        this.survey.getQuestions(),
-        [
-          Validators.required
-        ]
-      ]
     });
-
-
-    if (this.updateMode) {
-      const idControl: AbstractControl = new FormControl(this.survey.getId());
-      this.form.addControl('id', idControl);
-    }
 
     return this;
   }

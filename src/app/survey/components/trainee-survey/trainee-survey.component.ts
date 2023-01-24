@@ -1,16 +1,19 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Answer } from 'src/app/answer/core/models/answer';
 import { AnswerType } from 'src/app/core/enums/AnswerType';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
 import { Survey } from '../../core/models/survey';
+import { AnsweredSurveyService } from '../../core/services/answered-survey.service';
 import { SurveyService } from '../../core/services/survey.service';
+import { AnsweredSurveyDto } from '../../dto/answered-survey-dto';
 import { SurveyDto } from '../../dto/survey-dto';
 
 @Component({
@@ -28,6 +31,9 @@ export class TraineeSurveyComponent implements OnInit {
   questionsChooseOne: Array<Question> = [];
   questionsChooseMany: Array<Question> = [];
   idTrainee!: number;
+  answer: Answer = new Answer;
+  answers: Array<Answer> = [];
+  public selectedOption!: string;
 
   YESNO!: AnswerType;
 
@@ -39,8 +45,10 @@ export class TraineeSurveyComponent implements OnInit {
     private surveyService: SurveyService,
     private questionService: QuestionService,
     private stagiaireService: StagiaireService,
+    private answeredSurveyService: AnsweredSurveyService,
     private _location: Location,
     private dialog: MatDialog,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -63,15 +71,7 @@ export class TraineeSurveyComponent implements OnInit {
               question.setAnswerType(anyQuestion.answerType);
               question.setAnswersProposed(anyQuestion.answersProposed);
               this.questions.push(question);
-              // if (anyQuestion.answerType === "FREE") {
-              //   this.questionsFree.push(question);
-              // } else if (anyQuestion.answerType === "CHOOSE_ONE") {
-              //   this.questionsChooseOne.push(question)
-              // } else if (anyQuestion.answerType === "CHOOSE_MANY") {
-              //   this.questionsChooseMany.push(question)
-              // } else if (anyQuestion.answerType === "YES_NO") {
-              //   this.questionsChooseOne.push(question)
-              // }
+              this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
               return question;
             }
             )
@@ -97,10 +97,22 @@ export class TraineeSurveyComponent implements OnInit {
   }
 
   onSubmit() {
-    const dto: SurveyDto = new SurveyDto(this.surveyFormGroup.value);
-    dto.setQuestions(this.questions);
+
+    for (const question of this.questions) {
+      let answer: Answer = new Answer();
+      answer.setQuestion(question);
+      answer.setText(this.surveyFormGroup.get(question.getText())!.value);
+      this.answers.push(answer);
+      console.log(this.answers)
+    }
+    this.surveyFormGroup.value.trainee = this.stagiaire;
+    this.surveyFormGroup.value.survey = this.survey;
+    this.surveyFormGroup.value.answers = this.answers;
+    const dto: AnsweredSurveyDto = new AnsweredSurveyDto(this.surveyFormGroup.value);
+    dto.setAnswers(this.answers);
+    console.log("dto: ", dto);
     let subscription: Observable<any>;
-    subscription = this.surveyService.addSurvey(this.surveyFormGroup.value); // A remplacer par un update ? 
+    subscription = this.answeredSurveyService.addSurvey(dto)
     subscription.subscribe(() => this.goHome())
   }
 }
