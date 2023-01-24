@@ -70,9 +70,8 @@
           </div>
 
           <div class="question">
-               <button type="button" class="validate" (click)="onSubmit()" [mat-dialog-close]
-                    [disabled]="!surveyMatDialogForm.valid">Valider</button>
-               <button type="button" class="validate" [mat-dialog-close]>X</button>
+               <button type="button" class="validate" (click)="onSubmitMatDialog() " [mat-dialog-close]="data.dto" [disabled]="!surveyMatDialogForm.valid">Valider</button>
+               <button type="button" class="validate"  [mat-dialog-close]>X</button>
           </div>
 
      </form>
