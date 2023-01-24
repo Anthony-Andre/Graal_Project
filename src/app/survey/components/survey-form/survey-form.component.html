@@ -75,6 +75,34 @@
 
                 </div>
 
+                <h1 class="title">Question créée:</h1>
+
+
+                <div class="container" *ngIf="questionsDto.text !== '' ">
+
+                    <div class="table">
+                        <div class="table-header">
+                            <div class="header__item"><a id="name" class="filter__link" href="#">Titre de la question</a>
+                            </div>
+                            <div class="header__item"><a id="wins" class="filter__link filter__link--number"
+                                    href="#">Type de réponse</a>
+                            </div>
+                            <div class="header__item"><a id="draws" class="filter__link filter__link--number"
+                                href="#">Réponses Proposées</a>
+                        </div>
+                            
+                        </div>
+                        <div  class="table-content">
+                            <div class="table-row">
+                                <div class="table-data">{{questionsDto.text}}</div>
+                                <div class="table-data">{{questionsDto.answerType}}</div>
+                                <div class="table-data">{{questionsDto.answersProposed}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <h1 class="title">Liste des questions présentes dans le formulaire :</h1>
 
                 <div class="container" *ngIf="questions.length">
@@ -117,6 +145,14 @@
                         </div>
                     </div>
                 </div>
+
+                <!--<li *ngIf="questionsDto">
+                     <i>{{questionsDto.text}}</i>
+                     <i>{{questionsDto.answerType}}</i>
+                     <i>{{questionsDto.answersProposed}}</i>
+                  </li> -->
+
+
 
                 <div>
                     <button mat-button matStepperPrevious>Precedent</button>
