@@ -1,16 +1,16 @@
 <div [formGroup]="surveyFormGroup" class="questionnaire">
-    <h1 class="title">
-        Création d'un questionnaire
-    </h1>
+    <h1 class="title">{{addMode ? 'Création d\'un questionnaire' : 'Modifier le questionnaire'}}</h1>
+    <div class="underline-title"></div>
+
     <mat-stepper linear #stepper>
         <mat-step [stepControl]="surveyFormGroup.value.title">
             <div class="surveyForm">
                 <ng-template matStepLabel>Quel est le titre du questionnaire ?</ng-template>
-                <mat-form-field appearance="fill">
+                <mat-form-field class="inputs-placeholder" appearance="fill">
                     <mat-label>Titre...</mat-label>
                     <input matInput formControlName="title" placeholder="Nom du questionnaire" required>
                 </mat-form-field>
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperNext>Suivant</button>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <option value="ONE_YEAR">1 AN</option>
                 </select>
 
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperPrevious>Precedent</button>
                     <button mat-button matStepperNext>Suivant</button>
                 </div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperPrevious>Precedent</button>
                     <button mat-button matStepperNext>Suivant</button>
                 </div>
@@ -129,7 +129,7 @@
             <div class="surveyForm">
                 <ng-template matStepLabel>Terminé</ng-template>
                 <p>Vous avez terminé de remplir ce questionnaire</p>
-                <div>
+                <div class="botButtons">
                     <button mat-button matStepperPrevious>Étape précédente</button>
                     <button mat-button (click)="stepper.reset()">Recommencer</button>
                     <button mat-button (click)="onSubmit()">Enregistrer</button>

@@ -3,7 +3,8 @@
     <form class="basicForm" [formGroup]="poeForm" (ngSubmit)="onSubmit()">
         <!-- Onsubmit  -->
 
-        <h1>Ajouter une Poe</h1>
+        <h1>{{addMode ? 'Ajouter une POE' : 'Modifier la POE'}}</h1>
+        <div class="underline-title"></div>
 
         <label for="title">Veuillez saisir le nom d'une Poe:</label>
         <input id="title" type="text" placeholder="title" formControlName="title">
@@ -14,10 +15,10 @@
         </select>
 
         <div class="form-field">
-            <mat-form-field appearance="fill">
+            <mat-form-field class="selectDates" appearance="fill">
                 <mat-label>Dates de début et fin de la POE:</mat-label>
                 <mat-date-range-input class="datesPoe" [rangePicker]="picker">
-                    <input matStartDate formControlName="beginDate" placeholder="Start date">
+                    <input class="input-begin-date" matStartDate formControlName="beginDate" placeholder="Start date">
                     <input matEndDate formControlName="endDate" placeholder="End date">
                 </mat-date-range-input>
                 <mat-hint>JJ/MM/AAAA – JJ/MM/AAAA</mat-hint>

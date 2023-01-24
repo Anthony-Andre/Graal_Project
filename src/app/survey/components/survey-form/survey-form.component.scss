@@ -1,6 +1,20 @@
 $head-and-foot-color : rgb(212, 145, 62);
 $head-and-foot-text-color : rgb(0, 0, 0);
 $main-font: 'Acme', sans-serif;
+$main-color : rgb(212, 145, 62);
+
+.underline-title {
+    background: $main-color;
+    height: 2px;
+    margin: -1.8rem auto 0 auto;
+    width: 212px;
+}
+
+.inputs-placeholder {
+  input{
+    
+  }
+}
 
 .questionnaire {
   padding-top: 2em;
@@ -206,3 +220,12 @@ h6 {
   text-align: center;
   margin: 2rem auto;
 }
+
+.botButtons {
+  button {
+    &:hover {
+      background-color: rgba($main-color, $alpha: 0.7);
+    }
+  }
+}
+
