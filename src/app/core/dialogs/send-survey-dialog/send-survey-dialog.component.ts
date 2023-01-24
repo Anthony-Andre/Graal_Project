@@ -25,11 +25,12 @@ export class SendSurveyDialogComponent implements OnInit {
   ngOnInit(): void {
     this.surveyService.findAll().subscribe((surveys: Array<Survey>) => {
       this.allSurveys = surveys;
+      console.log("stopdate : ", this.data.stopDate);
       
       if (this.data.stopDate === "oneMonth") {
         this.allSurveys = this.allSurveys.filter((survey: Survey) => survey.getLevel().toString() === Level.ONE_MONTH);
       }
-      else if (this.data.stopDate === "sixMonths") {
+      else if (this.data.stopDate === "sixMonth") {
         this.allSurveys = this.allSurveys.filter((survey: Survey) => survey.getLevel() === Level.SIX_MONTHS)
       }
       else {this.allSurveys = this.allSurveys.filter((survey: Survey) => survey.getLevel() === Level.ONE_YEAR)}      
