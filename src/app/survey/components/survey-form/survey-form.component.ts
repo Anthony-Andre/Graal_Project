@@ -130,14 +130,14 @@ export class SurveyFormComponent implements OnInit {
       .afterClosed().subscribe((result) => {
         
         this.questionsDto = result.dto
-        this.questionService.findAll().subscribe()
-        
-        this.newQuestion.setId(this.questionsDto.id!)
-        this.newQuestion.setText(this.questionsDto.text)
-        this.newQuestion.setAnswerType(this.questionsDto.answerType)
-        this.newQuestion.setAnswersProposed(this.questionsDto.answersProposed)
+        //this.questionService.findAll().subscribe()
+        const newQuestion:Question = new Question()
+        newQuestion.setId(this.questionsDto.id!)
+        newQuestion.setText(this.questionsDto.text)
+        newQuestion.setAnswerType(this.questionsDto.answerType)
+        newQuestion.setAnswersProposed(this.questionsDto.answersProposed)
        
-        this.questions.push(this.newQuestion)
+        this.questions.push(newQuestion)
         
         console.log(result)
       })

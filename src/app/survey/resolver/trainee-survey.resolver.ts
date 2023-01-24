@@ -7,8 +7,10 @@ import {
   Router
 } from '@angular/router';
 import { map, Observable, of, take } from 'rxjs';
+import { AnsweredSurvey } from '../core/models/answered-survey';
 import { Survey } from '../core/models/survey';
 import { FormBuilderService } from '../core/services/form-builder/form-builder.service';
+import { TraineeSurveyFormService } from '../core/services/form-builder/trainee-survey-form.service';
 import { SurveyService } from '../core/services/survey.service';
 
 @Injectable({
@@ -17,7 +19,7 @@ import { SurveyService } from '../core/services/survey.service';
 export class TraineeSurveyResolver implements Resolve<FormGroup> {
   public constructor(
     private surveyService: SurveyService,
-    private formBuilderService: FormBuilderService,
+    private formBuilderService: TraineeSurveyFormService,
     private router: Router
   ) { }
 
@@ -28,22 +30,11 @@ export class TraineeSurveyResolver implements Resolve<FormGroup> {
     const idSurvey: number = +route.paramMap.get('idSurvey')!;
     console.log("id:", id);
     console.log("idSurvey: ", idSurvey);
-    let survey: Survey;
+    let survey: AnsweredSurvey;
     let form: FormGroup;
 
-    if (idSurvey === 0) {
-      survey = new Survey();
-      this.router.navigate(['/', 'home']);
-      form = this.formBuilderService.build(survey).getForm();
-      return of(form);
-    } else {
-      return this.surveyService.findOne(idSurvey)
-        .pipe(
-          take(1),
-          map((oSurvey: Survey) => {
-            return this.formBuilderService.build(oSurvey).getForm();
-          })
-        )
-    }
+    survey = new AnsweredSurvey();
+    form = this.formBuilderService.build(survey).getForm();
+    return of(form);
   }
 }
