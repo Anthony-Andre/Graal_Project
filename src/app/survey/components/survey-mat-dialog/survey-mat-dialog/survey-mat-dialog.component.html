@@ -2,7 +2,8 @@
 
      <form class="surveyDialog" [formGroup]="surveyMatDialogForm">
 
-          <h1 class="title">Creer Question</h1>
+          <h1 class="title">Créer une question</h1>
+          <div class="underline-title"></div>
 
           <div class="question">
                <label for="title" class="getQuestion">Question :</label>
@@ -18,62 +19,36 @@
                          {{getOptionLabelAnswerType(item)}}</option>
                </select>
           </div>
-
-
-          <!--<label class="getQuestion">Veuillez inscrire la réponse</label>-->
-          <!--<select #dataAns name="answerPurposed" id="answerPurposed" placeholder="Veuillez inscrire réponse" (change)="getAllAnswers(dataAns.value)" *ngIf="answerType == 'YES_NO'"class="getQuestion2" >
-        <option [value]="" *ngFor="let item of optionsYesNoAnswer">{{item}}</option>
-           - <option value="YES">YES</option> -->
-          <!-- <option value="NO">NO</option> -->
-          <!--</select> -->
-
-
-
-          <!--<input id="answerPurposed" type="answerPurposed" placeholder="suscribe answer" *ngIf="answerType == 'FREE'" class="getQuestion2" [(ngModel)]="inputFreeAnswer">
-            <button type="button" *ngIf="answerType == 'FREE'" class="getQuestion2" (click)="getAllAnswers(inputFreeAnswer)">Veuillez inscrire la réponse</button> -->
+          
           <input mdInput #chooseOne name="chooseOne" [value]="inputChooseOne" id="answerPurposed1" type="answerPurposed"
-               placeholder="suscribe answer" *ngIf="answerType == 'CHOOSE_ONE'" class="GetQuest"
+               placeholder="votre réponse..." *ngIf="answerType == 'CHOOSE_ONE'" class="GetQuest"
                [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
           <button id="inputChooseOne" name="inputChooseOne" type="button" *ngIf="answerType == 'CHOOSE_ONE'"
-               class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Veuillez insérer la
-               réponse</button>
+               class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseOne()">Insérer la réponse</button>
           <input mdInput #chooseMany name="chooseMany" [value]="inputChooseMany" id="answerPurposed2"
-               type="answerPurposed" placeholder="suscribe answers" *ngIf="answerType == 'CHOOSE_MANY'" class="GetQuest"
+               type="answerPurposed" placeholder="votre réponse..." *ngIf="answerType == 'CHOOSE_MANY'" class="GetQuest"
                [(ngModel)]="inputFreeAnswer" formControlName="answersProposed">
           <button id="inputChooseMany" name="inputChooseMany" type="button" *ngIf="answerType == 'CHOOSE_MANY'"
-               class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Veuillez insérer les
-               réponses</button>
-
-
-          <!--<label class="getQuestion">Réponse proposée</label>
-
-          <li class="getQuestion2" *ngFor="let item of answerRegistered">
-               {{item}}
-          </li>-->
-
-          <!--<input type="text" value="[{{answerRegistered}}]" formControlName="answersProposed"> -->
-
+               class="GetQuest" (click)="getAllAnswers(inputFreeAnswer);clearChooseMany()">Insérer la réponse</button>
 
           <label *ngIf="answerRegistered.length" class="getQuestion">Réponses proposées</label>
 
           <div class="answers">
                <ul class="answerList">
                     <li *ngFor="let item of answerRegistered,let i=index">
-                         {{item}}
-
-                         <button class="Answer1" (click)="spliceAnswer(answerRegistered,i)">
-                              delete
-                         </button>
+                         <div>
+                              <p>{{item}}</p>
+                              <button class="Answer1" (click)="spliceAnswer(answerRegistered,i)">
+                                   x
+                              </button>
+                         </div>
                     </li>
-
                </ul>
           </div>
 
           <div class="question">
                <button type="button" class="validate" (click)="onSubmitMatDialog() " [mat-dialog-close]="data.dto" [disabled]="!surveyMatDialogForm.valid">Valider</button>
-               <button type="button" class="validate"  [mat-dialog-close]>X</button>
+               <button type="button" class="validate"  [mat-dialog-close]>Annuler</button>
           </div>
-
      </form>
-
 </ng-container>
