@@ -135,7 +135,9 @@ export class SurveyMatDialogComponent implements OnInit {
     
     subscription = this.questionService.addQuestion(quest)
     subscription.subscribe((result) =>{
+      this.data.dto = result
      console.log(result)
+     console.log(this.data.dto)
     })
       //this._location.back())
     }
@@ -170,7 +172,11 @@ export class SurveyMatDialogComponent implements OnInit {
     this.surveyService.sendNewMessageSurv(this.data);
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>{})
+    subscription.subscribe((result: any) =>{
+      this.data.dto = result
+      console.log(result)
+      console.log(this.data.dto)
+    })
       //this._location.back())
       }
   
