@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { SurveyFormComponent } from '../../survey-form/survey-form.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SurveyService } from 'src/app/survey/core/services/survey.service';
 
 
 @Component({
@@ -28,13 +29,16 @@ export class SurveyMatDialogComponent implements OnInit {
     private questionService: QuestionService,
     private router: Router,
     private _location: Location,
-    public dialogRef:MatDialogRef<SurveyFormComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: QuestionDto
+    private surveyService: SurveyService,
+    public dialogRef:MatDialogRef<SurveyMatDialogComponent>,
+     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     //console.log(this.data);
         this.local_data = {...data};
         this.id = this.local_data.action;
-  }
+        //console.log('Data',data)  
+        //console.log('id',this.id)
+      }
 
   ngOnInit(): void {
     //this.getAllAnswers();
@@ -55,10 +59,14 @@ export class SurveyMatDialogComponent implements OnInit {
   dataAns!:string
   inputChooseOne:string=''
   inputChooseMany:string=''
+  arrayQuest:any[]=[]
+  recupQuest:any
   //chooseOne!:string;
   //chooseMany!:string;
 
-  surveyMatDialogForm = this.formBuilder.group({text: ['', [Validators.required]],
+  surveyMatDialogForm = this.formBuilder.group({
+  
+  text: ['', [Validators.required]],
   answerType: ['',Validators.required],
   answersProposed:[[]],
   
@@ -103,45 +111,72 @@ export class SurveyMatDialogComponent implements OnInit {
   }
 
 
-  onSubmit(){
+  onSubmitMatDialog(){
     
-    const quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+    let quest:QuestionDto=new QuestionDto(this.surveyMatDialogForm.value)
+    //console.log('QUEST',quest)
+    //let ID = quest.id
+    //console.log('ID',ID)
     let ansType = this.surveyMatDialogForm.get('answerType')?.value
     let ansProposed = this.surveyMatDialogForm.get('answerProposed')?.value
     if( ansType == 'CHOOSE_ONE' || ansType == 'CHOOSE_MANY'){
     quest.addAnswers(this.answerRegistered)
-    this.data = quest
+    this.data.dto = quest
+    //console.log('Data Verif',this.data)
+    this.recupQuest = this.data
+    //console.log('Data Verif',this.recupQuest)
+    this.surveyService.sendNewMessageSurv(this.data);
+    
     //console.log(this.surveyMatDialogForm.value)
     //console.log('Select',this.surveyMatDialogForm.get('answerType')?.value)
     
 
     let subscription: Observable<any>;
+    
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe(() =>{})
+    subscription.subscribe((result) =>{
+     console.log(result)
+    })
       //this._location.back())
       }
 
   if (ansType == 'YES_NO'){
     ansProposed = this.optionsYesNoAnswer
     quest.addAnswers(ansProposed)
-    this.data = quest
+    //console.log(quest)
+    this.data.dto = quest
+  
+    //console.log('Data Verif',this.data)
+    this.recupQuest = this.data
+    
+    this.surveyService.sendNewMessageSurv(this.data);
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
-    subscription.subscribe((result: any) =>{})
+    subscription.subscribe((result) =>{
+      this.data.dto = result
+      console.log(result)
+      console.log(this.data.dto)
+    })
       //this._location.back())
       }
 
   if(ansType == 'FREE'){
     ansProposed = this.inputArrayFreeAnswer
     quest.addAnswers(ansProposed)
-    this.data = quest
+    this.data.dto = quest
+    //console.log('Data Verif',this.data)
+    this.recupQuest = this.data
+   // console.log('Data Verif',this.recupQuest)
+    this.surveyService.sendNewMessageSurv(this.data);
     let subscription: Observable<any>;
     subscription = this.questionService.addQuestion(quest)
     subscription.subscribe((result: any) =>{})
       //this._location.back())
       }
   
-      console.log(this.data)
+     // console.log(this.data)
+
+      this.dialogRef.close(this.data);
 
 }
 
@@ -184,6 +219,9 @@ export class SurveyMatDialogComponent implements OnInit {
     this.inputFreeAnswer=''
     //console.log('Ans',this.answerRegistered)
     }
+
+
+     
 
   }
 

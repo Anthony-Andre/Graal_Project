@@ -8,6 +8,7 @@ import { Level } from 'src/app/core/enums/level';
 import { PoeType } from 'src/app/core/enums/poe-type';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
+import { QuestionDto } from 'src/app/question/dto/question-dto';
 import { Survey } from '../../core/models/survey';
 import { SurveyService } from '../../core/services/survey.service';
 import { SurveyDto } from '../../dto/survey-dto';
@@ -20,13 +21,16 @@ import { SurveyMatDialogComponent } from '../survey-mat-dialog/survey-mat-dialog
 })
 export class SurveyFormComponent implements OnInit {
 
-
+  newMessage!: string[];
   public addMode: boolean = true;
   survey: Survey = new Survey();
   surveyFormGroup!: FormGroup;
   questionToAdd: Question = new Question();
   questions: Array<Question> = [];
+  questionsDto: QuestionDto = new QuestionDto({});
+  questionsDto2: QuestionDto = new QuestionDto({});
   allQuestions: Array<Question> = [];
+  newQuestion: Question = new Question()
 
   title = this.formBuilder.group({ titleControl: ['', Validators.required] });
   surveyForm = this.formBuilder.group({
@@ -37,6 +41,9 @@ export class SurveyFormComponent implements OnInit {
     oldQuestionControl: [new Question()],
     newQuestionControl: [new Question()]
   });
+
+ 
+
 
   @ViewChild(SurveyMatDialogComponent) comp!: SurveyMatDialogComponent
   public showInput = false;
@@ -87,6 +94,8 @@ export class SurveyFormComponent implements OnInit {
         })
     }
 
+    this.checkNewMessage();
+    //console.log(this.newMessage)
 
   }
 
@@ -113,7 +122,8 @@ export class SurveyFormComponent implements OnInit {
 
     //let questions_test = this.questions
     this.dialog.open(SurveyMatDialogComponent, {
-      data:this.questions,
+      //data:{dto:this.questionsDto},
+      data:this.questionsDto,
       height: '450px',
       width: '600px', 
 
@@ -121,9 +131,18 @@ export class SurveyFormComponent implements OnInit {
 
     })
       .afterClosed().subscribe((result) => {
-        //this.questions= questions_test
-        //this.questions = questions
-        //console.log(result)
+        
+        this.questionsDto = result.dto
+        this.questionService.findAll().subscribe()
+        
+        this.newQuestion.setId(this.questionsDto.id!)
+        this.newQuestion.setText(this.questionsDto.text)
+        this.newQuestion.setAnswerType(this.questionsDto.answerType)
+        this.newQuestion.setAnswersProposed(this.questionsDto.answersProposed)
+       
+        this.questions.push(this.newQuestion)
+        
+        console.log(result)
       })
 
       
@@ -144,7 +163,9 @@ export class SurveyFormComponent implements OnInit {
 
   public addCurrentQuestion(): void {
     var questionId = ((<HTMLInputElement>document.getElementById("addCurrentQuestion")).value);
-
+    //this.allQuestions.push(this.newQuestion)
+    //console.log('nq',this.newQuestion)
+    //console.log('last',this.allQuestions[this.allQuestions.length-1])
     this.questionService.findOne(parseInt(questionId))
       .subscribe((question: Question) => {
         this.questionToAdd = question;
@@ -153,6 +174,7 @@ export class SurveyFormComponent implements OnInit {
           this.allQuestions.findIndex((q: Question) => q.getId() === question.getId()),
           1);
       });
+      //this.allQuestions.push(this.newQuestion)
   }
 
   public deleteQuestion(questionId: number): void {
@@ -166,6 +188,19 @@ export class SurveyFormComponent implements OnInit {
       });
 
 
+  }
+
+  checkNewMessage(): void {
+    this.surveyService
+      .currentMessageSurv$
+      .subscribe(value => this.newMessage = value);
+
+      //console.log(this.newMessage)
+
+      //let sub = this.newMessage.find((x:any) => x == 0)
+      //this.subMess = sub!
+      
+     
   }
 
 }

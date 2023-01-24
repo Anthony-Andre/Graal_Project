@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, take } from 'rxjs';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { Question } from 'src/app/question/core/models/question';
 import { environment } from 'src/environments/environment';
 import { SurveyDto } from '../../dto/survey-dto';
@@ -122,6 +122,20 @@ export class SurveyService {
         return survey;
       })
     )
+  }
+
+
+  //private sendMessage = new BehaviorSubject<any[]>([]); 
+  //currentMessage$ = this.sendMessage.asObservable();  
+
+ // sendNewMessage(message: any[]): void {       						  
+   // this.sendMessage.next(message)
+ // }
+
+  private sendMessageSurv = new BehaviorSubject<any[]>([]); 
+  currentMessageSurv$ = this.sendMessageSurv.asObservable();  
+  sendNewMessageSurv(message: any): void {       						  
+    this.sendMessageSurv.next(message)
   }
 
 }
