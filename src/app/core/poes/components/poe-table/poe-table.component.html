@@ -51,7 +51,7 @@
                         <ng-container *ngIf="(mailStatus === 200)">
                             <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
                         </ng-container>
-                        <ng-container *ngIf="(mailStatus >= 400)">
+                        <ng-container *ngIf="(mailStatus === 400)">
                             <i title="Erreur" class="fa-solid fa-envelope red"></i>
                         </ng-container>
                     </button>

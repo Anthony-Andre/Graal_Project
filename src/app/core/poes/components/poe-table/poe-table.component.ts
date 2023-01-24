@@ -33,7 +33,7 @@ export class PoeTableComponent implements OnInit {
   public croissantEndDate: boolean = false;
   public croissantTitle: boolean = false;
   public surveyId!: number;
-  public mailStatus!: number;
+  public mailStatus: number = 0;
 
 
   constructor(
@@ -46,7 +46,6 @@ export class PoeTableComponent implements OnInit {
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
-    this.mailStatus = this.poeService.getMailStatus();
     })
 
 
@@ -108,7 +107,11 @@ export class PoeTableComponent implements OnInit {
     const dialogRef = this.dialog.open(SendSurveyDialogComponent, {data: {stopDate : this.stopDate}});
     dialogRef.afterClosed().subscribe(result => {
       this.surveyId = result;
-      if (this.surveyId > 0) {this.poeService.mailToPoe(poe, this.surveyId);}      
+      if (this.surveyId > 0) {
+        this.poeService.mailToPoe(poe, this.surveyId).subscribe((status: any) =>  {
+          this.mailStatus = status;
+          console.log("mailStatus in poe table : ", this.mailStatus);        
+      })}
     });    
   }
 
