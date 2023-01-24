@@ -108,7 +108,7 @@ export class PoeTableComponent implements OnInit {
     const dialogRef = this.dialog.open(SendSurveyDialogComponent, {data: {stopDate : this.stopDate}});
     dialogRef.afterClosed().subscribe(result => {
       this.surveyId = result;
-      this.poeService.mailToPoe(poe, this.surveyId);
+      if (this.surveyId > 0) {this.poeService.mailToPoe(poe, this.surveyId);}      
     });    
   }
 
