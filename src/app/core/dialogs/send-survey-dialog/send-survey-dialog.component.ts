@@ -13,7 +13,6 @@ export class SendSurveyDialogComponent implements OnInit {
 
  
   allSurveys: Array<Survey> = [];
-  surveySelected!: Survey;
   surveyId!: number;
 
 
@@ -37,32 +36,14 @@ export class SendSurveyDialogComponent implements OnInit {
     })            
   }
 
-  addCreatedSurvey(): void {
-    var surveyCreatedId = ((<HTMLInputElement>document.getElementById("addCreatedSurvey")).value);
-    this.surveyService.findOne(parseInt(surveyCreatedId)).subscribe((survey: Survey) => {
-      this.surveySelected = survey;
-      this.surveyId = this.surveySelected.getId();
-      console.log("L'utilisateur souhaite envoyer le questionnaire", this.surveySelected.getTitle());
-      }
-      );    
+  addCreatedSurvey(event: Event): void {
+    this.surveyId = parseInt((event.target as HTMLTextAreaElement).value);
+    console.log("surveyId in dialog: ",this.surveyId)      
   }
 
-  getSurveyTitle(): string {
-    if (this.surveySelected !== undefined) {return this.surveySelected.getTitle();}
-    return "";
-  }
-
-  getSurvey(): Array<Survey> {
-    console.log("stopDate equals oneMOnth", this.data.stopDate === "oneMonth");
-    // console.log(this.allSurveys);
-    // if (this.data.stopDate === "oneMonth" ) {
-    //   return this.allSurveys.filter((survey: Survey) => survey.getLevel() === Level.ONE_MONTH);
-    // }
-    return [];
-    // if (this.data.stopDate === "SixMonths" ) {
-    //   return this.allSurveys.filter((survey : Survey) => survey.getLevel() === Level.SIX_MONTHS);
-    // }
-    // return this.allSurveys.filter((survey: Survey) => survey.getLevel() === Level.ONE_YEAR);
-  }
+  // getSurveyTitle(): string {
+  //   if (this.surveySelected !== undefined) {return this.surveySelected.getTitle();}
+  //   return "";
+  // }
 
 }

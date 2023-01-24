@@ -186,6 +186,7 @@ export class PoeService {
 
   public mailToPoe(poe: Poe, surveyId: number): void {
     console.log(`Appel au service pour envoi de mail OK`);
+    console.log(surveyId);
     if (surveyId) {
       this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToPoe/${surveyId}`, '')
       .subscribe((inputStatus: any) => {
