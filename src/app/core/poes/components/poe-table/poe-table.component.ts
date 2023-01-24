@@ -105,10 +105,9 @@ export class PoeTableComponent implements OnInit {
 
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
-    const dialogRef = this.dialog.open(SendSurveyDialogComponent);
+    const dialogRef = this.dialog.open(SendSurveyDialogComponent, {data: {stopDate : this.stopDate}});
     dialogRef.afterClosed().subscribe(result => {
-      let surveyIdOnString = result;
-      this.surveyId = parseInt(surveyIdOnString);
+      this.surveyId = result;
       this.poeService.mailToPoe(poe, this.surveyId);
     });    
   }

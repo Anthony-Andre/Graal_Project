@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Survey } from 'src/app/survey/core/models/survey';
 import { SurveyService } from 'src/app/survey/core/services/survey.service';
+import { Level } from '../../enums/level';
 
 @Component({
   selector: 'app-send-survey-dialog',
@@ -11,42 +12,38 @@ import { SurveyService } from 'src/app/survey/core/services/survey.service';
 export class SendSurveyDialogComponent implements OnInit {
 
  
-  allSurveys!: Array<Survey>;
-  surveySelected!: Survey;
+  allSurveys: Array<Survey> = [];
   surveyId!: number;
 
 
   constructor(
     private surveyService: SurveyService,
-    private dialogRef: MatDialogRef<SendSurveyDialogComponent>
+    private dialogRef: MatDialogRef<SendSurveyDialogComponent>,
+    @Inject (MAT_DIALOG_DATA) public data: any
     ) { }
   
   ngOnInit(): void {
-    this.surveyService.findAll().subscribe((surveys: Array<Survey>) => this.allSurveys = surveys);
-  }
-
-  addCreatedSurvey(): void {
-    var surveyCreatedId = ((<HTMLInputElement>document.getElementById("addCreatedSurvey")).value);
-    this.surveyService.findOne(parseInt(surveyCreatedId)).subscribe((survey: Survey) => {
-      this.surveySelected = survey;
-      this.surveyId = this.surveySelected.getId();
-      console.log("L'utilisateur souhaite envoyer le questionnaire", this.surveySelected.getTitle());
+    this.surveyService.findAll().subscribe((surveys: Array<Survey>) => {
+      this.allSurveys = surveys;
+      
+      if (this.data.stopDate === "oneMonth") {
+        this.allSurveys = this.allSurveys.filter((survey: Survey) => survey.getLevel().toString() === Level.ONE_MONTH);
       }
-      );    
+      else if (this.data.stopDate === "sixMonths") {
+        this.allSurveys = this.allSurveys.filter((survey: Survey) => survey.getLevel() === Level.SIX_MONTHS)
+      }
+      else {this.allSurveys = this.allSurveys.filter((survey: Survey) => survey.getLevel() === Level.ONE_YEAR)}      
+    })            
   }
 
-  getSurveyTitle(): string {
-    if (this.surveySelected !== undefined) {return this.surveySelected.getTitle();}
-    return "";
+  addCreatedSurvey(event: Event): void {
+    this.surveyId = parseInt((event.target as HTMLTextAreaElement).value);
+    console.log("surveyId in dialog: ",this.surveyId)      
   }
 
-  
-  
-
-
-
-  
-
- 
+  // getSurveyTitle(): string {
+  //   if (this.surveySelected !== undefined) {return this.surveySelected.getTitle();}
+  //   return "";
+  // }
 
 }
