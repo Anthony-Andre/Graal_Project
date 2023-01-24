@@ -78,8 +78,6 @@ export class TraineeSurveyComponent implements OnInit {
           });
       })
 
-    console.log(this.questions);
-
     // Récupération du stagiaire : 
     this.idTrainee = this.route.snapshot.params['id'];
     this.stagiaireService.findOne(this.idTrainee).subscribe((trainee) => {
@@ -103,14 +101,12 @@ export class TraineeSurveyComponent implements OnInit {
       answer.setQuestion(question);
       answer.setText(this.surveyFormGroup.get(question.getText())!.value);
       this.answers.push(answer);
-      console.log(this.answers)
     }
     this.surveyFormGroup.value.trainee = this.stagiaire;
     this.surveyFormGroup.value.survey = this.survey;
     this.surveyFormGroup.value.answers = this.answers;
     const dto: AnsweredSurveyDto = new AnsweredSurveyDto(this.surveyFormGroup.value);
     dto.setAnswers(this.answers);
-    console.log("dto: ", dto);
     let subscription: Observable<any>;
     subscription = this.answeredSurveyService.addSurvey(dto)
     subscription.subscribe(() => this.goHome())
