@@ -6,7 +6,7 @@
     <thead>
         <tr>
             <th>#</th>
-            <th (click)="sortByTitle()">Title
+            <th (click)="sortByTitle()">Titre
                 <ng-container *ngIf="!croissantTitle">
                     <i alt="fleche" class="fa-solid fa-caret-down"></i>
                 </ng-container>
@@ -15,7 +15,7 @@
                 </ng-container>
             </th>
             <th>Type de POE</th>
-            <th (click)="sortByLevel()">Level
+            <th (click)="sortByLevel()">Terminée depuis
                 <ng-container *ngIf="!croissantLevel">
                     <i alt="fleche" class="fa-solid fa-caret-down"></i>
                 </ng-container>
@@ -24,8 +24,8 @@
                 </ng-container>
             </th>
             <th>Nombre de questions</th>
-            <th>Modify</th>
-            <th>Delete</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
         </tr>
     </thead>  
 
@@ -46,4 +46,4 @@
     </tbody>
 </table>
 
-<a class="link-button" [routerLink]="['/','survey','add']">Ajouter un survey</a>
+<a class="link-button" [routerLink]="['/','survey','add']">Ajouter un questionnaire</a>

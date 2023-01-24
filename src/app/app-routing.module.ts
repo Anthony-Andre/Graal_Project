@@ -14,7 +14,6 @@ import { HasUserGuard } from './user/guards/has-user.guard';
 import { SignupFormComponent } from './user/components/signup-form/signup-form.component';
 import { PoeDetailsComponent } from './core/poes/components/poe-details/poe-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
-import { QuestionFormComponent } from './question/components/question-form/question-form/question-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolver/survey.resolver';
 import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
@@ -137,13 +136,6 @@ export class AppRoutingModule {
       path: 'survey/update/:id',
       component: SurveyFormComponent,
       resolve: { form: SurveyResolver },
-      canActivate: [
-        HasUserGuard
-      ]
-    },
-    {
-      path: 'question',
-      component: QuestionFormComponent,
       canActivate: [
         HasUserGuard
       ]

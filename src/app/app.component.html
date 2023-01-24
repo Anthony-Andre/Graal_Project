@@ -6,16 +6,16 @@
 
   <ul class="navbar">
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'poe']">POE List</a>
+      <a [routerLink]="['/', 'poe']">POEs</a>
     </li>
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'stagiaire']">Trainees</a>
+      <a [routerLink]="['/', 'stagiaire']">Stagiaires</a>
     </li>
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'survey']">Surveys</a>
+      <a [routerLink]="['/', 'survey']">Questionnaires</a>
     </li>
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'question-table']">Question</a>
+      <a [routerLink]="['/', 'question-table']">Questions</a>
     </li>
 
     <li>

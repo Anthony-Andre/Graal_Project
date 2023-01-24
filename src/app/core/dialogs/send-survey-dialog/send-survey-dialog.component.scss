@@ -1,0 +1,39 @@
+
+
+.selectSurvey {
+    display: flex;
+    flex-direction: column;
+}
+
+#bloc_page {
+    text-align: center;
+}
+
+#addCreatedSurvey {
+    text-align: center;
+}
+
+#linked_line {
+    margin-top: 5px;
+}
+
+.bot-buttons-div {
+    display: flex;
+    justify-content: center;
+    }
+
+.bot-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7em;
+    height: 2em;
+    text-decoration: none;
+    background-color: rgba($color: #c6e5f3d1, $alpha: 1.0);
+    color: rgb(0, 0, 0);
+    border: solid black;
+    border-radius: 25px;
+    margin: 2em auto;
+    text-align: center;
+    cursor: pointer;
+}
