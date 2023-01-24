@@ -32,7 +32,7 @@
       <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'YES_NO'">
         <legend>{{question.getText()}}</legend>
         <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
-          <input type="radio" formControlName="{{question.getText()}}">
+          <input type="radio" formControlName="{{question.getText()}}" value="{{answer}}">
           <label for="{{question}}">{{answer}}</label>
         </div>
       </fieldset>
@@ -48,8 +48,10 @@
         <legend>{{question.getText()}}</legend>
         <div class="answerContainer">
           <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
-            <input formControlName="{{question.getText()}}" type="radio"
-              name="{{question.getText()}}"><span>{{answer}}</span>
+            <input formControlName="{{question.getText()}}" type="radio" value="{{answer}}">
+            <span>
+              {{answer}}
+            </span>
           </div>
         </div>
       </fieldset>
