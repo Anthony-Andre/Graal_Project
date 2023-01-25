@@ -35,6 +35,9 @@ export class PoeService {
             poe.setEndDate(inputPoe.endDate);
             poe.setPoeType(inputPoe.type);
             poe.setTrainees(inputPoe.trainees);
+            poe.setOneMonthMailSent(inputPoe.oneMonthMailSent);
+            poe.setSixMonthMailSent(inputPoe.sixMonthMailSent);
+            poe.setOneYearMailSent(inputPoe.oneYearMailSent);
             return poe;
           })
         })
@@ -54,6 +57,9 @@ export class PoeService {
         poe.setEndDate(new Date(inputPoe.endDate));
         poe.setPoeType(inputPoe.type);
         poe.setTrainees(inputPoe.trainees);
+        poe.setOneMonthMailSent(inputPoe.oneMonthMailSent);
+        poe.setSixMonthMailSent(inputPoe.sixMonthMailSent);
+        poe.setOneYearMailSent(inputPoe.oneYearMailSent);
         return poe;
       })
     )
@@ -186,15 +192,23 @@ export class PoeService {
       )
   }
 
-  public mailToPoe(poe: Poe, surveyId: number): Observable<any> {
+  public mailToPoe(poe: Poe, surveyId: number, stopDate: String | null): Observable<Poe> {
     console.log(`Appel au service pour envoi de mail OK`);
-    console.log(surveyId);
-    return this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToPoe/${surveyId}`, '')
+    return this.httpClient.patch<Poe>(`${this.controllerBaseUrl}/${poe.getId()}/mailToPoe/${surveyId}`, stopDate)
       .pipe(
         take(1),
-        map((inputStatus: any) => {
-          this.mailStatus = inputStatus;
-          return this.mailStatus;
+        map((inputPoe: any) => {
+          const poe: Poe = new Poe();
+          poe.setId(inputPoe.id!);
+          poe.setTitle(inputPoe.title);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
+          poe.setPoeType(inputPoe.type);
+          poe.setTrainees(inputPoe.trainees);
+          poe.setOneMonthMailSent(inputPoe.oneMonthMailSent);
+          poe.setSixMonthMailSent(inputPoe.sixMonthMailSent);
+          poe.setOneYearMailSent(inputPoe.oneYearMailSent);
+          return poe;
         })
       )  
   }

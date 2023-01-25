@@ -8,7 +8,9 @@ export class Poe {
     private endDate!: Date;
     private type!: PoeType;
     private trainees!: Array<Stagiaire>;
-    private mailSend: Boolean = false;
+    private oneMonthMailSent: number = 0;
+    private sixMonthMailSent: number = 0;
+    private oneYearMailSent: number = 0;
 
 
     public getId(): number {
@@ -59,11 +61,28 @@ export class Poe {
         this.trainees = trainees;
     }
 
-    public getMailSend(): Boolean {
-      return this.mailSend;
+    public getOneMonthMailSent(): number {
+        return this.oneMonthMailSent;
     }
-    public setMailSend(value: Boolean) {
-      this.mailSend = value;
+
+    public setOneMonthMailSent(value: number) {
+        this.oneMonthMailSent = value;
+    }
+
+    public getSixMonthMailSent(): number {
+        return this.sixMonthMailSent;
+    }
+
+    public setSixMonthMailSent(value: number) {
+        this.sixMonthMailSent = value;
+    }
+
+    public getOneYearMailSent(): number {
+        return this.oneYearMailSent;
+    }
+
+    public setOneYearMailSent(value: number) {
+        this.oneYearMailSent = value;
     }
 }
 

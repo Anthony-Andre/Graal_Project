@@ -43,15 +43,41 @@
                 <td><button type="button" class="buttonDelete" (click)="onUpDate(poe)">🖊️</button></td>
                 <td><button type="button" class="buttonDelete" (click)="onRemovePoeDialog(poe)">X</button></td>
                 <td> {{ poe.getTrainees().length }}</td>
-                <td *ngIf="stopDate !== null">
+                <td *ngIf="stopDate === 'oneMonth'">
                     <button class="mailButton" type="button" (click)="onMail(poe)">
-                        <ng-container *ngIf="(mailStatus === 0)">
+                        <ng-container *ngIf="(poe.getOneMonthMailSent() === 0)">
                             <i title="Envoyer" class="fa-solid fa-envelope"></i>
                         </ng-container>
-                        <ng-container *ngIf="(mailStatus === 200)">
+                        <ng-container *ngIf="(poe.getOneMonthMailSent() === 200)">
                             <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
                         </ng-container>
-                        <ng-container *ngIf="(mailStatus === 400)">
+                        <ng-container *ngIf="(poe.getOneMonthMailSent() === 400)">
+                            <i title="Erreur" class="fa-solid fa-envelope red"></i>
+                        </ng-container>
+                    </button>
+                </td>
+                <td *ngIf="stopDate === 'sixMonth'">
+                    <button class="mailButton" type="button" (click)="onMail(poe)">
+                        <ng-container *ngIf="(poe.getSixMonthMailSent() === 0)">
+                            <i title="Envoyer" class="fa-solid fa-envelope"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(poe.getSixMonthMailSent() === 200)">
+                            <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(poe.getSixMonthMailSent() === 400)">
+                            <i title="Erreur" class="fa-solid fa-envelope red"></i>
+                        </ng-container>
+                    </button>
+                </td>
+                <td *ngIf="stopDate === 'oneYear'">
+                    <button class="mailButton" type="button" (click)="onMail(poe)">
+                        <ng-container *ngIf="(poe.getOneYearMailSent() === 0)">
+                            <i title="Envoyer" class="fa-solid fa-envelope"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(poe.getOneYearMailSent() === 200)">
+                            <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(poe.getOneYearMailSent() === 400)">
                             <i title="Erreur" class="fa-solid fa-envelope red"></i>
                         </ng-container>
                     </button>

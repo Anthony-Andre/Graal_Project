@@ -33,7 +33,6 @@ export class PoeTableComponent implements OnInit {
   public croissantEndDate: boolean = false;
   public croissantTitle: boolean = false;
   public surveyId!: number;
-  public mailStatus: number = 0;
 
 
   constructor(
@@ -41,12 +40,14 @@ export class PoeTableComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private greetingService: GreetingService,
-    private dialog : MatDialog) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
     })
+
+
 
 
     this.isSignedin = this.authService.isUserSignedin();
@@ -61,7 +62,7 @@ export class PoeTableComponent implements OnInit {
       this.greetingService.getByAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/admin - You are not authorized'));
       this.greetingService.getByUserOrAdminRole().subscribe((result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
     }
-    
+
   }
 
   public doSignout() {
@@ -85,7 +86,7 @@ export class PoeTableComponent implements OnInit {
           )
         }
       });
-    }    
+    }
   }
 
   public onRemovePoeDialog(poe: Poe): void {
@@ -104,15 +105,17 @@ export class PoeTableComponent implements OnInit {
 
   public onMail(poe: Poe): void {
     console.log(`L'utilisateur souhaite envoyer un mail à tous les stagiaires de la poe ${poe.getTitle()}`);
-    const dialogRef = this.dialog.open(SendSurveyDialogComponent, {data: {stopDate : this.stopDate}});
+    const dialogRef = this.dialog.open(SendSurveyDialogComponent, { data: { stopDate: this.stopDate } });
     dialogRef.afterClosed().subscribe(result => {
       this.surveyId = result;
       if (this.surveyId > 0) {
-        this.poeService.mailToPoe(poe, this.surveyId).subscribe((status: any) =>  {
-          this.mailStatus = status;
-          console.log("mailStatus in poe table : ", this.mailStatus);        
-      })}
-    });    
+        this.poeService.mailToPoe(poe, this.surveyId, this.stopDate).subscribe((inputPoe: any) => {
+          poe = inputPoe;
+          console.log("poe in poe table : ", JSON.stringify(poe));
+          this.poes[this.poes.findIndex((p: Poe) => p.getId() === poe.getId())]=poe;
+        })
+      }
+    });
   }
 
   public filterChanged(event: String | null): void {
@@ -161,37 +164,39 @@ export class PoeTableComponent implements OnInit {
     this.croissantTitle = false;
     if (this.croissantEndDate) {
       this.croissantEndDate = false;
-    this.poes.sort((a, b) => {
-      var endDateTimeA =  Number(new Date(a.getEndDate()));
-      var endDateTimeB =  Number(new Date(b.getEndDate()));
-        return endDateTimeB - endDateTimeA;
-    })
-   } else {
-    this.croissantEndDate = true;
       this.poes.sort((a, b) => {
-        var endDateTimeA =  Number(new Date(a.getEndDate()));
-        var endDateTimeB =  Number(new Date(b.getEndDate()));
-          return endDateTimeA - endDateTimeB;
-    })
-  };
-}
+        var endDateTimeA = Number(new Date(a.getEndDate()));
+        var endDateTimeB = Number(new Date(b.getEndDate()));
+        return endDateTimeB - endDateTimeA;
+      })
+    } else {
+      this.croissantEndDate = true;
+      this.poes.sort((a, b) => {
+        var endDateTimeA = Number(new Date(a.getEndDate()));
+        var endDateTimeB = Number(new Date(b.getEndDate()));
+        return endDateTimeA - endDateTimeB;
+      })
+    };
+  }
 
   public sortByTitle() {
     this.croissantEndDate = false;
     if (this.croissantTitle) {
       this.croissantTitle = false;
-      function SortArray(x: Poe, y: Poe){
+      function SortArray(x: Poe, y: Poe) {
         return x.getTitle().localeCompare(y.getTitle());
       }
-      return this.poes.sort(SortArray);    
+      return this.poes.sort(SortArray);
     } else {
       this.croissantTitle = true;
-      function SortArray(x: Poe, y: Poe){
+      function SortArray(x: Poe, y: Poe) {
         return y.getTitle().localeCompare(x.getTitle());
       }
-      return this.poes.sort(SortArray);    
+      return this.poes.sort(SortArray);
     }
   }
+
+
 }
 
 
