@@ -61,56 +61,14 @@
         <legend>{{question.getText()}}</legend>
         <div class="answerContainer">
           <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
-            <input formControlName="{{question.getText()}}" type="radio" name="{{question.getText()}}">
+            <input class="{{question.getText()}}" type="checkbox" formControlName="{{question.getText()}}{{answer}}"
+              value="{{answer}}" name="{{question.getText()}}">
             <label for="{{question}}">{{answer}}</label>
           </div>
         </div>
       </fieldset>
 
-
-
     </div>
-
-
-    <!-- 
-    <div class="questionsYesNo" *ngFor="let question of questionsYesNo">
-      <h1>{{question.getText()}}</h1>
-      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
-
-        
-
-        <input type="radio" name="{{answer}}" value="{{answer}}">
-        <label for="{{answer}}">{{answer}}</label>
-      </div>
-    </div>
-
-    .<div class="questionsFree" *ngFor="let question of questionsFree">
-      <h1>{{question.getText()}}</h1>
-      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
-        <input name="{{answer}}" type="text">
-        <label for="{{answer}}">{{answer}}</label>
-      </div>
-    </div>
-
-    <div class="questionsYesNo" *ngFor="let question of questionsYesNo">
-      <h1>{{question.getText()}}</h1>
-      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
-        <input type="radio" name="{{answer}}" value="{{answer}}">
-        <label for="{{answer}}">{{answer}}</label>
-      </div>
-    </div>
-
-    <div class="questionsYesNo" *ngFor="let question of questionsYesNo">
-      <h1>{{question.getText()}}</h1>
-      <div class="answers" *ngFor="let answer of question.getAnswersProposed()">
-        <input type="radio" name="{{answer}}" value="{{answer}}">
-        <label for="{{answer}}">{{answer}}</label>
-      </div>
-    </div>
-
--->
-
-
 
     <div class="btn-block">
       <button type="submit" (click)="onSubmit()">Envoyer vos réponses</button>

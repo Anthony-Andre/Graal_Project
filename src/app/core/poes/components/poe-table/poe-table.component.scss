@@ -90,10 +90,13 @@ tfoot {
 }
 
 .mailButton {
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 25px;
-  width: 22px;
-  height: 22px;
+  button {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    width: 22px;
+    height: 22px;
+  }
+
   // :active {
   //   animation-duration: 2s;
   //   animation-name: slideLeft;

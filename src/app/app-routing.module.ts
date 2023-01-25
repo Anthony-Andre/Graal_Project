@@ -20,6 +20,7 @@ import { TraineeSurveyComponent } from './survey/components/trainee-survey/train
 import { TraineeSurveyResolver } from './survey/resolver/trainee-survey.resolver';
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
 import { HasAnonymousGuard } from './user/guards/has-anonymous.guard';
+import { ThanksComponent } from './survey/finish/thanks/thanks.component';
 
 const routes: Routes = [];
 
@@ -158,6 +159,10 @@ export class AppRoutingModule {
       path: 'survey/:idSurvey/trainee/:id',
       component: TraineeSurveyComponent,
       resolve: { form: TraineeSurveyResolver }
+    },
+    {
+      path: 'thanks',
+      component: ThanksComponent
     },
     {
       path: 'question-table',
