@@ -1,10 +1,23 @@
 $head-and-foot-color : rgb(212, 145, 62);
 $head-and-foot-text-color : rgb(0, 0, 0);
 $main-font: 'Acme', sans-serif;
+$main-color : rgb(212, 145, 62);
+
+
+/*-- soulignement du titre --*/
+.underline-title {
+    background: $main-color;
+    height: 2px;
+    margin: -1.1rem auto 0 auto;
+    width: 172px;
+}
 
 .surveyDialog input,
 .surveyDialog select {
     font-family: $main-font;
+    &::placeholder {
+        color: rgba($color: $main-color, $alpha: 0.7);
+    }
 }
 
 .title {
@@ -46,7 +59,8 @@ $main-font: 'Acme', sans-serif;
 .answers {
     display: flex;
     justify-content: center;
-    margin-bottom: 1em;
+    margin-top: 1.5em;
+
 }
 
 .question {
@@ -55,6 +69,14 @@ $main-font: 'Acme', sans-serif;
 
 .answerList {
     list-style-type: disc;
+    div {
+        display: flex;
+        flex-direction: row;
+        p {
+            margin: 0;
+            margin-right: 10px;
+        }
+    }
 }
 
 .question label,
@@ -70,4 +92,12 @@ $main-font: 'Acme', sans-serif;
     text-align: center;
     display: absolute;
     margin: auto;
+    border: 1px solid black;
+    border-radius: 25px;
+    width: 20px;
+    color: $main-color ;
+    &:hover {
+        color: rgba(255, 0, 0, 0.712);
+        border: 1px solid rgba(255, 0, 0, 0.702);
+    }
 }

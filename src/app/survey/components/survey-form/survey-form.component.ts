@@ -124,28 +124,23 @@ export class SurveyFormComponent implements OnInit {
     this.dialog.open(SurveyMatDialogComponent, {
       //data:{dto:this.questionsDto},
       data:this.questionsDto,
-      height: '450px',
-      width: '600px', 
-
-     
-
+      height: 'auto',
+      width: '500px',
     })
       .afterClosed().subscribe((result) => {
         
         this.questionsDto = result.dto
-        this.questionService.findAll().subscribe()
-        
-        this.newQuestion.setId(this.questionsDto.id!)
-        this.newQuestion.setText(this.questionsDto.text)
-        this.newQuestion.setAnswerType(this.questionsDto.answerType)
-        this.newQuestion.setAnswersProposed(this.questionsDto.answersProposed)
+        //this.questionService.findAll().subscribe()
+        const newQuestion:Question = new Question()
+        newQuestion.setId(this.questionsDto.id!)
+        newQuestion.setText(this.questionsDto.text)
+        newQuestion.setAnswerType(this.questionsDto.answerType)
+        newQuestion.setAnswersProposed(this.questionsDto.answersProposed)
        
-        this.questions.push(this.newQuestion)
+        this.questions.push(newQuestion)
         
         console.log(result)
       })
-
-      
   }
 
   InsertSelect() {
