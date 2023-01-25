@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, take } from 'rxjs';
+import { map, Observable, of, take } from 'rxjs';
 import { Survey } from 'src/app/survey/core/models/survey';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
@@ -35,6 +35,9 @@ export class PoeService {
             poe.setEndDate(inputPoe.endDate);
             poe.setPoeType(inputPoe.type);
             poe.setTrainees(inputPoe.trainees);
+            poe.setOneMonthMailSent(inputPoe.oneMonthMailSent);
+            poe.setSixMonthMailSent(inputPoe.sixMonthMailSent);
+            poe.setOneYearMailSent(inputPoe.oneYearMailSent);
             return poe;
           })
         })
@@ -54,6 +57,9 @@ export class PoeService {
         poe.setEndDate(new Date(inputPoe.endDate));
         poe.setPoeType(inputPoe.type);
         poe.setTrainees(inputPoe.trainees);
+        poe.setOneMonthMailSent(inputPoe.oneMonthMailSent);
+        poe.setSixMonthMailSent(inputPoe.sixMonthMailSent);
+        poe.setOneYearMailSent(inputPoe.oneYearMailSent);
         return poe;
       })
     )
@@ -172,6 +178,7 @@ export class PoeService {
       .pipe(
         take(1),
         map((inputPoe: any) => {
+          console.log("inputPoe in clearTrainees",JSON.stringify(inputPoe));
           const poe: Poe = new Poe();
           poe.setId(inputPoe.id!);
           poe.setTitle(inputPoe.title);
@@ -179,27 +186,30 @@ export class PoeService {
           poe.setEndDate(new Date(inputPoe.endDate));
           poe.setPoeType(inputPoe.type);
           poe.setTrainees(inputPoe.trainees);
-          return poe;
+          console.log("poe in clearTrainees",JSON.stringify(poe));
+          return poe;          
         })
       )
   }
 
-  public mailToPoe(poe: Poe, surveyId: number): void {
+  public mailToPoe(poe: Poe, surveyId: number, stopDate: String | null): Observable<Poe> {
     console.log(`Appel au service pour envoi de mail OK`);
-    console.log(surveyId);
-    if (surveyId > 0) {
-      this.httpClient.post<any>(`${this.controllerBaseUrl}/${poe.getId()}/mailToPoe/${surveyId}`, '')
-      .subscribe((inputStatus: any) => {
-        console.log(inputStatus);
-        this.mailStatus = inputStatus;
-        console.log("mailstatus : ", this.mailStatus);
-      }
-      );
-    }
-   
-  }
-
-  public getMailStatus(): number {
-    return this.mailStatus;
+    return this.httpClient.patch<Poe>(`${this.controllerBaseUrl}/${poe.getId()}/mailToPoe/${surveyId}`, stopDate)
+      .pipe(
+        take(1),
+        map((inputPoe: any) => {
+          const poe: Poe = new Poe();
+          poe.setId(inputPoe.id!);
+          poe.setTitle(inputPoe.title);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
+          poe.setPoeType(inputPoe.type);
+          poe.setTrainees(inputPoe.trainees);
+          poe.setOneMonthMailSent(inputPoe.oneMonthMailSent);
+          poe.setSixMonthMailSent(inputPoe.sixMonthMailSent);
+          poe.setOneYearMailSent(inputPoe.oneYearMailSent);
+          return poe;
+        })
+      )  
   }
 }
