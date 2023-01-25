@@ -10,6 +10,7 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
+import { AnsweredSurvey } from '../../core/models/answered-survey';
 import { Survey } from '../../core/models/survey';
 import { AnsweredSurveyService } from '../../core/services/answered-survey.service';
 import { SurveyService } from '../../core/services/survey.service';
@@ -34,6 +35,7 @@ export class TraineeSurveyComponent implements OnInit {
   answer: Answer = new Answer;
   answers: Array<Answer> = [];
   public selectedOption!: string;
+  answeredSurveys: Array<AnsweredSurvey> = [];
 
   YESNO!: AnswerType;
 
@@ -53,7 +55,6 @@ export class TraineeSurveyComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     // Récupération du survey via le resolver :
     const data: any = this.route.snapshot.data;
     this.surveyFormGroup = data.form;
@@ -71,18 +72,33 @@ export class TraineeSurveyComponent implements OnInit {
               question.setAnswerType(anyQuestion.answerType);
               question.setAnswersProposed(anyQuestion.answersProposed);
               this.questions.push(question);
-              this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
+
+              if (question.getAnswerType().toLocaleString() === "CHOOSE_MANY") {
+                for (const answer of question.getAnswersProposed()) {
+                  this.surveyFormGroup.addControl(question.getText() + answer, this.formBuilder.control('', [Validators.required]));
+                }
+              } else {
+                this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
+              }
               return question;
             }
             )
           });
       })
 
+
+
     // Récupération du stagiaire : 
     this.idTrainee = this.route.snapshot.params['id'];
     this.stagiaireService.findOne(this.idTrainee).subscribe((trainee) => {
       return this.stagiaire = trainee;
     });
+
+    this.answeredSurveyService.findAll().subscribe((answeredSurveys) =>
+      this.answeredSurveys = answeredSurveys
+    )
+
+    console.log(this.answeredSurveys);
 
   }
 
@@ -97,9 +113,26 @@ export class TraineeSurveyComponent implements OnInit {
   onSubmit() {
 
     for (const question of this.questions) {
+
+      // Préparation d'une réponse avec attribution de la question : 
       let answer: Answer = new Answer();
       answer.setQuestion(question);
-      answer.setText(this.surveyFormGroup.get(question.getText())!.value);
+
+      // Préparation des réponses en Choose Many 
+      if (question.getAnswerType().toLocaleString() === "CHOOSE_MANY") {
+        let answersChooseMany = [];
+        var checkboxes = document.getElementsByClassName(question.getText());
+        for (const [i, answer] of question.getAnswersProposed().entries()) {
+          if (this.surveyFormGroup.get(question.getText() + answer)!.value == true) {
+            console.log(checkboxes[i].getAttribute('value'));
+            answersChooseMany.push(checkboxes[i].getAttribute('value'));
+          }
+        }
+        answer.setText(answersChooseMany.toString());
+      } else {
+        // Attribution du texte de la réponse à la réponse : 
+        answer.setText(this.surveyFormGroup.get(question.getText())!.value);
+      }
       this.answers.push(answer);
     }
     this.surveyFormGroup.value.trainee = this.stagiaire;
