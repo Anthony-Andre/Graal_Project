@@ -10,6 +10,8 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
+import { Request } from 'src/app/user/models/request';
+import { AuthService } from 'src/app/user/services/auth-service.service';
 import { Survey } from '../../core/models/survey';
 import { AnsweredSurveyService } from '../../core/services/answered-survey.service';
 import { SurveyService } from '../../core/services/survey.service';
@@ -33,6 +35,7 @@ export class TraineeSurveyComponent implements OnInit {
   idTrainee!: number;
   answer: Answer = new Answer;
   answers: Array<Answer> = [];
+  request!: Request;
   public selectedOption!: string;
 
   YESNO!: AnswerType;
@@ -48,11 +51,11 @@ export class TraineeSurveyComponent implements OnInit {
     private answeredSurveyService: AnsweredSurveyService,
     private _location: Location,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
 
-  ngOnInit(): void {
-
+  ngOnInit(): void {    
 
     // Récupération du survey via le resolver :
     const data: any = this.route.snapshot.data;

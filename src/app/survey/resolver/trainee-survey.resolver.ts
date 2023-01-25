@@ -6,7 +6,9 @@ import {
   ActivatedRouteSnapshot,
   Router
 } from '@angular/router';
-import { map, Observable, of, take } from 'rxjs';
+import { flatMap, map, Observable, of, take } from 'rxjs';
+import { Request } from 'src/app/user/models/request';
+import { AuthService } from 'src/app/user/services/auth-service.service';
 import { AnsweredSurvey } from '../core/models/answered-survey';
 import { Survey } from '../core/models/survey';
 import { FormBuilderService } from '../core/services/form-builder/form-builder.service';
@@ -17,24 +19,31 @@ import { SurveyService } from '../core/services/survey.service';
   providedIn: 'root'
 })
 export class TraineeSurveyResolver implements Resolve<FormGroup> {
+
+  private request!: Request;
+
   public constructor(
     private surveyService: SurveyService,
     private formBuilderService: TraineeSurveyFormService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {
-
-
-    const id: number = +route.paramMap.get('id')!;
-    const idSurvey: number = +route.paramMap.get('idSurvey')!;
-    console.log("id:", id);
-    console.log("idSurvey: ", idSurvey);
     let survey: AnsweredSurvey;
-    let form: FormGroup;
-
     survey = new AnsweredSurvey();
-    form = this.formBuilderService.build(survey).getForm();
-    return of(form);
+    let form = this.formBuilderService.build(survey).getForm();
+    this.request = { userName: "anonymous", userPwd: "anonymous", stayConnected: false }
+    return this.authService.signin(this.request).pipe(
+      take(1),
+      flatMap(() => {
+        const id: number = +route.paramMap.get('id')!;
+        const idSurvey: number = +route.paramMap.get('idSurvey')!;
+        console.log("id:", id);
+        console.log("idSurvey: ", idSurvey);
+        form = this.formBuilderService.build(survey).getForm();
+        return of(form);
+      }
+      ));
   }
 }
