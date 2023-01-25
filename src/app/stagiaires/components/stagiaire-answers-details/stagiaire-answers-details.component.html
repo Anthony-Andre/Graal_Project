@@ -1,1 +1,12 @@
+<h1>Nom du questionnaire : {{survey.getTitle()}}</h1>
 
+<h2>Mail pour l'échéance : {{survey.getLevel()}}</h2>
+
+<div *ngFor="let answer of answers">
+
+  <h3>{{answer.getQuestion().getText()}}</h3>
+
+  <h4>Réponse du stagiaire : {{answer.getText()}}</h4>
+
+
+</div>

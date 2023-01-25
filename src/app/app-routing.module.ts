@@ -19,6 +19,7 @@ import { SurveyResolver } from './survey/resolver/survey.resolver';
 import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
 import { TraineeSurveyResolver } from './survey/resolver/trainee-survey.resolver';
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
+import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
 
 const routes: Routes = [];
 
@@ -144,6 +145,10 @@ export class AppRoutingModule {
       path: 'survey/:idSurvey/trainee/:id',
       component: TraineeSurveyComponent,
       resolve: { form: TraineeSurveyResolver }
+    },
+    {
+      path: 'answered-survey/:id',
+      component: StagiaireAnswersDetailsComponent
     },
     {
       path: 'question-table',
