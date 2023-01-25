@@ -17,10 +17,19 @@ export class StagiaireDetailComponent implements OnInit {
   // @Output() public changeVisibility: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   // @Output() public onChangeState: EventEmitter<Stagiaire | null> = new EventEmitter<Stagiaire | null>();
 
+  public changeView: boolean = false;
   public bubbleConfig: any = {
     backgroundColor: 'rgba(189, 58, 58, 0.651)',
     color: '#fff',
     border: 'solid 2px rgb(2, 222, 45)'
+  }
+
+  public toInfos(): void {
+    this.changeView = false;
+  } 
+
+  public toReponses(): void {
+    this.changeView = true;
   }
 
   constructor(
@@ -45,8 +54,6 @@ export class StagiaireDetailComponent implements OnInit {
   public changeStagiaire(stagiaire: Stagiaire) {
     this.stagiaire = stagiaire;
   }
-
-
 
   public closeStagiaireCard() {
     this.handleDetailService.setIsDetailHidden(true);
