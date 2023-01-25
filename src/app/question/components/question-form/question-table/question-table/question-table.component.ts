@@ -30,16 +30,16 @@ export class QuestionTableComponent implements OnInit {
   public onRemove(question: Question): void {
     console.log(`L'utilisateur souhaite supprimer ${question.getText()}`);
     //if (this.confirmation === "true") {
-      this.questionService.delete(question).subscribe({
-        next: (response: HttpResponse<any>) => { },
-        error: (error: any) => { },
-        complete: () => {
-         this.questions.splice(
-            this.questions.findIndex((q: Question) => q.getId() === question.getId()),
-            1
-         )
-        }
-      });
+    this.questionService.delete(question).subscribe({
+      next: (response: HttpResponse<any>) => { },
+      error: (error: any) => { },
+      complete: () => {
+        this.questions.splice(
+          this.questions.findIndex((q: Question) => q.getId() === question.getId()),
+          1
+        )
+      }
+    });
     //}
   }
 
