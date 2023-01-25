@@ -56,7 +56,7 @@ header ul {
 
   li {
     background-color: $main-color;
-    border: solid 1px $main-color;
+    border: solid $main-color;
     border-radius: 0.5em;
     margin: auto;
     padding: 1em;
@@ -126,54 +126,6 @@ header h1 {
     transform: scale(2.0);
   }
 }
-
-//** Affichage d'une carte de stagiaire : **// 
-
-// Style d'un formulaire (Carte) perso // 
-
-
-// form {
-//   margin: 2em auto;
-//   padding: 2em;
-//   width: 25%;
-//   border: solid;
-//   background-color: #fff;
-//   display: flex;
-//   flex-direction: column;
-//   text-align: center;
-// }
-
-// form label,
-// form button {
-//   margin-top: .75em;
-//   font-weight: bold;
-// }
-
-// form input,
-// form button {
-//   height: 1.5em;
-//   border-radius: 25px;
-//   text-align: center;
-//   font-family: $main-font;
-// }
-
-// form input {
-//   border-top: none;
-//   margin: auto;
-//   width: 75%;
-// }
-
-// form button {
-//   height: 2em;
-//   width: 25%;
-//   margin: 1.5em auto 0 auto;
-//   background-color: rgb(212, 145, 62);
-//   color: #fff;
-//   cursor: pointer;
-// }
-
-//** Style d'un formulaire (Carte) Perso **// 
-
 
 // Style d'un formulaire (Carte) avec Material : // 
 
@@ -282,3 +234,51 @@ body {
   margin: auto 1em;
   border-radius: 5px;
 }
+
+
+//** Affichage d'une carte de stagiaire : **// 
+
+// Style d'un formulaire (Carte) perso // 
+
+
+// form {
+//   margin: 2em auto;
+//   padding: 2em;
+//   width: 25%;
+//   border: solid;
+//   background-color: #fff;
+//   display: flex;
+//   flex-direction: column;
+//   text-align: center;
+// }
+
+// form label,
+// form button {
+//   margin-top: .75em;
+//   font-weight: bold;
+// }
+
+// form input,
+// form button {
+//   height: 1.5em;
+//   border-radius: 25px;
+//   text-align: center;
+//   font-family: $main-font;
+// }
+
+// form input {
+//   border-top: none;
+//   margin: auto;
+//   width: 75%;
+// }
+
+// form button {
+//   height: 2em;
+//   width: 25%;
+//   margin: 1.5em auto 0 auto;
+//   background-color: rgb(212, 145, 62);
+//   color: #fff;
+//   cursor: pointer;
+// }
+
+//** Style d'un formulaire (Carte) Perso **// 
