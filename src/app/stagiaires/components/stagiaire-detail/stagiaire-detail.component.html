@@ -11,10 +11,7 @@
           (click)="closeStagiaireCard()">X</button>
       </div>
 
-      <button type="button" (click)="toInfos()">infos</button>
-      <button type="button" (click)="toReponses()">réponses</button>
-
-      <div *ngIf="(!changeView)" class="infosCard">
+      <div class="infosCard">
         <p>Lastname : {{stagiaire.getLastName()}}</p>
         <p>Firstname : {{stagiaire.getFirstName()}}</p>
         <p>Birthdate : {{stagiaire.getBirthDate() | date}}</p>
