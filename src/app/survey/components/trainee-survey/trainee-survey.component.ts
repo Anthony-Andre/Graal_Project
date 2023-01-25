@@ -93,8 +93,8 @@ export class TraineeSurveyComponent implements OnInit {
     return this.surveyFormGroup.controls;
   }
 
-  public goHome(): void {
-    this._location.back();
+  public goThanks(): void {
+    this.router.navigateByUrl('/thanks');
   }
 
   onSubmit() {
@@ -111,7 +111,7 @@ export class TraineeSurveyComponent implements OnInit {
     const dto: AnsweredSurveyDto = new AnsweredSurveyDto(this.surveyFormGroup.value);
     dto.setAnswers(this.answers);
     let subscription: Observable<any>;
-    subscription = this.answeredSurveyService.addSurvey(dto)
-    subscription.subscribe(() => this.goHome())
+    subscription = this.answeredSurveyService.addSurvey(dto);
+    subscription.subscribe(() => this.goThanks());
   }
 }
