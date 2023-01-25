@@ -19,6 +19,7 @@ import { SurveyResolver } from './survey/resolver/survey.resolver';
 import { TraineeSurveyComponent } from './survey/components/trainee-survey/trainee-survey.component';
 import { TraineeSurveyResolver } from './survey/resolver/trainee-survey.resolver';
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
+import { HasAnonymousGuard } from './user/guards/has-anonymous.guard';
 
 const routes: Routes = [];
 
@@ -46,21 +47,24 @@ export class AppRoutingModule {
       path: 'home',
       component: PoeTableComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
       path: 'poe',
       component: PoeTableComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
       path: 'poe/:id',
       component: PoeDetailsComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -68,7 +72,8 @@ export class AppRoutingModule {
       component: PoeFormComponent,
       resolve: { form: PoeResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -76,14 +81,16 @@ export class AppRoutingModule {
       component: PoeFormComponent,
       resolve: { form: PoeResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
       path: 'stagiaire',
       component: StagiaireTableComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -91,14 +98,16 @@ export class AppRoutingModule {
       component: StagiaireFormComponent,
       resolve: { form: StagiaireResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
       path: 'stagiaire/:id',
       component: StagiaireDetailComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -106,7 +115,8 @@ export class AppRoutingModule {
       component: StagiaireFormComponent,
       resolve: { form: StagiaireResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -114,14 +124,16 @@ export class AppRoutingModule {
       component: StagiaireFormComponent,
       resolve: { form: StagiaireResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
       path: 'survey',
       component: SurveyTableComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -129,7 +141,8 @@ export class AppRoutingModule {
       component: SurveyFormComponent,
       resolve: { form: SurveyResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -137,7 +150,8 @@ export class AppRoutingModule {
       component: SurveyFormComponent,
       resolve: { form: SurveyResolver },
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
@@ -149,7 +163,8 @@ export class AppRoutingModule {
       path: 'question-table',
       component: QuestionTableComponent,
       canActivate: [
-        HasUserGuard
+        HasUserGuard,
+        HasAnonymousGuard
       ]
     },
     {
