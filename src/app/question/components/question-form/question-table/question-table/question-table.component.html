@@ -4,6 +4,7 @@
             <th>#</th>
             <th>Type de réponse</th>
             <th>Question</th>
+            <th>Réponses</th>
             <th>Supprimer</th>
         </tr>
     </thead>  
@@ -16,9 +17,7 @@
                 <td> {{ question.getId() }} </td>
                 <td> {{ question.getAnswerType() }} </td>
                 <td> {{ question.getText() }} </td>
-                
-                
-                
+                <td> {{ question.getAnswersProposed() }} </td>
                 <td><button type="button" class="buttonDelete" (click)="onRemove(question)">X</button></td>
             </tr>
         </ng-container>
