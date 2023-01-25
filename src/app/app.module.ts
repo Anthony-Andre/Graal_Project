@@ -39,6 +39,7 @@ import { TraineeSurveyComponent } from './survey/components/trainee-survey/train
 import { SendSurveyDialogComponent } from './core/dialogs/send-survey-dialog/send-survey-dialog.component';
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
 import { MessageAnswerComponent } from './answer/components/message-answer/message-answer.component';
+import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
 
 
 
@@ -73,7 +74,8 @@ export function initializeApp1(appInitService: AppInitService) {
     TraineeSurveyComponent,
     SendSurveyDialogComponent,
     QuestionTableComponent,
-    MessageAnswerComponent
+    MessageAnswerComponent,
+    StagiaireAnswersDetailsComponent
   ],
   imports: [
     BrowserModule,
