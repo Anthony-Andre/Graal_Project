@@ -11,6 +11,7 @@ import { Request } from 'src/app/user/models/request';
 import { AuthService } from 'src/app/user/services/auth-service.service';
 import { AnsweredSurvey } from '../core/models/answered-survey';
 import { Survey } from '../core/models/survey';
+import { AnsweredSurveyService } from '../core/services/answered-survey.service';
 import { FormBuilderService } from '../core/services/form-builder/form-builder.service';
 import { TraineeSurveyFormService } from '../core/services/form-builder/trainee-survey-form.service';
 import { SurveyService } from '../core/services/survey.service';
@@ -25,14 +26,14 @@ export class TraineeSurveyResolver implements Resolve<FormGroup> {
   public constructor(
     private surveyService: SurveyService,
     private formBuilderService: TraineeSurveyFormService,
+    private answeredSurveyService: AnsweredSurveyService,
     private router: Router,
     private authService: AuthService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {   
     let survey: AnsweredSurvey;
-    survey = new AnsweredSurvey();
-    let form = this.formBuilderService.build(survey).getForm();
+    survey = new AnsweredSurvey();    
     this.request = { userName: "anonymous", userPwd: "anonymous", stayConnected: false }
     return this.authService.signin(this.request).pipe(
       take(1),
@@ -41,9 +42,8 @@ export class TraineeSurveyResolver implements Resolve<FormGroup> {
         const idSurvey: number = +route.paramMap.get('idSurvey')!;
         console.log("id:", id);
         console.log("idSurvey: ", idSurvey);
-        form = this.formBuilderService.build(survey).getForm();
+        let form = this.formBuilderService.build(survey).getForm();
         return of(form);
-      }
-      ));
+      }));
   }
 }

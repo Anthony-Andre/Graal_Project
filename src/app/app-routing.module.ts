@@ -22,6 +22,7 @@ import { HasAnonymousGuard } from './user/guards/has-anonymous.guard';
 import { ThanksComponent } from './survey/finish/thanks/thanks.component';
 import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
 
+
 const routes: Routes = [];
 
 @NgModule({
@@ -162,7 +163,8 @@ export class AppRoutingModule {
     },
     {
       path: 'thanks',
-      component: ThanksComponent
+      component: ThanksComponent,
+      resolve: { form: TraineeSurveyResolver }
     },
     {
       path: 'answered-survey/:id',
