@@ -1,0 +1,43 @@
+.home-container {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
+.home-container img {
+  margin: auto;
+  width: 15%;
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 25px;
+}
+
+h1 {
+  margin: auto;
+  margin-top: 1em;
+  font-size: 3em;
+}
+
+.categories {
+  min-height: 50%;
+  margin: auto;
+  margin-top: 8em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 4em;
+  column-gap: 4em;
+  width: 60%;
+}
+
+.categories button {
+  height: 8em;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.categories button:hover {
+  box-shadow: 0 0 5px 0 #095484;
+  font-weight: bold;
+}

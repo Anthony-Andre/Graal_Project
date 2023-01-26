@@ -20,6 +20,7 @@ import { TraineeSurveyComponent } from './survey/components/trainee-survey/train
 import { TraineeSurveyResolver } from './survey/resolver/trainee-survey.resolver';
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
 import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [];
 
@@ -45,13 +46,13 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: PoeTableComponent,
+      component: HomeComponent,
       canActivate: [
         HasUserGuard
       ]
     },
     {
-      path: 'poe',
+      path: 'poes',
       component: PoeTableComponent,
       canActivate: [
         HasUserGuard
@@ -81,7 +82,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'stagiaire',
+      path: 'stagiaires',
       component: StagiaireTableComponent,
       canActivate: [
         HasUserGuard
@@ -119,7 +120,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'survey',
+      path: 'surveys',
       component: SurveyTableComponent,
       canActivate: [
         HasUserGuard
@@ -151,7 +152,7 @@ export class AppRoutingModule {
       component: StagiaireAnswersDetailsComponent
     },
     {
-      path: 'question-table',
+      path: 'questions',
       component: QuestionTableComponent,
       canActivate: [
         HasUserGuard

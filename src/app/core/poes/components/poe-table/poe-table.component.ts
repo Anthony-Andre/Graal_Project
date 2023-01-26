@@ -112,7 +112,7 @@ export class PoeTableComponent implements OnInit {
         this.poeService.mailToPoe(poe, this.surveyId, this.stopDate).subscribe((inputPoe: any) => {
           poe = inputPoe;
           console.log("poe in poe table : ", JSON.stringify(poe));
-          this.poes[this.poes.findIndex((p: Poe) => p.getId() === poe.getId())]=poe;
+          this.poes[this.poes.findIndex((p: Poe) => p.getId() === poe.getId())] = poe;
         })
       }
     });

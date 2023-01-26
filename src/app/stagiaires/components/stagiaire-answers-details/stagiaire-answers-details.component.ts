@@ -51,6 +51,9 @@ export class StagiaireAnswersDetailsComponent implements OnInit {
           survey.setId(answeredSurvey.getSurvey().id);
           survey.setLevel(answeredSurvey.getSurvey().level);
           survey.setTitle(answeredSurvey.getSurvey().title);
+          this.poeService.findOne(answeredSurvey.getStagiaire().poe_id).subscribe((poe: Poe) => {
+            this.poe = poe;
+          });
           this.survey = survey;
           this.answeredSurvey.getAnswers().map((anyAnswer: any) => {
             const answer: Answer = new Answer();
