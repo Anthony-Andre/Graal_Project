@@ -55,7 +55,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'poe',
+      path: 'poes',
       component: PoeTableComponent,
       canActivate: [
         HasUserGuard,
@@ -89,7 +89,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'stagiaire',
+      path: 'stagiaires',
       component: StagiaireTableComponent,
       canActivate: [
         HasUserGuard,
@@ -132,7 +132,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'survey',
+      path: 'surveys',
       component: SurveyTableComponent,
       canActivate: [
         HasUserGuard,
@@ -172,7 +172,7 @@ export class AppRoutingModule {
       component: StagiaireAnswersDetailsComponent
     },
     {
-      path: 'question-table',
+      path: 'questions',
       component: QuestionTableComponent,
       canActivate: [
         HasUserGuard,
