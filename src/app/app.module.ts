@@ -41,6 +41,7 @@ import { QuestionTableComponent } from './question/components/question-form/ques
 import { MessageAnswerComponent } from './answer/components/message-answer/message-answer.component';
 import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
 import { ThanksComponent } from './survey/finish/thanks/thanks.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -78,7 +79,8 @@ export function initializeApp1(appInitService: AppInitService) {
     QuestionTableComponent,
     MessageAnswerComponent,
     StagiaireAnswersDetailsComponent,
-    ThanksComponent
+    ThanksComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

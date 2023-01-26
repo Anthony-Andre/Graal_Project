@@ -21,6 +21,7 @@ import { QuestionTableComponent } from './question/components/question-form/ques
 import { HasAnonymousGuard } from './user/guards/has-anonymous.guard';
 import { ThanksComponent } from './survey/finish/thanks/thanks.component';
 import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [];
@@ -47,14 +48,14 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: PoeTableComponent,
+      component: HomeComponent,
       canActivate: [
         HasUserGuard,
         HasAnonymousGuard
       ]
     },
     {
-      path: 'poe',
+      path: 'poes',
       component: PoeTableComponent,
       canActivate: [
         HasUserGuard,
@@ -88,7 +89,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'stagiaire',
+      path: 'stagiaires',
       component: StagiaireTableComponent,
       canActivate: [
         HasUserGuard,
@@ -131,7 +132,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'survey',
+      path: 'surveys',
       component: SurveyTableComponent,
       canActivate: [
         HasUserGuard,
@@ -171,7 +172,7 @@ export class AppRoutingModule {
       component: StagiaireAnswersDetailsComponent
     },
     {
-      path: 'question-table',
+      path: 'questions',
       component: QuestionTableComponent,
       canActivate: [
         HasUserGuard,

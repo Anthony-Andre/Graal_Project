@@ -5,17 +5,17 @@
   </h1>
 
   <ul class="navbar">
-    <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'poe']">POEs</a>
+    <li *ngIf="hasUser && home">
+      <a [routerLink]="['/', 'poes']">POEs</a>
     </li>
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'stagiaire']">Stagiaires</a>
+      <a [routerLink]="['/', 'stagiaires']">Stagiaires</a>
     </li>
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'survey']">Questionnaires</a>
+      <a [routerLink]="['/', 'surveys']">Questionnaires</a>
     </li>
     <li *ngIf="hasUser">
-      <a [routerLink]="['/', 'question-table']">Questions</a>
+      <a [routerLink]="['/', 'questions']">Questions</a>
     </li>
 
     <li>

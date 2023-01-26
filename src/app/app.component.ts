@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Stagiaire } from './core/models/stagiaire';
 import { StagiaireService } from './core/services/stagiaire.service';
 import { AuthService } from './user/services/auth-service.service';
+import { GreetingService } from './user/services/greeting.service';
 import { UserService } from './user/services/user.service';
 
 @Component({
@@ -14,13 +15,16 @@ import { UserService } from './user/services/user.service';
 export class AppComponent {
   public title = 'Suivi des POE';
   public hasUser: boolean = this.authService.hasUser().getValue();
+  public isUserAdmin: boolean = false;
+  public home: boolean = false;
 
   public stagiaires: Array<Stagiaire> = this.stagiaireService.getStagiaires();
 
   public constructor(
     private stagiaireService: StagiaireService,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private greetingService: GreetingService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +33,7 @@ export class AppComponent {
     //     this.hasUser = this.authService.isUserSignedin());
     // this.hasUser = this.authService.isUserSignedin();
     this.authService.hasUser().subscribe((hasUser: boolean) => this.hasUser = hasUser);
+    this.greetingService.getByUserOrAdminRole().subscribe((result) => console.log(result));
   }
 
   public onLogout(): void {
