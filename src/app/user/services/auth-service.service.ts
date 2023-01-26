@@ -63,8 +63,8 @@ export class AuthService {
     }
   }
 
-  isUserAnonymous() : boolean {
-    if (this.roles.includes('ROLE_ANONYMOUS')) {return true;}
+  isUserAnonymous(): boolean {
+    if (this.roles.includes('ROLE_ANONYMOUS')) { return true; }
     return false;
   }
 

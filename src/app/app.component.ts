@@ -15,7 +15,7 @@ import { UserService } from './user/services/user.service';
 export class AppComponent {
   public title = 'Suivi des POE';
   public hasUser: boolean = this.authService.hasUser().getValue();
-  public isUserAdmin: boolean = false;
+  public isUserAnonymous: boolean = false;
   public home: boolean = false;
 
   public stagiaires: Array<Stagiaire> = this.stagiaireService.getStagiaires();
@@ -32,8 +32,11 @@ export class AppComponent {
     //   .subscribe((hasUser: boolean) =>
     //     this.hasUser = this.authService.isUserSignedin());
     // this.hasUser = this.authService.isUserSignedin();
-    this.authService.hasUser().subscribe((hasUser: boolean) => this.hasUser = hasUser);
-    this.greetingService.getByUserOrAdminRole().subscribe((result) => console.log(result));
+    this.authService.hasUser().subscribe((hasUser: boolean) => {
+      this.hasUser = hasUser;
+      this.isUserAnonymous = this.authService.isUserAnonymous();
+      console.log("anonyme: ", this.isUserAnonymous)
+    });
   }
 
   public onLogout(): void {

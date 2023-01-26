@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { map, Observable, take } from 'rxjs';
+import { flatMap, map, Observable, of, take } from 'rxjs';
 import { AnsweredSurvey } from '../models/answered-survey';
 import { AnsweredSurveyDto } from '../../dto/answered-survey-dto';
 
@@ -69,6 +69,18 @@ export class AnsweredSurveyService {
           return survey;
         })
       );
+  }
+
+  public searchSurvey(surveyId: number, traineeId: number): Observable<boolean> {
+    console.log("L'utilisateur souhaite chercher si le questionnaire : ", surveyId, " du stagiaire : ", traineeId, " est bien rempli");
+    return this.httpClient.get<any>(`${this.controllerBaseUrl}/search?surveyId=${surveyId}&traineeId=${traineeId}`)
+      .pipe(
+        take(1),
+        flatMap((response: any) => {
+          console.log("response du back ", response);
+          if (response === true) { return of(true); }
+          else { return of(false); }
+        }));
   }
 
 
