@@ -39,6 +39,7 @@ export class TraineeSurveyComponent implements OnInit {
   request!: Request;
   public selectedOption!: string;
   answeredSurveys: Array<AnsweredSurvey> = [];
+  alreadyAnswered: boolean = false;
 
   YESNO!: AnswerType;
 
@@ -57,53 +58,51 @@ export class TraineeSurveyComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit(): void {    
-
+  ngOnInit(): void {
     // Récupération du survey via le resolver :
     const data: any = this.route.snapshot.data;
     this.surveyFormGroup = data.form;
-
     this.route.params
       .subscribe((routeParams: Params) => {
         const surveyId: number = routeParams['idSurvey'];
-        this.surveyService.findOne(surveyId)
-          .subscribe((survey: Survey) => {
-            this.survey = survey;
-            this.survey.getQuestions().map((anyQuestion: any) => {
-              const question: Question = new Question();
-              question.setId(anyQuestion.id);
-              question.setText(anyQuestion.text);
-              question.setAnswerType(anyQuestion.answerType);
-              question.setAnswersProposed(anyQuestion.answersProposed);
-              this.questions.push(question);
+        const traineeId: number = routeParams['id'];
+        this.answeredSurveyService.searchSurvey(surveyId, traineeId).subscribe((resp: boolean) => {
+          this.alreadyAnswered = resp;
+          this.surveyService.findOne(surveyId)
+            .subscribe((survey: Survey) => {
+              this.survey = survey;
+              this.survey.getQuestions().map((anyQuestion: any) => {
+                const question: Question = new Question();
+                question.setId(anyQuestion.id);
+                question.setText(anyQuestion.text);
+                question.setAnswerType(anyQuestion.answerType);
+                question.setAnswersProposed(anyQuestion.answersProposed);
+                this.questions.push(question);
 
-              if (question.getAnswerType().toLocaleString() === "CHOOSE_MANY") {
-                for (const answer of question.getAnswersProposed()) {
-                  this.surveyFormGroup.addControl(question.getText() + answer, this.formBuilder.control('', [Validators.required]));
+                if (question.getAnswerType().toLocaleString() === "CHOOSE_MANY") {
+                  for (const answer of question.getAnswersProposed()) {
+                    this.surveyFormGroup.addControl(question.getText() + answer, this.formBuilder.control('', [Validators.required]));
+                  }
+                } else {
+                  this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
                 }
-              } else {
-                this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
-              }
-              return question;
-            }
-            )
-          });
-      })
+                return question;
+              })
+            });
 
+        })
+        // Récupération du stagiaire : 
+        this.idTrainee = this.route.snapshot.params['id'];
+        this.stagiaireService.findOne(this.idTrainee).subscribe((trainee) => {
+          return this.stagiaire = trainee;
+        });
 
+        this.answeredSurveyService.findAll().subscribe((answeredSurveys) =>
+          this.answeredSurveys = answeredSurveys
+        )
 
-    // Récupération du stagiaire : 
-    this.idTrainee = this.route.snapshot.params['id'];
-    this.stagiaireService.findOne(this.idTrainee).subscribe((trainee) => {
-      return this.stagiaire = trainee;
-    });
-
-    this.answeredSurveyService.findAll().subscribe((answeredSurveys) =>
-      this.answeredSurveys = answeredSurveys
-    )
-
-    console.log(this.answeredSurveys);
-
+        console.log(this.answeredSurveys);
+       });
   }
 
   public get c(): { [key: string]: AbstractControl } {
