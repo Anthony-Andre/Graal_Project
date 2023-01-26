@@ -23,6 +23,7 @@ import { ThanksComponent } from './survey/finish/thanks/thanks.component';
 import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
 
 
+
 const routes: Routes = [];
 
 @NgModule({

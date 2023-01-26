@@ -45,6 +45,7 @@ import { HomeComponent } from './home/home.component';
 
 
 
+
 export function initializeApp1(appInitService: AppInitService) {
   return (): Promise<any> => {
     return appInitService.init();

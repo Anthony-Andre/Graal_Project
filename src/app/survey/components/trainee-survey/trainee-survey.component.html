@@ -13,7 +13,7 @@
 
 -->
 
-<div class="testbox">
+<div class="testbox" *ngIf="alreadyAnswered == false">
 
   <form [formGroup]="surveyFormGroup">
 
@@ -74,4 +74,9 @@
       <button type="submit" (click)="onSubmit()">Envoyer vos réponses</button>
     </div>
   </form>
+</div>
+
+<div class="answered" *ngIf="alreadyAnswered == true">
+  <img src="../../../../assets/logo-aelion_1.png" alt="Logo Aelion">
+  <p>C'est gentil de vouloir nous faire un coucou mais tu as déjà répondu à ce questionnaire !</p>
 </div>

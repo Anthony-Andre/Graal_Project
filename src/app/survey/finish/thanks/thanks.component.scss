@@ -1,10 +1,15 @@
-.thanks_class{
+body,
+div,
+p {
+    padding: 0;
+    margin-top: 150px;
+    width: 150 px;
+    height: 150 px;    
     text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-    width: 100px;
-    height: 100px;
+    outline: none;
+    font-family: Acme, Arial, sans-serif;
+    font-size: 14px;
+    background-color: white;
+    color: #666;
+    line-height: 22px;
 }
