@@ -28,12 +28,29 @@ export class AnsweredSurveyService {
             answeredSurvey.setSurvey(inputSurvey.survey);
             answeredSurvey.setStagiaire(inputSurvey.trainee);
             answeredSurvey.setAnswers(inputSurvey.responses)
-            console.log(answeredSurvey);
             return answeredSurvey;
           })
         })
       )
   }
+
+  public findOne(id: number): Observable<AnsweredSurvey> {
+    return this.httpClient.get<any>(
+      `${this.controllerBaseUrl}/${id}`
+    ).pipe(
+      take(1),
+      map((inputSurvey: any) => {
+        const answeredSurvey: AnsweredSurvey = new AnsweredSurvey();
+        answeredSurvey.setId(inputSurvey.id);
+        answeredSurvey.setSurvey(inputSurvey.survey);
+        answeredSurvey.setStagiaire(inputSurvey.trainee);
+        answeredSurvey.setAnswers(inputSurvey.responses)
+        return answeredSurvey;
+      })
+    )
+  }
+
+
 
   public addSurvey(survey: AnsweredSurveyDto): Observable<AnsweredSurvey> {
     console.log('add survey : ', survey)

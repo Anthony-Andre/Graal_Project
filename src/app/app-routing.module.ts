@@ -1,6 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { homedir } from 'os';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
@@ -21,6 +20,7 @@ import { TraineeSurveyResolver } from './survey/resolver/trainee-survey.resolver
 import { QuestionTableComponent } from './question/components/question-form/question-table/question-table/question-table.component';
 import { HasAnonymousGuard } from './user/guards/has-anonymous.guard';
 import { ThanksComponent } from './survey/finish/thanks/thanks.component';
+import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
 
 const routes: Routes = [];
 
@@ -163,6 +163,10 @@ export class AppRoutingModule {
     {
       path: 'thanks',
       component: ThanksComponent
+    },
+    {
+      path: 'answered-survey/:id',
+      component: StagiaireAnswersDetailsComponent
     },
     {
       path: 'question-table',
