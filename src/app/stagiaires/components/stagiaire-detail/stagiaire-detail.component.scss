@@ -61,3 +61,34 @@ div {
   height: 2em;
   line-height: 1.5;
 }
+
+/*-- boutons questionnaires --*/
+
+.bot-buttons-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 7em;
+    height: 2.3em;
+    text-decoration: none;
+    background-color: rgba($color: #c6e5f3d1, $alpha: 1.0);
+    color: rgb(0, 0, 0);
+    border: solid black;
+    border-radius: 25px;
+    margin: 2em auto;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      border: solid 1px rgb(170, 170, 170);
+    }
+  }
+}
+
+// .bot-buttons {
+
+// }
