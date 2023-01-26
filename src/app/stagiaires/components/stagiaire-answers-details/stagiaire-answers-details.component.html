@@ -1,12 +1,20 @@
-<h1>Nom du questionnaire : {{survey.getTitle()}}</h1>
+<div class="questionnaire">
 
-<h2>Mail pour l'échéance : {{survey.getLevel()}}</h2>
+  <h1>Nom du questionnaire : {{survey.getTitle()}}</h1>
 
-<div *ngFor="let answer of answers">
+  <h2>Mail pour l'échéance : {{survey.getLevel()}}</h2>
+  <h2>Stagiaire ayant répondu : {{stagiaire.getFirstName()}} {{stagiaire.getLastName()}}</h2>
+  <h2>POE du stagiaire : {{poe.getTitle()}}</h2>
 
-  <h3>{{answer.getQuestion().getText()}} (Question de type {{answer.getQuestion().getAnswerType()}})</h3>
+  <div *ngFor="let answer of answers">
 
-  <h4>Réponse du stagiaire : {{answer.getText()}}</h4>
+    <fieldset class="reponse">
+      <legend>
+        {{answer.getQuestion().getText()}}
+      </legend>
+      {{answer.getText()}}
+    </fieldset>
 
+  </div>
 
 </div>

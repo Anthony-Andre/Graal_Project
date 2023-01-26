@@ -1,0 +1,24 @@
+$main-font: 'Acme', sans-serif;
+
+.questionnaire {
+  max-width: 50%;
+  min-height: 70%;
+  margin: auto;
+  text-align: center;
+  margin-top: 5em;
+  padding-top: 2em;
+  background-color: #fff;
+  border: solid black;
+}
+
+h2,
+h3 {
+  font-family: $main-font;
+}
+
+.reponse {
+  width: 50%;
+  margin: auto;
+  padding: 1em;
+  margin-top: 2em;
+}
