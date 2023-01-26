@@ -13,7 +13,7 @@ export class AuthService {
 
   private baseUrl = 'http://localhost:8080/';
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUserSignedin());
-  public roles!: string[];
+  public roles: string[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
