@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Answer } from 'src/app/answer/core/models/answer';
+import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
+import { PoeService } from 'src/app/core/services/poe.service';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
@@ -25,13 +27,15 @@ export class StagiaireAnswersDetailsComponent implements OnInit {
   public answeredSurveys: Array<any> = [];
   public surveysIdsOfStagiaire: Array<Number> = []
   public stagiaire: Stagiaire = new Stagiaire();
+  public poe: Poe = new Poe();
 
 
   constructor(private surveyService: SurveyService,
     private answeredSurveyService: AnsweredSurveyService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
-    private stagiaireService: StagiaireService
+    private stagiaireService: StagiaireService,
+    private poeService: PoeService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +46,8 @@ export class StagiaireAnswersDetailsComponent implements OnInit {
         this.answeredSurveyService.findOne(surveyId).subscribe((answeredSurvey: any) => {
           this.answeredSurvey = answeredSurvey;
           const survey: Survey = new Survey();
+          this.stagiaire.setFirstName(answeredSurvey.getStagiaire().firstName);
+          this.stagiaire.setLastName(answeredSurvey.getStagiaire().lastName);
           survey.setId(answeredSurvey.getSurvey().id);
           survey.setLevel(answeredSurvey.getSurvey().level);
           survey.setTitle(answeredSurvey.getSurvey().title);

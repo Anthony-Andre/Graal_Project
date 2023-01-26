@@ -13,6 +13,7 @@ export class AuthService {
 
   private baseUrl = 'http://localhost:8080/';
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUserSignedin());
+  public roles: string[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
@@ -25,10 +26,11 @@ export class AuthService {
         localStorage.setItem('user', request.userName);
         localStorage.setItem('token', 'HTTP_TOKEN ' + resp.token);
       }
-
+      this.roles = resp.roles;
       this.hasUser$.next(true);
       console.log("login:", this.isUserSignedin());
-      console.log("hasUser$", this.hasUser$.getValue())
+      console.log("hasUser$", this.hasUser$.getValue());
+      console.log("roles:", this.roles);
       return resp;
     }));
   }
@@ -59,6 +61,11 @@ export class AuthService {
     } else {
       return sessionStorage.getItem('token') !== null;
     }
+  }
+
+  isUserAnonymous() : boolean {
+    if (this.roles.includes('ROLE_ANONYMOUS')) {return true;}
+    return false;
   }
 
   getSignedinUser() {
