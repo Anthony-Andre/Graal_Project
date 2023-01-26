@@ -57,7 +57,7 @@ export class TraineeSurveyComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
 
     // Récupération du survey via le resolver :
     const data: any = this.route.snapshot.data;
@@ -66,28 +66,39 @@ export class TraineeSurveyComponent implements OnInit {
     this.route.params
       .subscribe((routeParams: Params) => {
         const surveyId: number = routeParams['idSurvey'];
-        this.surveyService.findOne(surveyId)
-          .subscribe((survey: Survey) => {
-            this.survey = survey;
-            this.survey.getQuestions().map((anyQuestion: any) => {
-              const question: Question = new Question();
-              question.setId(anyQuestion.id);
-              question.setText(anyQuestion.text);
-              question.setAnswerType(anyQuestion.answerType);
-              question.setAnswersProposed(anyQuestion.answersProposed);
-              this.questions.push(question);
+        const traineeId: number = routeParams['id'];
+        this.answeredSurveyService.searchSurvey(surveyId, traineeId).subscribe(
+          (resp: any) => {
+            console.log("response dans le trainee survey component :", resp);
+            if (resp === true) { this.alreadyAnswered(); }
+            else {
+              this.surveyService.findOne(surveyId)
+                .subscribe((survey: Survey) => {
+                  this.survey = survey;
+                  this.survey.getQuestions().map((anyQuestion: any) => {
+                    const question: Question = new Question();
+                    question.setId(anyQuestion.id);
+                    question.setText(anyQuestion.text);
+                    question.setAnswerType(anyQuestion.answerType);
+                    question.setAnswersProposed(anyQuestion.answersProposed);
+                    this.questions.push(question);
 
-              if (question.getAnswerType().toLocaleString() === "CHOOSE_MANY") {
-                for (const answer of question.getAnswersProposed()) {
-                  this.surveyFormGroup.addControl(question.getText() + answer, this.formBuilder.control('', [Validators.required]));
-                }
-              } else {
-                this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
-              }
-              return question;
+                    if (question.getAnswerType().toLocaleString() === "CHOOSE_MANY") {
+                      for (const answer of question.getAnswersProposed()) {
+                        this.surveyFormGroup.addControl(question.getText() + answer, this.formBuilder.control('', [Validators.required]));
+                      }
+                    } else {
+                      this.surveyFormGroup.addControl(question.getText(), this.formBuilder.control('', [Validators.required]));
+                    }
+                    return question;
+                  }
+                  )
+                });
+
             }
-            )
-          });
+          }
+        )
+
       })
 
 
@@ -112,6 +123,10 @@ export class TraineeSurveyComponent implements OnInit {
 
   public goThanks(): void {
     this.router.navigateByUrl('/thanks');
+  }
+
+  public alreadyAnswered(): void {
+    // this.router.navigateByUrl('/alreadyAnswered');
   }
 
   onSubmit() {
