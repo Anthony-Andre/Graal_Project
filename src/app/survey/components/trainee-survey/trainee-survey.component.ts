@@ -10,6 +10,8 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
+import { Request } from 'src/app/user/models/request';
+import { AuthService } from 'src/app/user/services/auth-service.service';
 import { AnsweredSurvey } from '../../core/models/answered-survey';
 import { Survey } from '../../core/models/survey';
 import { AnsweredSurveyService } from '../../core/services/answered-survey.service';
@@ -34,6 +36,7 @@ export class TraineeSurveyComponent implements OnInit {
   idTrainee!: number;
   answer: Answer = new Answer;
   answers: Array<Answer> = [];
+  request!: Request;
   public selectedOption!: string;
   answeredSurveys: Array<AnsweredSurvey> = [];
 
@@ -50,10 +53,11 @@ export class TraineeSurveyComponent implements OnInit {
     private answeredSurveyService: AnsweredSurveyService,
     private _location: Location,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
 
     // Récupération du survey via le resolver :
     const data: any = this.route.snapshot.data;
@@ -106,8 +110,8 @@ export class TraineeSurveyComponent implements OnInit {
     return this.surveyFormGroup.controls;
   }
 
-  public goHome(): void {
-    this._location.back();
+  public goThanks(): void {
+    this.router.navigateByUrl('/thanks');
   }
 
   onSubmit() {
@@ -141,7 +145,7 @@ export class TraineeSurveyComponent implements OnInit {
     const dto: AnsweredSurveyDto = new AnsweredSurveyDto(this.surveyFormGroup.value);
     dto.setAnswers(this.answers);
     let subscription: Observable<any>;
-    subscription = this.answeredSurveyService.addSurvey(dto)
-    subscription.subscribe(() => this.goHome())
+    subscription = this.answeredSurveyService.addSurvey(dto);
+    subscription.subscribe(() => this.goThanks());
   }
 }
