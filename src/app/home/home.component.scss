@@ -27,15 +27,17 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 4em;
-  column-gap: 4em;
-  width: 60%;
+  column-gap: 7em;
+  width: 50%;
 }
 
 .categories button {
-  height: 8em;
+  height: 6em;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 25px;
 }
+
 
 .categories button:hover {
   box-shadow: 0 0 5px 0 #095484;

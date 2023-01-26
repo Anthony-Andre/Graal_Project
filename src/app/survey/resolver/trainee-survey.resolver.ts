@@ -31,9 +31,9 @@ export class TraineeSurveyResolver implements Resolve<FormGroup> {
     private authService: AuthService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {   
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {
     let survey: AnsweredSurvey;
-    survey = new AnsweredSurvey();    
+    survey = new AnsweredSurvey();
     this.request = { userName: "anonymous", userPwd: "anonymous", stayConnected: false }
     return this.authService.signin(this.request).pipe(
       take(1),

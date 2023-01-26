@@ -102,7 +102,7 @@ export class TraineeSurveyComponent implements OnInit {
         )
 
         console.log(this.answeredSurveys);
-       });
+      });
   }
 
   public get c(): { [key: string]: AbstractControl } {

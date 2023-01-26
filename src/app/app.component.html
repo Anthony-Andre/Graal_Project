@@ -1,26 +1,25 @@
 <header>
-  <a id="home" [routerLink]="['/', 'home']"><i class="fa-solid fa-house"></i></a>
-  <h1 (click)="toggleTitle()">
-    {{ title }}
-  </h1>
+
+  <a id="logo" [routerLink]="['/', 'home']"><img src="../assets/logo-aelion_1.png" alt="logo Aelion"></a>
 
   <ul class="navbar">
-    <li *ngIf="hasUser && home">
+    <li *ngIf="hasUser && !isUserAnonymous">
       <a [routerLink]="['/', 'poes']">POEs</a>
     </li>
-    <li *ngIf="hasUser">
+    <li *ngIf="hasUser && !isUserAnonymous">
       <a [routerLink]="['/', 'stagiaires']">Stagiaires</a>
     </li>
-    <li *ngIf="hasUser">
+    <li *ngIf="hasUser && !isUserAnonymous">
       <a [routerLink]="['/', 'surveys']">Questionnaires</a>
     </li>
-    <li *ngIf="hasUser">
+    <li *ngIf="hasUser && !isUserAnonymous">
       <a [routerLink]="['/', 'questions']">Questions</a>
     </li>
 
     <li>
-      <a *ngIf="!hasUser" [routerLink]="['/', 'login']">Login</a>
-      <a *ngIf="hasUser" href="" (click)="onLogout()"><i class="fa-solid fa-person-through-window"></i></a>
+      <a *ngIf="!hasUser && !isUserAnonymous" [routerLink]="['/', 'login']">Login</a>
+      <a *ngIf="hasUser && !isUserAnonymous" href="" (click)="onLogout()"><i
+          class="fa-solid fa-person-through-window"></i></a>
     </li>
   </ul>
 </header>

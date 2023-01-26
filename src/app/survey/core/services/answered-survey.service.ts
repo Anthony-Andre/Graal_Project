@@ -74,14 +74,15 @@ export class AnsweredSurveyService {
   public searchSurvey(surveyId: number, traineeId: number): Observable<boolean> {
     console.log("L'utilisateur souhaite chercher si le questionnaire : ", surveyId, " du stagiaire : ", traineeId, " est bien rempli");
     return this.httpClient.get<any>(`${this.controllerBaseUrl}/search?surveyId=${surveyId}&traineeId=${traineeId}`)
-    .pipe(
-      take(1),
-      flatMap((response: any) => {
-        console.log("response du back ",response);
-        if (response === true) {return of(true);}
-        else {return of(false);}
-      }));
+      .pipe(
+        take(1),
+        flatMap((response: any) => {
+          console.log("response du back ", response);
+          if (response === true) { return of(true); }
+          else { return of(false); }
+        }));
   }
+
 
 
 

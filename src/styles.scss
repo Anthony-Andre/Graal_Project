@@ -44,6 +44,15 @@ header {
   height: 5em;
 }
 
+.buttonNavbar {
+  display: block;
+  margin: auto;
+  margin-top: 2em;
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: .5em;
+}
+
 header ul {
   display: flex;
   justify-content: flex-end;

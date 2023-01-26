@@ -21,7 +21,7 @@ import { QuestionTableComponent } from './question/components/question-form/ques
 import { HasAnonymousGuard } from './user/guards/has-anonymous.guard';
 import { ThanksComponent } from './survey/finish/thanks/thanks.component';
 import { StagiaireAnswersDetailsComponent } from './stagiaires/components/stagiaire-answers-details/stagiaire-answers-details.component';
-import { HomeComponent } from './home/home.component';
+
 
 
 const routes: Routes = [];
@@ -48,7 +48,7 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: HomeComponent,
+      component: PoeTableComponent,
       canActivate: [
         HasUserGuard,
         HasAnonymousGuard
