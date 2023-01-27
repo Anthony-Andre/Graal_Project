@@ -54,7 +54,9 @@ header {
   align-items: center;
 }
 
-#logo img {
+#logo img,
+#logoAelion img {
+  margin: auto;
   height: 3.5em;
   border-radius: 6px;
 }
