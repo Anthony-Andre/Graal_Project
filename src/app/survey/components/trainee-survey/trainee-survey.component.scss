@@ -20,19 +20,33 @@ textarea {
 }
 
 .answered {
-    padding: 0;
-    margin-top: 150px;
-    text-align: center;
-    outline: none;
-    background-color: white;
+  width: 75%;
+  margin: auto;
+  min-height: 60%;
+  padding: 0;
+  margin-top: 150px;
+  text-align: center;
+  outline: none;
+  background-color: white;
+  color: #666;
+  line-height: 50px;
+
+  p {
+    margin: 2em auto;
+    font-family: Acme, Arial, sans-serif;
+    font-size: 24px;
     color: #666;
-    line-height: 50px;
-    p {
-      font-family: Acme, Arial, sans-serif;
-      font-size: 24px;
-      color: #666;
-    }
+    width: 70%;
+  }
+
+  img {
+    margin: 2em auto;
+    width: 30%;
+  }
+
+
 }
+
 
 h1 {
   margin: 15px 0;

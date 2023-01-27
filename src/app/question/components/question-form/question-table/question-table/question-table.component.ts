@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Question } from 'src/app/question/core/models/question';
 import { QuestionService } from 'src/app/question/core/services/question.service';
+import { SurveyService } from 'src/app/survey/core/services/survey.service';
 
 @Component({
   selector: 'app-question-table',
@@ -16,6 +17,7 @@ export class QuestionTableComponent implements OnInit {
   public confirmation: string = "false";
   constructor(
     private questionService: QuestionService,
+    private surveyService: SurveyService,
     private router: Router,
     private dialog: MatDialog
   ) { }
