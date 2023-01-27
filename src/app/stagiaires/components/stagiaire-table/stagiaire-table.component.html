@@ -1,73 +1,79 @@
-<app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>
+<div class="bodyClass">
 
-<!-- <app-stagiaire-detail [hidden]="isDetailHidden$ | async" [stagiaire]=" selectedStagiaire">
+
+
+  <app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>
+
+  <!-- <app-stagiaire-detail [hidden]="isDetailHidden$ | async" [stagiaire]=" selectedStagiaire">
 </app-stagiaire-detail> -->
 
-<table class="table">
-  <thead>
-    <tr>
-      <!--<th>#</th> -->
-      <th>Détail</th>
-      <th (click)="sortByLastName()">Nom
-        <ng-container *ngIf="!croissantLastName">
-          <i alt="fleche" class="fa-solid fa-caret-down"></i>
-        </ng-container>
-        <ng-container *ngIf="croissantLastName">
-          <i alt="fleche" class="fa-solid fa-caret-up"></i>
-        </ng-container>
-      </th>
-      <th>Prénom</th>
-      <th>Date de naissance</th>
-      <th>Modifier</th>
-      <th>Supprimer</th>
-      <th>Poe</th>
-    </tr>
-  </thead>
+  <table class="table">
+    <thead>
+      <tr>
+        <!--<th>#</th> -->
+        <th>Détail</th>
+        <th (click)="sortByLastName()">Nom
+          <ng-container *ngIf="!croissantLastName">
+            <i alt="fleche" class="fa-solid fa-caret-down"></i>
+          </ng-container>
+          <ng-container *ngIf="croissantLastName">
+            <i alt="fleche" class="fa-solid fa-caret-up"></i>
+          </ng-container>
+        </th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+        <th>Poe</th>
+      </tr>
+    </thead>
 
 
 
-  <tbody>
-    <ng-container *ngFor="let stagiaire of stagiaires">
-      <tr class="stagiaireLine" *ngIf="changeView(stagiaire)">
+    <tbody>
+      <ng-container *ngFor="let stagiaire of stagiaires">
+        <tr class="stagiaireLine" *ngIf="changeView(stagiaire)">
 
-        <!-- <td>
+          <!-- <td>
           {{stagiaire.getId()}}
         </td> -->
-        <td>
-          <span class="initials" appBubble [config]="bubbleConfig" (click)="onClick(stagiaire)">{{stagiaire |
-            initials : {firstNameFirst: true, full:
-            true} }}</span>
-        </td>
-        <td>
-          {{stagiaire.getLastName() | uppercase}}
-        </td>
-        <td>
-          {{stagiaire.getFirstName()}}
-        </td>
-        <td>
-          {{stagiaire.getBirthDate() | date: 'dd-MM-YYYY'}}
-        </td>
-        <td>
-          <button class="buttonDelete" type="button" (click)="onUpdate(stagiaire)">🖊️</button>
-        </td>
-        <td>
-          <button class="buttonDelete" type="button" (click)="onRemoveTraineeDialog(stagiaire)">X</button>
-        </td>
-        <td *ngIf="stagiaire.getPoe()">
-          {{stagiaire.getPoe().getTitle()}}
-        </td>
-        <td *ngIf="!stagiaire.getPoe()">Libre</td>
+          <td>
+            <span class="initials" appBubble [config]="bubbleConfig" (click)="onClick(stagiaire)">{{stagiaire |
+              initials : {firstNameFirst: true, full:
+              true} }}</span>
+          </td>
+          <td>
+            {{stagiaire.getLastName() | uppercase}}
+          </td>
+          <td>
+            {{stagiaire.getFirstName()}}
+          </td>
+          <td>
+            {{stagiaire.getBirthDate() | date: 'dd-MM-YYYY'}}
+          </td>
+          <td>
+            <button class="buttonDelete" type="button" (click)="onUpdate(stagiaire)">🖊️</button>
+          </td>
+          <td>
+            <button class="buttonDelete" type="button" (click)="onRemoveTraineeDialog(stagiaire)">X</button>
+          </td>
+          <td *ngIf="stagiaire.getPoe()">
+            {{stagiaire.getPoe().getTitle()}}
+          </td>
+          <td *ngIf="!stagiaire.getPoe()">Libre</td>
 
 
 
-      </tr>
-    </ng-container>
-  </tbody>
+        </tr>
+      </ng-container>
+    </tbody>
 
-  <tfoot>
-    <td colspan="4">Total number of trainees </td>
-    <td>{{stagiaires.length}}</td>
-  </tfoot>
-</table>
+    <tfoot>
+      <td colspan="4">Total number of trainees </td>
+      <td>{{stagiaires.length}}</td>
+    </tfoot>
+  </table>
 
-<a class="link-button" [routerLink]="['/', 'stagiaire', 'add']">Ajouter un stagiaire</a>
+  <a class="link-button" [routerLink]="['/', 'stagiaire', 'add']">Ajouter un stagiaire</a>
+
+</div>
