@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +28,8 @@ export class PoeFormComponent implements OnInit {
   constructor(
     private poeService: PoeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +79,7 @@ export class PoeFormComponent implements OnInit {
   }
 
   public goHome(): void {
-    this.router.navigate(['/', 'home'])
+    this.location.back();
   }
 
 }

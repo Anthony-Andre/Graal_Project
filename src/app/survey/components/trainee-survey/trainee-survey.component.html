@@ -58,7 +58,7 @@
 
       <!-- Question Choose Many-->
       <fieldset class="questions" *ngIf="question.getAnswerType().toLocaleString() === 'CHOOSE_MANY'">
-        <legend>{{question.getText()}}</legend>
+        <legend>{{question.getText()}} (Plusieurs réponses possibles)</legend>
         <div class="answerContainer">
           <div class="answer" *ngFor="let answer of question.getAnswersProposed()">
             <input class="{{question.getText()}}" type="checkbox" formControlName="{{question.getText()}}{{answer}}"
