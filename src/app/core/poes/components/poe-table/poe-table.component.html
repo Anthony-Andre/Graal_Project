@@ -55,16 +55,14 @@
                     </button>
                 </td>
                 <td class="mailButton" *ngIf="stopDate === 'sixMonth'">
-                    <button type="button" (click)="onMail(poe)">
-                        <button *ngIf="(poe.getSixMonthMailSent() === 0)" (click)="onMail(poe)">
-                            <i title="Envoyer" class="fa-solid fa-envelope"></i>
-                        </button>
-                        <button *ngIf="(poe.getSixMonthMailSent() === 200)">
-                            <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
-                        </button>
-                        <button *ngIf="(poe.getSixMonthMailSent() === 400)" (click)="onMail(poe)">
-                            <i title="Erreur" class="fa-solid fa-envelope red"></i>
-                        </button>
+                    <button *ngIf="(poe.getSixMonthMailSent() === 0)" (click)="onMail(poe)">
+                        <i title="Envoyer" class="fa-solid fa-envelope"></i>
+                    </button>
+                    <button *ngIf="(poe.getSixMonthMailSent() === 200)">
+                        <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
+                    </button>
+                    <button *ngIf="(poe.getSixMonthMailSent() === 400)" (click)="onMail(poe)">
+                        <i title="Erreur" class="fa-solid fa-envelope red"></i>
                     </button>
                 </td>
                 <td class="mailButton" *ngIf="stopDate === 'oneYear'">
