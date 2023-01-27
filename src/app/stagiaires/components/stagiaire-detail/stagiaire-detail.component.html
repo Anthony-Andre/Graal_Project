@@ -7,7 +7,7 @@
         <div appBubble [config]="bubbleConfig" class="initials">{{stagiaire | initials : {firstNameFirst: true, full:
           true} }}</div>
         <h1>Fiche stagiaire</h1>
-        <button type="button" class="link-button" [routerLink]="['/stagiaire']"
+        <button type="button" class="link-button" [routerLink]="['/stagiaires']"
           (click)="closeStagiaireCard()">X</button>
       </div>
 
@@ -22,16 +22,19 @@
 
       <div class="bot-buttons-div">
         <ng-container *ngFor="let survey of answeredSurveysFiltred">
-          <button class="bot-buttons" (click)="redirectTo(survey.getId())" *ngIf="survey.getSurvey().getLevel() === 'ONE_MONTH'">Questionnaire <br/> 1 mois</button>
-          <button class="bot-buttons" (click)="redirectTo(survey.getId())" *ngIf="survey.getSurvey().getLevel() === 'SIX_MONTHS'">Questionnaire <br/> 6 mois</button>
-          <button class="bot-buttons" (click)="redirectTo(survey.getId())" *ngIf="survey.getSurvey().getLevel() === 'ONE_YEAR'">Questionnaire <br/> 1 an</button>
+          <button class="bot-buttons" (click)="redirectTo(survey.getId())"
+            *ngIf="survey.getSurvey().getLevel() === 'ONE_MONTH'">Questionnaire <br /> 1 mois</button>
+          <button class="bot-buttons" (click)="redirectTo(survey.getId())"
+            *ngIf="survey.getSurvey().getLevel() === 'SIX_MONTHS'">Questionnaire <br /> 6 mois</button>
+          <button class="bot-buttons" (click)="redirectTo(survey.getId())"
+            *ngIf="survey.getSurvey().getLevel() === 'ONE_YEAR'">Questionnaire <br /> 1 an</button>
         </ng-container>
-          <!-- <button class="bot-buttons" (click)="redirectTo(oneMonthSurveyId)" [disabled]="!oneMonthAnswered">Questionnaire <br/> 1 mois</button>
+        <!-- <button class="bot-buttons" (click)="redirectTo(oneMonthSurveyId)" [disabled]="!oneMonthAnswered">Questionnaire <br/> 1 mois</button>
           <button class="bot-buttons" (click)="redirectTo(survey.getId())" [disabled]="!sixMonthsAnswered">Questionnaire <br/> 6 mois</button>
           <button class="bot-buttons" (click)="redirectTo(survey.getId())" [disabled]="!oneYearAnswered">Questionnaire <br/> 1 an</button> -->
       </div>
+    </div>
+
+
+
   </div>
-
-
-
-</div>
