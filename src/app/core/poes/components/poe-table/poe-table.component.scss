@@ -104,5 +104,21 @@ tfoot {
 }
 
 .red {
-  color:rgb(197, 0, 0);
+  color: rgb(197, 0, 0);
+}
+
+.green {
+  color: green;
+}
+
+.stats {
+  margin: auto;
+  margin-top: 4em;
+  border-collapse: collapse;
+  border: solid black;
+  text-align: center;
+  background-color: #ffffff57;
+  width: 40%;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }

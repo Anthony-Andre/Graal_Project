@@ -6,8 +6,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th>#</th>
-      <th>&nbsp;</th>
+      <!--<th>#</th> -->
+      <th>Détail</th>
       <th (click)="sortByLastName()">Nom
         <ng-container *ngIf="!croissantLastName">
           <i alt="fleche" class="fa-solid fa-caret-down"></i>
@@ -30,9 +30,9 @@
     <ng-container *ngFor="let stagiaire of stagiaires">
       <tr class="stagiaireLine" *ngIf="changeView(stagiaire)">
 
-        <td>
+        <!-- <td>
           {{stagiaire.getId()}}
-        </td>
+        </td> -->
         <td>
           <span class="initials" appBubble [config]="bubbleConfig" (click)="onClick(stagiaire)">{{stagiaire |
             initials : {firstNameFirst: true, full:

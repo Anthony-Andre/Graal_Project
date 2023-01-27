@@ -1,14 +1,21 @@
 $main-font: 'Acme', sans-serif;
 
 .questionnaire {
+  position: relative;
   max-width: 50%;
   min-height: 70%;
   margin: auto;
   text-align: center;
   margin-top: 5em;
   padding-top: 2em;
+  padding-bottom: 4em;
   background-color: #fff;
   border: solid black;
+}
+
+.close:hover {
+  cursor: pointer;
+
 }
 
 h2,

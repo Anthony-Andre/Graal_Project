@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Answer } from 'src/app/answer/core/models/answer';
@@ -35,7 +36,8 @@ export class StagiaireAnswersDetailsComponent implements OnInit {
     private questionService: QuestionService,
     private route: ActivatedRoute,
     private stagiaireService: StagiaireService,
-    private poeService: PoeService
+    private poeService: PoeService,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +72,10 @@ export class StagiaireAnswersDetailsComponent implements OnInit {
         });
       })
 
+  }
+
+  public goBack() {
+    this._location.back();
   }
 
 }

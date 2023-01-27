@@ -105,7 +105,7 @@ export class StagiaireService {
           stagiaire.setBirthDate(stagiaireDto.birthdate);
           // stagiaire.setPoe(stagiaireDto.poe);
           stagiaire.setPoe_Id(stagiaireDto.poe_id);
-          console.log("stagiaireDtoDuAdd: ", stagiaireDto);
+          console.log("stagiaireDtoPOE: ", stagiaireDto.poe_id);
           console.log("poe addStagiaire: ", stagiaire);
           return stagiaire;
         })

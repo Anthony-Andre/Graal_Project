@@ -48,7 +48,7 @@
                         <i title="Envoyer" class="fa-solid fa-envelope"></i>
                     </button>
                     <button *ngIf="(poe.getOneMonthMailSent() === 200)">
-                        <i title="Envoyé" class="fa-solid fa-envelope-circle-check"></i>
+                        <i title="Envoyé" class="fa-solid fa-envelope-circle-check green"></i>
                     </button>
                     <button *ngIf="(poe.getOneMonthMailSent() === 400)" (click)="onMail(poe)">
                         <i title="Erreur" class="fa-solid fa-envelope red"></i>
@@ -85,19 +85,11 @@
 
 <a class="link-button" [routerLink]="['/','add','poe']">Ajouter une poe</a>
 
-<table class="stats">
+<div class="stats">
 
+    <h1>Statistiques :</h1>
+    <p>Nombre total de Poe : {{poes.length}}</p>
+    <p>Nombre total de stagiaires : {{tousLesStagiaires()}}</p>
+    <p>Moyenne de stagiaires par POE : {{moyenneStagiaires()}}</p>
 
-    <tr>
-        <th>Statistiques :</th>
-    </tr>
-
-    <tr>Nombre total de Poe : {{poes.length}}</tr>
-
-    <tr>Nombre total de stagiaires : {{tousLesStagiaires()}}</tr>
-
-    <tr>Moyenne de stagiaires par POE : {{moyenneStagiaires()}}</tr>
-
-    <p></p>
-
-</table>
+</div>

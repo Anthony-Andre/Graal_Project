@@ -17,6 +17,7 @@ import { DeleteTraineeDialogComponent } from 'src/app/core/dialogs/delete-traine
 export class StagiaireTableComponent implements OnInit {
 
   public stagiaires: Array<Stagiaire> = [];
+  public stagiairesFiltres: Array<Stagiaire> = [];
   public stopDate: Date | null = new Date(1990, 11, 31);
   public stagiaire: Stagiaire | null = null;
   public visibility: Boolean = true;
@@ -48,8 +49,8 @@ export class StagiaireTableComponent implements OnInit {
   ngOnInit(): void {
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
       this.stagiaires = stagiaires;
-            
-      console.log(this.stagiaires[0] instanceof Stagiaire);
+      this.croissantLastName = false;
+      this.sortByLastName();
     })
 
     this.isDetailHidden$ = this.handleDetailService.isDetailHidden;
@@ -60,23 +61,23 @@ export class StagiaireTableComponent implements OnInit {
     console.log(`L'utilisateur souhaite supprimer ${stagiaire.getLastName()}`);
     if (this.confirmation === "true") {
       this.stagiaireService.delete(stagiaire)
-      .subscribe({
-        next: (response: HttpResponse<any>) => {
+        .subscribe({
+          next: (response: HttpResponse<any>) => {
 
-          // Here goes the snackbar
-        },
-        error: (error: any) => {
-          // Something went wrong, deal with it
-        },
-        complete: () => {
-          this.stagiaires.splice(
-            this.stagiaires.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
-            1
-          )
-        }
-      })
+            // Here goes the snackbar
+          },
+          error: (error: any) => {
+            // Something went wrong, deal with it
+          },
+          complete: () => {
+            this.stagiaires.splice(
+              this.stagiaires.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+              1
+            )
+          }
+        })
     }
-    
+
   }
 
   public onRemoveTraineeDialog(stagiaire: Stagiaire): void {
@@ -98,6 +99,8 @@ export class StagiaireTableComponent implements OnInit {
   public filterChanged(event: Date | null): void {
     // console.log(`Filter has changed to : ${event}`);
     this.stopDate = event;
+    this.croissantLastName = false;
+    this.sortByLastName();
     // this.stagiairesBeforeStopDate = this.stagiaireService.getStagiaireBornBefore(this.stopDate)
   }
 
@@ -123,8 +126,6 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public getVisibleStagiaire(): number {
-    console.log("date:", this.stopDate)
-    console.log("nombre:", this.stagiaireService.getStagiaireBornBefore(this.stopDate).length)
     return this.stagiaireService.getVisibleStagiaireNumber(
       this.stopDate);
   }
@@ -143,19 +144,19 @@ export class StagiaireTableComponent implements OnInit {
           return 1;
         }
         return 0;
-        })
+      })
     } else {
-    this.croissantLastName = false;
-    this.stagiaires.sort((a, b) => {
-      var nameA = a.getLastName();
-      var nameB = b.getLastName();
-      if (nameA > nameB) {
-        return -1;
-      }
-      if (nameA < nameB) {
-        return 1;
-      }
-      return 0;
+      this.croissantLastName = false;
+      this.stagiaires.sort((a, b) => {
+        var nameA = a.getLastName();
+        var nameB = b.getLastName();
+        if (nameA > nameB) {
+          return -1;
+        }
+        if (nameA < nameB) {
+          return 1;
+        }
+        return 0;
       })
     }
   }
